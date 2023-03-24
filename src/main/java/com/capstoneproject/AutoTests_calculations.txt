@@ -1,0 +1,29 @@
+AutoTests calculcation verification
+
+
+
+First test (20 yr old driver, 1 accident, 2014 vehicle)
+
+$750.00 base premium
+*2.0 (under 25)
+*1.25 (1 accident)
+*1.5(9 yr old vehicle)
+____________________
+
+=$2,812.50    Auto Insurace Quote
+*1.15 tax rate
+=$3,234.38    Auto Policy Total
+
+
+
+Second test (same but 4 accidents)
+
+$750.00 base premium
+*2.0 (under 25)
+*2.5 (1 accident)
+*1.5(9 yr old vehicle)
+____________________
+
+=$5,625.00    Auto Insurance Quote
+*1.15 tax rate
+=$6,468.75    Auto Policy Total

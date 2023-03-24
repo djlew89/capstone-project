@@ -1,0 +1,43 @@
+HomeTest calculcation verification
+
+
+
+First test (2013 home, 220k value, Electric heating, Urban location)
+
+$500.00 base premium + 0 value factor (less than 250k val)
+*1.0 (under 25 yrs old)
+*1.0 (electric heat)
+*1.0 (urban)
+____________________
+
+=$500.00    Home Insurace Quote
+*1.15 tax rate
+=$575.00    Home Policy Total
+
+
+
+Second test (1995 home, 300k value, Oil heating, Rural location)
+
+$500.00 base premium + 600 value factor (0.2% of 300k value)
+*1.25 (over 25 yrs old)
+*2.0 (oil heat)
+*1.25 (rural)
+____________________
+
+=$3,437.50    Home Insurace Quote
+*1.15 tax rate
+=$3,953.13    Home Policy Total
+
+
+
+Third test (2003 home, 260k value, Gas heating, Rural location)
+
+$500.00 base premium + 520 value factor (0.2% of 300k value)
+*1.0 (under 25 yrs old)
+*1.0 (gas heat)
+*1.25 (rural)
+____________________
+
+=$1,275.00    Home Insurace Quote
+*1.15 tax rate
+=$1,466.25    Home Policy Total
