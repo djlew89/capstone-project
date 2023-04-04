@@ -1,4 +1,4 @@
-package com.capstoneproject;//import java.sql.SQLException;
+package com.capstoneproject.POJOS;//import java.sql.SQLException;
 //import java.util.Scanner;
 //
 ///**

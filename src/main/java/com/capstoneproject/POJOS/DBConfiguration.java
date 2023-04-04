@@ -1,4 +1,4 @@
-package com.capstoneproject;
+package com.capstoneproject.POJOS;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

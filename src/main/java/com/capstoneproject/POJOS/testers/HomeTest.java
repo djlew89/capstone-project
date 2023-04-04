@@ -1,4 +1,9 @@
-package com.capstoneproject;
+package com.capstoneproject.POJOS.testers;
+
+import com.capstoneproject.POJOS.Customer;
+import com.capstoneproject.POJOS.Home;
+import com.capstoneproject.POJOS.HomePolicy;
+import com.capstoneproject.POJOS.HomeQuote;
 
 import java.time.LocalDate;
 
@@ -43,7 +48,7 @@ public class HomeTest
                     policy_end,
                     home);
             System.out.printf(
-                    "\nCustomer: %s %s\nAge of home: %d\nHeating type: %s\nLocation: %s\nHome Insurance Quote: %.2f\n", customer.getFirstName(), customer.getLastName(), home.calculateAge(), home.getHeatingType(), home.getLocation(), hquote.calculateHomeQuote()
+                    "\nCustomer: %s %s\nAge of home: %d\nHeating type: %s\nLocation: %s\nHome Insurance Quote: %.2f\n", customer.getFirstName(), customer.getLastName(), home.getAge(), home.getHeatingType(), home.getLocation(), hquote.calculateHomeQuote()
             );
         }
     }

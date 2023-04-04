@@ -1,4 +1,4 @@
-package com.capstoneproject;
+package com.capstoneproject.POJOS;
 
 import java.time.LocalDate;
 
@@ -54,7 +54,7 @@ public class HomeQuote extends Quote
     {
         double premium = 500;
         int value = home.getValue();
-        int age = home.calculateAge();
+        int age = home.getAge();
         int heatingType;
         Home.HeatingType type = home.getHeatingType();
         switch (type)
