@@ -1,4 +1,4 @@
-package com.capstoneproject;//import java.sql.Connection;
+package com.capstoneproject.POJOS;//import java.sql.Connection;
 //import java.sql.PreparedStatement;
 //import java.sql.SQLException;
 //

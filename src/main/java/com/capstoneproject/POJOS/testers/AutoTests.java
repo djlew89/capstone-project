@@ -1,4 +1,6 @@
-package com.capstoneproject;
+package com.capstoneproject.POJOS.testers;
+
+import com.capstoneproject.POJOS.*;
 
 import java.time.LocalDate;
 

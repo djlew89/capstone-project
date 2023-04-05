@@ -1,4 +1,8 @@
-package com.capstoneproject;
+package com.capstoneproject.POJOS;
+
+import com.capstoneproject.User;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
@@ -7,24 +11,33 @@ import java.time.LocalDate;
  * @Date 2023-02-22
  * Descriptive class for a Home object
  */
+@Entity(name = "home")
 public class Home
 {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO) private Integer id;
+
+
     /**
      * Age of dwelling
      */
-    private final int yearBuilt;
+    @JsonFormat(pattern="yyyy-MM-dd") private final int yearBuilt;
     /**
      * int representing the type of heating in a dwelling.
      */
-    private final HeatingType heatingType;
+    @Enumerated(EnumType.ORDINAL) private final HeatingType heatingType;
     /**
      * Location of the dwelling
      */
-    private final Location location;
+    @Enumerated(EnumType.ORDINAL) private final Location location;
     /**
      * The monetary value of dwelling
      */
     private final int value;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     /**
      * Constructor
@@ -40,6 +53,7 @@ public class Home
         this.value = value;
         this.heatingType = heatingType;
         this.location = location;
+        user = null;
     }
 
     public HeatingType getHeatingType()
@@ -57,9 +71,10 @@ public class Home
         return value;
     }
 
-    public int calculateAge()
+    public int getAge()
     {
         return LocalDate.now()
+
                 .getYear() - this.yearBuilt;
     }
 
@@ -68,10 +83,14 @@ public class Home
         return location == Location.URBAN;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     /**
      * Types of heating in a home
      */
-    enum HeatingType
+    public enum HeatingType
     {
         ELECTRIC, OIL, WOOD, GAS, OTHER
     }
@@ -79,7 +98,7 @@ public class Home
     /**
      * Location categories
      */
-    enum Location
+    public enum Location
     {
         URBAN, RURAL
     }

@@ -1,4 +1,4 @@
-package com.capstoneproject;
+package com.capstoneproject.POJOS;
 
 /**
  * @Author Adam Elliott
