@@ -22,48 +22,31 @@ public class Home
     /**
      * Age of dwelling
      */
-    @JsonFormat(pattern="yyyy-MM-dd") private final int yearBuilt;
+    @JsonFormat(pattern="yyyy-MM-dd") private int yearBuilt;
     /**
      * int representing the type of heating in a dwelling.
      */
-    @Enumerated(EnumType.ORDINAL) private final HeatingType heatingType;
+    @Enumerated(EnumType.ORDINAL) private Home.HeatingType heatingType;
     /**
      * Location of the dwelling
      */
-    @Enumerated(EnumType.ORDINAL) private final Location location;
+    @Enumerated(EnumType.ORDINAL) private Home.Location location;
     /**
      * The monetary value of dwelling
      */
-    private final int value;
+    private int value;
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "ID")
     private User user;
-
-    /**
-     * Constructor
-     *
-     * @param yearBuilt   The year the house was built.
-     * @param value       The value.
-     * @param heatingType The type of heat used.
-     * @param location    The location
-     */
-    public Home(int yearBuilt, int value, HeatingType heatingType, Location location)
-    {
-        this.yearBuilt = yearBuilt;
-        this.value = value;
-        this.heatingType = heatingType;
-        this.location = location;
-        user = null;
-    }
 
     public HeatingType getHeatingType()
     {
-        return heatingType;
+        return this.heatingType;
     }
 
     public Location getLocation()
     {
-        return location;
+        return this.location;
     }
 
     public int getValue()
@@ -87,12 +70,32 @@ public class Home
         this.user = user;
     }
 
+    public void setYearBuilt(int yearBuilt) {
+        this.yearBuilt = yearBuilt;
+    }
+
+    public void setHeatingType(HeatingType heatingType) {
+        this.heatingType = heatingType;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
     /**
      * Types of heating in a home
      */
     public enum HeatingType
     {
-        ELECTRIC, OIL, WOOD, GAS, OTHER
+        ELECTRIC,
+        OIL,
+        WOOD,
+        GAS,
+        OTHER;
     }
 
     /**
@@ -100,7 +103,8 @@ public class Home
      */
     public enum Location
     {
-        URBAN, RURAL
+        URBAN,
+        RURAL;
     }
 
 }

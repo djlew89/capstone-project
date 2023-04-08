@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.Optional;
 
 @Controller //This means that this class is a Controller
@@ -26,7 +25,7 @@ public class MainController {
     }
 
     //USER - GET / READ ONE by ID
-    @GetMapping(path = RESTNouns.USER + "/{id}")
+    @GetMapping(path = RESTNouns.USER + RESTNouns.USER_ID)
     public @ResponseBody Optional<User> getUserWithId(@PathVariable Integer id){
         return userRepository.findById(id);
     }
@@ -52,7 +51,13 @@ public class MainController {
         return homeRepository.findAll();
     }
 
-    //TODO HOME - GET / READ ONE by ID
+    //HOME -GET / READ ONE
+    @GetMapping(path=RESTNouns.USER+RESTNouns.HOME+RESTNouns.HOME_ID)
+    public @ResponseBody Optional<Home> getHomeByID(@PathVariable Integer home_id) {return homeRepository.findById(home_id);}
+
+    //HOME -GET /READ ALL BY USER ID (not working yet)
+//    @GetMapping(path=RESTNouns.USER+RESTNouns.USER_ID+RESTNouns.HOME)
+//    public @ResponseBody Optional<Home> getAllUserHomes(@PathVariable Integer id) {return homeRepository.findById(id);}
 
 //ECHO Home info to build out the commponents
 //    @Id
@@ -65,9 +70,18 @@ public class MainController {
     //HOME - POST / CREATE ONE
     @PostMapping(path=RESTNouns.USER + RESTNouns.USER_ID + RESTNouns.HOME)
     public @ResponseBody String addNewHome(@PathVariable Integer id,
-                                           @RequestParam LocalDate dateBuilt, @RequestParam int value,
-                                           @RequestParam("heatingtype") Home.HeatingType heatingType){
-        Home home = new Home(dateBuilt.getYear(), value, heatingType, Home.Location.RURAL);
+                                           @RequestParam Integer year,
+                                           @RequestParam Integer value,
+                                           @RequestParam Home.HeatingType heatingType,
+                                           @RequestParam Home.Location location){
+
+
+        Home home = new Home();
+        home.setYearBuilt(year);
+        home.setValue(value);
+        home.setHeatingType(heatingType);
+        home.setLocation(location);
+
 
         //Scope the customer
         Optional<User> user = userRepository.findById(id);
@@ -80,7 +94,19 @@ public class MainController {
         }
     }
 
+    @PostMapping(path = RESTNouns.USER+RESTNouns.USER_ID+RESTNouns.HOME+RESTNouns.HOME_ID+"/delete")
+    public @ResponseBody String deleteHome(@PathVariable Integer home_id){
+        Optional<Home> home = homeRepository.findById(home_id);
+        if(home.isPresent()){
+            homeRepository.deleteById(home_id);
+            return "deleted";
+        }else{
+            return "Failed to find home";
+        }
+    }
+
     //TODO HOME - PUT Update
+//    @PutMapping()
     //TODO HOME - DELETE
 
     //Quote REST
