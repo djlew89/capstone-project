@@ -3,6 +3,7 @@ package com.capstoneproject.POJOS;
 import com.capstoneproject.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 
@@ -22,7 +23,7 @@ public class Home
     /**
      * Age of dwelling
      */
-    @JsonFormat(pattern="yyyy-MM-dd") private int yearBuilt;
+    @JsonFormat(pattern="yyyy-MM-dd") private LocalDate dateBuilt;
     /**
      * int representing the type of heating in a dwelling.
      */
@@ -34,7 +35,7 @@ public class Home
     /**
      * The monetary value of dwelling
      */
-    private int value;
+    private double value;
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "ID")
     private User user;
@@ -49,16 +50,14 @@ public class Home
         return this.location;
     }
 
-    public int getValue()
+    public double getValue()
     {
         return value;
     }
 
     public int getAge()
     {
-        return LocalDate.now()
-
-                .getYear() - this.yearBuilt;
+        return LocalDate.now().getYear() - this.dateBuilt.getYear();
     }
 
     public boolean isUrban()
@@ -70,8 +69,8 @@ public class Home
         this.user = user;
     }
 
-    public void setYearBuilt(int yearBuilt) {
-        this.yearBuilt = yearBuilt;
+    public void setDateBuilt(LocalDate dateBuilt) {
+        this.dateBuilt = dateBuilt;
     }
 
     public void setHeatingType(HeatingType heatingType) {
@@ -82,7 +81,7 @@ public class Home
         this.location = location;
     }
 
-    public void setValue(int value) {
+    public void setValue(double value) {
         this.value = value;
     }
 

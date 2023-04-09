@@ -1,12 +1,23 @@
 package com.capstoneproject.POJOS;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+import java.time.LocalDate;
+
 /**
- * @Author Dan Lewis
+ * @Author Dan Lewis, Julia Parewick
  * @Date 2023-02-16
  * Descriptive class for a Driver object
  */
+@Entity(name="driver")
 public class Driver
 {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
     /**
      * First name of Driver
      */
@@ -20,7 +31,7 @@ public class Driver
     /**
      * Age of Driver
      */
-    private int age;
+    private LocalDate dob;
     /**
      * Number of Accidents Driver has been involved in
      */
@@ -29,22 +40,6 @@ public class Driver
      * Driver's Home Address
      */
     private String address;
-
-    /**
-     * Instantiates a new Driver class
-     *
-     * @param driverAge         Driver's Age
-     * @param numberOfAccidents Number of accidents by driver
-     * @param address           home address
-     */
-    public Driver(String firstName, String lastName, int driverAge, int numberOfAccidents, String address)
-    {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = driverAge;
-        this.numberOfAccidents = numberOfAccidents;
-        this.address = address;
-    }
 
     /**
      * getter
@@ -91,19 +86,19 @@ public class Driver
      *
      * @return Integer
      */
-    public int getAge()
+    public int calculateAge()
     {
-        return age;
+        return LocalDate.now().getYear()-this.dob.getYear();
     }
 
     /**
      * setter
      *
-     * @param age drivers age
+     * @param dob drivers date of birth
      */
-    public void setAge(int age)
+    public void setdob(LocalDate dob)
     {
-        this.age = age;
+        this.dob = dob;
     }
 
     /**

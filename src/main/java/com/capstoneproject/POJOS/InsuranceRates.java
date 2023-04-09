@@ -7,12 +7,12 @@ package com.capstoneproject.POJOS;
  *
  * Note: all premiums are annual
  *
- * @author Josh
+ * @author Julia Parewick
  */
 public interface InsuranceRates {
 
     /**
-     * Get the base annual premium for a home ca.nl.cna.Java3.capstonePOJOs.Quote
+     * Get the base annual premium for a HomeQuote
      * @return base premium
      */
     public double getHomeBasePremium();
@@ -28,17 +28,23 @@ public interface InsuranceRates {
      * @param location home location
      * @return
      */
-    public double getLocationFactor(Home.Location location);
+    public double getHomeLocationFactor(Home.Location location);
 
     /**
      * Get the rating factor based on home age - years since construction
      * @param yearsOld Years since construction
      * @return
      */
-    public double getAgeFactor(int yearsOld);
+    public double getHomeAgeFactor(int yearsOld);
 
+    public double getHomeValueFactor(double value);
 
-    //TODO Add auto methods
+    public double getAutoBasePremium();
 
-    //TODO How to handle tax?
+    public double getDriverAgeFactor(int age);
+
+    public double getDriverAccidentsFactor(int accidents);
+
+    public double getVehicleAgeFactor(int age);
+
 }

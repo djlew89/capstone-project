@@ -1,5 +1,6 @@
 package com.capstoneproject.POJOS;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 /**
@@ -28,9 +29,9 @@ public class AutoPolicy extends Policy
      * @param driver    The driver insured by the policy
      * @param vehicle   The vehicle insured by the policy
      */
-    public AutoPolicy(Customer customer, LocalDate startDate, LocalDate endDate, Driver driver, Vehicle vehicle)
+    public AutoPolicy(LocalDate startDate, LocalDate endDate, BigDecimal totalBeforeTax, Customer customer, Driver driver, Vehicle vehicle)
     {
-        super(customer, startDate, endDate);
+        super(startDate, endDate, totalBeforeTax, customer);
         this.driver = driver;
         this.vehicle = vehicle;
     }
@@ -53,17 +54,5 @@ public class AutoPolicy extends Policy
     public Vehicle getVehicle()
     {
         return vehicle;
-    }
-
-    /**
-     * Calculates premium for policy based on age, number of accidents, and vehicle age
-     *
-     * @return premium
-     */
-    public double calculatePremium()
-    {
-        AutoQuote quote = new AutoQuote(super.startDate, super.endDate, driver, vehicle);
-
-        return quote.calculateAutoQuote() * 1.15;
     }
 }
