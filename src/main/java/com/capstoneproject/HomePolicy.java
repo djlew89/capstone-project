@@ -1,4 +1,9 @@
-package com.capstoneproject.POJOS;
+package com.capstoneproject;
+
+import com.capstoneproject.Customer;
+import com.capstoneproject.Home;
+import com.capstoneproject.POJOS.Policy;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -8,14 +13,26 @@ import java.time.LocalDate;
  * @Date 2023-02-24
  * Abstract class for a customer's insurance policy
  */
+@Entity(name="home_policy")
 public class HomePolicy extends Policy
 {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+
+
+
     /**
      * a Home object representing the subject of the Policy
+     *
      */
+    @OneToOne
+    @JoinColumn(name="home_id", referencedColumnName = "ID")
     protected Home home;
 
     protected BigDecimal premiumBeforeTax;
+
 
     /**
      * constructor
@@ -30,6 +47,18 @@ public class HomePolicy extends Policy
         super(startDate, endDate, totalBeforeTax, customer);
         this.premiumBeforeTax = premiumBeforeTax;
         this.home = home;
+    }
+
+    public HomePolicy() {
+        super();
+    }
+
+    public void setHome(Home home) {
+        this.home = home;
+    }
+
+    public void setPremiumBeforeTax(BigDecimal premiumBeforeTax) {
+        this.premiumBeforeTax = premiumBeforeTax;
     }
 
     /**

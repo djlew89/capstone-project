@@ -1,5 +1,7 @@
 package com.capstoneproject.POJOS;
 
+import com.capstoneproject.Home;
+
 /**
  * Testing insurance rates class which will be abstracted by a Web Service
  *

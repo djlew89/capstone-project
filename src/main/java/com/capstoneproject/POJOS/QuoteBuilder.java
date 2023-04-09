@@ -1,5 +1,9 @@
 package com.capstoneproject.POJOS;
 
+import com.capstoneproject.Driver;
+import com.capstoneproject.Home;
+import com.capstoneproject.Vehicle;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -71,9 +75,9 @@ public class QuoteBuilder {
 
         BigDecimal bigDecimal = new BigDecimal(insuranceRates.getAutoBasePremium());
         return bigDecimal
-                .multiply(BigDecimal.valueOf(insuranceRates.getDriverAgeFactor(driver.calculateAge())))
+                .multiply(BigDecimal.valueOf(insuranceRates.getDriverAgeFactor(LocalDate.now().getYear()-driver.getCustomer().getDob().getYear()))
                 .multiply(BigDecimal.valueOf(insuranceRates.getVehicleAgeFactor(vehicle.calculateAge())))
-                .multiply(BigDecimal.valueOf(insuranceRates.getDriverAccidentsFactor(driver.getNumberAccidents())));
+                .multiply(BigDecimal.valueOf(insuranceRates.getDriverAccidentsFactor(driver.getNumberAccidents()))));
     }
 
 }

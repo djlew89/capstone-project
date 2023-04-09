@@ -1,9 +1,7 @@
-package com.capstoneproject.POJOS;
+package com.capstoneproject;
 
-import com.capstoneproject.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 
@@ -37,8 +35,20 @@ public class Home
      */
     private double value;
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "ID")
+    @JoinColumn(name = "customer_id", referencedColumnName = "ID")
+    private Customer customer;
+
+    @ManyToOne
+    @JoinColumn(name="user_id", referencedColumnName = "ID")
     private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public HeatingType getHeatingType()
     {
@@ -65,8 +75,8 @@ public class Home
         return location == Location.URBAN;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public void setDateBuilt(LocalDate dateBuilt) {

@@ -1,4 +1,7 @@
-package com.capstoneproject.POJOS;
+package com.capstoneproject;
+
+import com.capstoneproject.User;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.LinkedList;
@@ -9,12 +12,16 @@ import java.util.List;
  * @Date 2023-02-24
  * Descriptive class for a Customer
  */
+@Entity(name="customer")
 public class Customer
 {
-    /**
-     * Customer's Policies in a list
-     */
-    private final List<Policy> policyList;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+//    /**
+//     * Customer's Policies in a list
+//     */
+//    private final List<Policy> policyList = new LinkedList<>();
     /**
      * Customer's First Name
      */
@@ -28,20 +35,15 @@ public class Customer
      */
     private LocalDate dob;
 
-    /**
-     * Instantiates a new Customer class
-     *
-     * @param firstName a customers first name.
-     * @param lastName  a customers last name.
-     * @param dob       a customers date of birth.
-     */
-    public Customer(String firstName, String lastName, LocalDate dob)
-    {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.dob = dob;
-        this.policyList = new LinkedList<>();
-    }
+    private String address;
+
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "ID")
+    private User user;
+
+    @OneToOne
+    @JoinColumn(name= "driver_id", referencedColumnName = "ID")
+    private Driver driver;
 
     /**
      * getter
@@ -103,23 +105,38 @@ public class Customer
         this.dob = dob;
     }
 
-    /**
-     * getter
-     *
-     * @return List<Policy>
-     */
-    public List<Policy> getPolicyList()
-    {
-        return policyList;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    /**
-     * Adds a policy to the Customer's policy list
-     *
-     * @param policy the policy.
-     */
-    public void addPolicy(Policy policy)
-    {
-        this.policyList.add(policy);
+    public String getAddress() {
+        return address;
     }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+//    /**
+//     * getter
+//     *
+//     * @return List<Policy>
+//     */
+//    public List<Policy> getPolicyList()
+//    {
+//        return policyList;
+//    }
+
+//    /**
+//     * Adds a policy to the Customer's policy list
+//     *
+//     * @param policy the policy.
+//     */
+//    public void addPolicy(Policy policy)
+//    {
+//        this.policyList.add(policy);
+//    }
+//    public Integer getId() {
+//        return id;
+//    }
 }

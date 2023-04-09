@@ -1,16 +1,13 @@
 package com.capstoneproject;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 /**
  * User Entity model. This object will be used by Hibernate to create a table in the database
  *
  * Data Access Object
  *
- * @author Josh
+ * @author Julia Parewick
  */
 @Entity(name = "user")
 public class User {
@@ -18,9 +15,13 @@ public class User {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
     private Integer id;
-    private String name;
+    private String username;
     private String email;
-    //TODO Add date of birth for Driving purposes - model the home year built
+    private String password;
+
+    @OneToOne
+    @JoinColumn(name="customer_id", referencedColumnName = "ID")
+    private Customer customer;
 
     public Integer getId() {
         return id;
@@ -30,12 +31,12 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.username = name;
     }
 
     public String getEmail() {
@@ -44,6 +45,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
 }

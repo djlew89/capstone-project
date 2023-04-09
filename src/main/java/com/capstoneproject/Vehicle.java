@@ -1,4 +1,4 @@
-package com.capstoneproject.POJOS;
+package com.capstoneproject;
 
 import com.capstoneproject.User;
 import jakarta.persistence.*;
@@ -36,6 +36,10 @@ public class Vehicle
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "ID")
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name="customer_id", referencedColumnName = "ID")
+    private Customer customer;
 
     /**
      * Getter for make
