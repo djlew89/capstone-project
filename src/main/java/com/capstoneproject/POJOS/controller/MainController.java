@@ -26,7 +26,7 @@ public class MainController {
     }
 
     //USER - GET / READ ONE by ID
-    @GetMapping(path = RESTNouns.USER + "/{id}")
+    @GetMapping(path = RESTNouns.USER + RESTNouns.USER_ID)
     public @ResponseBody Optional<User> getUserWithId(@PathVariable Integer id){
         return userRepository.findById(id);
     }
@@ -38,11 +38,36 @@ public class MainController {
         user.setName(name);
         user.setEmail(email);
         userRepository.save(user);
-        return "Saved"; //TODO Send a better message
+        return "User Registered";
     }
 
-    //TODO USER PUT Update
-    //TODO USER DELETE
+    //USER -PUT / UPDATE ONE
+    @PutMapping(path=RESTNouns.USER+RESTNouns.USER_ID+"/update")
+    public @ResponseBody String updateUser(@PathVariable Integer id,
+                                           @RequestParam String name,
+                                           @RequestParam String email){
+        Optional<User> user = userRepository.findById(id);
+        if(user.isPresent()){
+            user.get().setName(name);
+            user.get().setEmail(email);
+            userRepository.save(user.get());
+            return "Updated!";
+        }else{
+            return "Not Found";
+        }
+    }
+
+    //USER -DELETE / DELETE ONE
+    @DeleteMapping(path = RESTNouns.USER+RESTNouns.USER_ID+"/delete")
+    public @ResponseBody String deleteUser(@PathVariable Integer id){
+        Optional<User> user = userRepository.findById(id);
+        if(user.isPresent()){
+            userRepository.delete(user.get());
+            return "Deleted";
+        }else{
+            return "Not Found";
+        }
+    }
 
     //HOME REST
 
@@ -52,9 +77,15 @@ public class MainController {
         return homeRepository.findAll();
     }
 
-    //TODO HOME - GET / READ ONE by ID
+    //HOME -GET / READ ONE
+    @GetMapping(path=RESTNouns.USER+RESTNouns.HOME+RESTNouns.HOME_ID)
+    public @ResponseBody Optional<Home> getHomeByID(@PathVariable Integer home_id) {return homeRepository.findById(home_id);}
 
-//ECHO Home info to build out the commponents
+    //HOME -GET /READ ALL BY USER ID (not working yet)
+//    @GetMapping(path=RESTNouns.USER+RESTNouns.USER_ID+RESTNouns.HOME)
+//    public @ResponseBody Optional<Home> getAllUserHomes(@PathVariable Integer id) {return homeRepository.;}
+
+//ECHO Home info to build out the components
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.AUTO) private Integer id;
 //    @JsonFormat(pattern="yyyy-MM-dd")  private LocalDate yearBuilt;
@@ -65,9 +96,18 @@ public class MainController {
     //HOME - POST / CREATE ONE
     @PostMapping(path=RESTNouns.USER + RESTNouns.USER_ID + RESTNouns.HOME)
     public @ResponseBody String addNewHome(@PathVariable Integer id,
-                                           @RequestParam LocalDate dateBuilt, @RequestParam int value,
-                                           @RequestParam("heatingtype") Home.HeatingType heatingType){
-        Home home = new Home(dateBuilt.getYear(), value, heatingType, Home.Location.RURAL);
+                                           @RequestParam LocalDate date,
+                                           @RequestParam Integer value,
+                                           @RequestParam Home.HeatingType heatingType,
+                                           @RequestParam Home.Location location){
+
+
+        Home home = new Home();
+        home.setDateBuilt(date);
+        home.setValue(value);
+        home.setHeatingType(heatingType);
+        home.setLocation(location);
+
 
         //Scope the customer
         Optional<User> user = userRepository.findById(id);
@@ -80,8 +120,37 @@ public class MainController {
         }
     }
 
-    //TODO HOME - PUT Update
-    //TODO HOME - DELETE
+    //HOME -DELETE / DELETE ONE
+    @DeleteMapping(path = RESTNouns.USER+RESTNouns.USER_ID+RESTNouns.HOME+RESTNouns.HOME_ID+"/delete")
+    public @ResponseBody String deleteHome(@PathVariable Integer home_id){
+        Optional<Home> home = homeRepository.findById(home_id);
+        if(home.isPresent()){
+            homeRepository.delete(home.get());
+            return "Deleted";
+        }else{
+            return "Not Found";
+        }
+    }
+
+    //HOME -PUT / UPDATE ONE
+    @PutMapping(path = RESTNouns.USER+RESTNouns.USER_ID+RESTNouns.HOME_ID+"/update")
+    public @ResponseBody String updateHome(@PathVariable Integer home_id,
+                                           @RequestParam LocalDate dateBuilt,
+                                           @RequestParam double value,
+                                           @RequestParam Home.HeatingType heatingType,
+                                           @RequestParam Home.Location location){
+        Optional<Home> home = homeRepository.findById(home_id);
+        if(home.isPresent()){
+            home.get().setDateBuilt(dateBuilt);
+            home.get().setValue(value);
+            home.get().setHeatingType(heatingType);
+            home.get().setLocation(location);
+            homeRepository.save(home.get());
+            return "Updated!";
+        }else{
+            return "Not Found.";
+        }
+    }
 
     //Quote REST
     /*

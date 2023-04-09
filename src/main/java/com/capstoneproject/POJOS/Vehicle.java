@@ -1,40 +1,41 @@
 package com.capstoneproject.POJOS;
 
+import com.capstoneproject.User;
+import jakarta.persistence.*;
+
+import java.time.LocalDate;
+
 /**
- * @Author Adam Elliott
- * @Date 2023-02-22
+ * @Author Adam Elliott, Julia Parewick
+ * @Date 2023-04-08
  * Descriptive class for a Vehicle object
  */
+@Entity(name="vehicle")
 public class Vehicle
 {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+
+
     /**
      * The make of the vehicle
      */
-    private final String make;
+    private String make;
 
     /**
      * The model of the vehicle
      */
-    private final String model;
+    private String model;
 
     /**
      * The year the vehicle was made
      */
-    private final int year;
+    private int year;
 
-    /**
-     * Constructor for Vehicle class
-     *
-     * @param make  The make of the vehicle
-     * @param model The model of the vehicle
-     * @param year  The year the vehicle was made
-     */
-    public Vehicle(String make, String model, int year)
-    {
-        this.make = make;
-        this.model = model;
-        this.year = year;
-    }
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "ID")
+    private User user;
 
     /**
      * Getter for make
@@ -64,5 +65,29 @@ public class Vehicle
     public int getYear()
     {
         return year;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public int calculateAge(){
+        return LocalDate.now().getYear()-year;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setMake(String make) {
+        this.make = make;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
     }
 }

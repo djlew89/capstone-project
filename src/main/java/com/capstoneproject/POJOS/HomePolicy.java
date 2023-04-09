@@ -1,5 +1,6 @@
 package com.capstoneproject.POJOS;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 /**
@@ -12,7 +13,9 @@ public class HomePolicy extends Policy
     /**
      * a Home object representing the subject of the Policy
      */
-    private final Home home;
+    protected Home home;
+
+    protected BigDecimal premiumBeforeTax;
 
     /**
      * constructor
@@ -22,15 +25,15 @@ public class HomePolicy extends Policy
      * @param endDate   The policy end date.
      * @param home      The home.
      */
-    public HomePolicy(Customer customer, LocalDate startDate, LocalDate endDate, Home home)
+    public HomePolicy(LocalDate startDate, LocalDate endDate, BigDecimal totalBeforeTax, Customer customer, BigDecimal premiumBeforeTax, Home home)
     {
-        super(customer, startDate, endDate);
+        super(startDate, endDate, totalBeforeTax, customer);
+        this.premiumBeforeTax = premiumBeforeTax;
         this.home = home;
     }
 
     /**
      * getter
-     *
      * @return Home
      */
     public Home getHome()
@@ -38,15 +41,8 @@ public class HomePolicy extends Policy
         return this.home;
     }
 
-    /**
-     * Calculates the home premium based on factors provided by Home object
-     *
-     * @return double
-     */
-    public double calculatePremium()
-    {
-        HomeQuote quote = new HomeQuote(super.startDate, super.endDate, home);
-
-        return quote.calculateHomeQuote() * 1.15;
+    public BigDecimal premiumBeforeTax() {
+        return this.premiumBeforeTax;
     }
+
 }

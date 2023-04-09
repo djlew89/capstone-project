@@ -1,5 +1,6 @@
 package com.capstoneproject.POJOS;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 /**
@@ -12,6 +13,7 @@ public abstract class Quote
 {
     protected LocalDate startDate;
     protected LocalDate endDate;
+    protected BigDecimal totalBeforeTax;
 
     /**
      * Instantiates a new Quote.
@@ -19,10 +21,11 @@ public abstract class Quote
      * @param startDate the start date
      * @param endDate   the end date
      */
-    public Quote(LocalDate startDate, LocalDate endDate)
+    public Quote(LocalDate startDate, LocalDate endDate, BigDecimal totalBeforeTax)
     {
         this.startDate = startDate;
         this.endDate = endDate;
+        this.totalBeforeTax = totalBeforeTax;
     }
 
     /**
@@ -64,4 +67,13 @@ public abstract class Quote
     {
         this.endDate = endDate;
     }
+
+    public BigDecimal totalBeforeTax(){
+        return this.totalBeforeTax;
+    }
+
+    public BigDecimal calculateTax(){
+        return this.totalBeforeTax.multiply(BigDecimal.valueOf(0.15));
+    }
+
 }
