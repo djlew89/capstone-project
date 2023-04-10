@@ -1,5 +1,6 @@
 package com.capstoneproject.POJOS.testers;
 
+import com.capstoneproject.*;
 import com.capstoneproject.POJOS.*;
 
 import java.time.LocalDate;
@@ -20,14 +21,25 @@ public class AutoTestApplication {
         Customer customer = getTestCustomer();
         AutoPolicy policy = PolicyBuilder.getNewAutoPolicy(LocalDate.now(), LocalDate.now().plusDays(365), car, driver, customer);
         System.out.printf("\nTotal Before Tax: %.2f\nTax: %.2f\nFinal Total: %.2f",
-                policy.totalBeforeTax(),
+                policy.getTotalBeforetax(),
                 policy.calculateTax(),
-                policy.totalBeforeTax().add(policy.calculateTax()));
+                policy.getTotalBeforetax().add(policy.calculateTax()));
     }
 
+    public static User getTestUser(){
+        User user = new User();
+        user.setName("JuliaParewick");
+        user.setEmail("jparewick@gmail.com");
+        return user;
+    }
     public static Customer getTestCustomer(){
         //TODO Randomize this? Add in edge cases
-        return new Customer("Josh", "Taylor", LocalDate.of(1990,10,1));
+        Customer customer = new Customer();
+        customer.setFirstName("Julia");
+        customer.setLastName("Parewick");
+        customer.setDob(LocalDate.of(1992,4,4));
+        customer.setUser(getTestUser());
+        return customer;
     }
     public static Vehicle getTestVehicle(){
         Random random = new Random();
@@ -58,26 +70,17 @@ public class AutoTestApplication {
         int i = Math.abs(random.nextInt());
         if(i % 3 == 0){
             Driver driver = new Driver();
-            driver.setAddress("22 Test Ave, SJ, NL");
-            driver.setdob(LocalDate.of(1990,3,20));
-            driver.setFirstName("Jake");
-            driver.setLastName("Test");
             driver.setNumberAccidents(1);
+            driver.setCustomer(getTestCustomer());
             return driver;
         } else if(i % 3 == 1){
             Driver driver = new Driver();
-            driver.setAddress("22 Test Ave, SJ, NL");
-            driver.setdob(LocalDate.of(1999,3,20));
-            driver.setFirstName("Jake");
-            driver.setLastName("Test");
+            driver.setCustomer(getTestCustomer());
             driver.setNumberAccidents(3);
             return driver;
         } else {
             Driver driver = new Driver();
-            driver.setAddress("22 Test Ave, SJ, NL");
-            driver.setdob(LocalDate.of(1960,3,20));
-            driver.setFirstName("Jake");
-            driver.setLastName("Test");
+            driver.setCustomer(getTestCustomer());
             driver.setNumberAccidents(0);
             return driver;
         }
@@ -87,10 +90,10 @@ public class AutoTestApplication {
                 car.getMake(),
                 car.getModel(),
                 car.getYear(),
-                driver.getFirstName(),
-                driver.getLastName(),
-                driver.getAddress(),
-                driver.calculateAge(),
+                driver.getCustomer().getFirstName(),
+                driver.getCustomer().getLastName(),
+                driver.getCustomer().getAddress(),
+                LocalDate.now().getYear()-driver.getCustomer().getDob().getYear(),
                 driver.getNumberAccidents()
         );
     }

@@ -1,5 +1,7 @@
 package com.capstoneproject.POJOS;
 
+import com.capstoneproject.Home;
+
 /**
  * An interface for insurance rates. This allows for rates to be abstracted to web service.
  * This is a single set of rates for both home and auto. This is common industry practice as

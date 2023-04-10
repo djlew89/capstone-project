@@ -1,4 +1,7 @@
 package com.capstoneproject.POJOS.testers;
+import com.capstoneproject.Customer;
+import com.capstoneproject.Home;
+import com.capstoneproject.HomePolicy;
 import com.capstoneproject.POJOS.*;
 import java.time.LocalDate;
 import java.util.Random;
@@ -23,14 +26,14 @@ public class HomeTestApplication {
         HomePolicy policy = PolicyBuilder.getNewHomePolicy(LocalDate.now(), LocalDate.now().plusDays(360),home,customer);
         System.out.printf("\nHome Premium: %.2f\nTotal Before Tax: %.2f\nTax: %.2f\nFinal Total: %.2f",
                 policy.premiumBeforeTax(),
-                policy.totalBeforeTax(),
+                policy.getTotalBeforetax(),
                 policy.calculateTax(),
-                policy.totalBeforeTax().add(policy.calculateTax()));
+                policy.getTotalBeforetax().add(policy.calculateTax()));
     }
 
     public static Customer getTestCustomer(){
         //TODO Randomize this? Add in edge cases
-        return new Customer("Josh", "Taylor", LocalDate.of(1990,10,1));
+        return new Customer();
     }
 
     public static Home getTestHome(){
@@ -41,7 +44,7 @@ public class HomeTestApplication {
         if(i % 3 == 0){
             Home home = new Home();
             home.setDateBuilt(LocalDate.of(2005,1,1));
-            home.setValue(400000);
+            home.setValue(240000);
             home.setHeatingType(Home.HeatingType.OIL);
             home.setLocation(Home.Location.RURAL);
             return home;
