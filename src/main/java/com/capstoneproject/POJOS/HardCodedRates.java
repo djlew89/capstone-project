@@ -7,23 +7,30 @@ import com.capstoneproject.Home;
  *
  * @author Josh
  */
-public class HardCodedRates implements InsuranceRates {
+public class HardCodedRates implements InsuranceRates
+{
 
     @Override
-    public double getHomeBasePremium() {
+    public double getHomeBasePremium()
+    {
         return 500;
     }
 
     @Override
-    public double getHeatingTypeFactor(Home.HeatingType heatingType) {
-        switch(heatingType) {
-            case OIL -> {
+    public double getHeatingTypeFactor(Home.HeatingType heatingType)
+    {
+        switch (heatingType)
+        {
+            case OIL ->
+            {
                 return 2.0;
             }
-            case WOOD -> {
+            case WOOD ->
+            {
                 return 1.25;
             }
-            case OTHER -> {
+            case OTHER ->
+            {
                 return 1.0;
             }
         }
@@ -31,9 +38,12 @@ public class HardCodedRates implements InsuranceRates {
     }
 
     @Override
-    public double getHomeLocationFactor(Home.Location location) {
-        switch(location) {
-            case URBAN, RURAL -> {
+    public double getHomeLocationFactor(Home.Location location)
+    {
+        switch (location)
+        {
+            case URBAN, RURAL ->
+            {
                 return 1.0;
             }
         }
@@ -41,55 +51,84 @@ public class HardCodedRates implements InsuranceRates {
     }
 
     @Override
-    public double getHomeAgeFactor(int yearsOld) {
-        if(yearsOld > 50){
+    public double getHomeAgeFactor(int yearsOld)
+    {
+        if (yearsOld > 50)
+        {
             return 1.5;
-        } else if (yearsOld > 25){
+        }
+        else if (yearsOld > 25)
+        {
             return 1.25;
-        } else {
+        }
+        else
+        {
             return 1.0;
         }
     }
 
     @Override
-    public double getHomeValueFactor(double value) {
-        if(value > 250000){
-            return value*0.02;
-        }else{
+    public double getHomeValueFactor(double value)
+    {
+        if (value > 250000)
+        {
+            return value * 0.02;
+        }
+        else
+        {
             return 0;
         }
     }
 
     @Override
-    public double getAutoBasePremium(){ return 750.0;}
+    public double getAutoBasePremium()
+    {
+        return 750.0;
+    }
 
     @Override
-    public double getDriverAgeFactor(int age) {
-        if(age<25){
+    public double getDriverAgeFactor(int age)
+    {
+        if (age < 25)
+        {
             return 2.0;
-        }else{
+        }
+        else
+        {
             return 1.0;
         }
     }
 
     @Override
-    public double getDriverAccidentsFactor(int accidents) {
-        if(accidents>=2){
+    public double getDriverAccidentsFactor(int accidents)
+    {
+        if (accidents >= 2)
+        {
             return 2.5;
-        }else if(accidents==1){
+        }
+        else if (accidents == 1)
+        {
             return 1.25;
-        }else{
+        }
+        else
+        {
             return 1.0;
         }
     }
 
     @Override
-    public double getVehicleAgeFactor(int age) {
-        if (age < 5) {
+    public double getVehicleAgeFactor(int age)
+    {
+        if (age < 5)
+        {
             return 1.0;
-        } else if (age >= 5 && age < 10) {
+        }
+        else if (age >= 5 && age < 10)
+        {
             return 1.5;
-        } else {
+        }
+        else
+        {
             return 2.5;
         }
     }

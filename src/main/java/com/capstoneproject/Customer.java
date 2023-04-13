@@ -1,27 +1,24 @@
 package com.capstoneproject;
 
-import com.capstoneproject.User;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * @Author Dan Lewis
  * @Date 2023-02-24
  * Descriptive class for a Customer
  */
-@Entity(name="customer")
+@Entity(name = "customer")
 public class Customer
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-//    /**
-//     * Customer's Policies in a list
-//     */
-//    private final List<Policy> policyList = new LinkedList<>();
+    //    /**
+    //     * Customer's Policies in a list
+    //     */
+    //    private final List<Policy> policyList = new LinkedList<>();
     /**
      * Customer's First Name
      */
@@ -42,7 +39,7 @@ public class Customer
     private User user;
 
     @OneToOne
-    @JoinColumn(name= "driver_id", referencedColumnName = "ID")
+    @JoinColumn(name = "driver_id", referencedColumnName = "ID")
     private Driver driver;
 
     /**
@@ -105,38 +102,41 @@ public class Customer
         this.dob = dob;
     }
 
-    public void setUser(User user) {
+    public void setUser(User user)
+    {
         this.user = user;
     }
 
-    public String getAddress() {
+    public String getAddress()
+    {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(String address)
+    {
         this.address = address;
     }
 
-//    /**
-//     * getter
-//     *
-//     * @return List<Policy>
-//     */
-//    public List<Policy> getPolicyList()
-//    {
-//        return policyList;
-//    }
+    //    /**
+    //     * getter
+    //     *
+    //     * @return List<Policy>
+    //     */
+    //    public List<Policy> getPolicyList()
+    //    {
+    //        return policyList;
+    //    }
 
-//    /**
-//     * Adds a policy to the Customer's policy list
-//     *
-//     * @param policy the policy.
-//     */
-//    public void addPolicy(Policy policy)
-//    {
-//        this.policyList.add(policy);
-//    }
-//    public Integer getId() {
-//        return id;
-//    }
+    //    /**
+    //     * Adds a policy to the Customer's policy list
+    //     *
+    //     * @param policy the policy.
+    //     */
+    //    public void addPolicy(Policy policy)
+    //    {
+    //        this.policyList.add(policy);
+    //    }
+    //    public Integer getId() {
+    //        return id;
+    //    }
 }

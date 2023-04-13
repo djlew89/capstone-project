@@ -15,21 +15,25 @@ public class Home
 {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO) private Integer id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
 
     /**
      * Age of dwelling
      */
-    @JsonFormat(pattern="yyyy-MM-dd") private LocalDate dateBuilt;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dateBuilt;
     /**
      * int representing the type of heating in a dwelling.
      */
-    @Enumerated(EnumType.ORDINAL) private Home.HeatingType heatingType;
+    @Enumerated(EnumType.ORDINAL)
+    private Home.HeatingType heatingType;
     /**
      * Location of the dwelling
      */
-    @Enumerated(EnumType.ORDINAL) private Home.Location location;
+    @Enumerated(EnumType.ORDINAL)
+    private Home.Location location;
     /**
      * The monetary value of dwelling
      */
@@ -39,14 +43,16 @@ public class Home
     private Customer customer;
 
     @ManyToOne
-    @JoinColumn(name="user_id", referencedColumnName = "ID")
+    @JoinColumn(name = "user_id", referencedColumnName = "ID")
     private User user;
 
-    public User getUser() {
+    public User getUser()
+    {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(User user)
+    {
         this.user = user;
     }
 
@@ -55,9 +61,19 @@ public class Home
         return this.heatingType;
     }
 
+    public void setHeatingType(HeatingType heatingType)
+    {
+        this.heatingType = heatingType;
+    }
+
     public Location getLocation()
     {
         return this.location;
+    }
+
+    public void setLocation(Location location)
+    {
+        this.location = location;
     }
 
     public double getValue()
@@ -65,9 +81,15 @@ public class Home
         return value;
     }
 
+    public void setValue(double value)
+    {
+        this.value = value;
+    }
+
     public int getAge()
     {
-        return LocalDate.now().getYear() - this.dateBuilt.getYear();
+        return LocalDate.now()
+                .getYear() - this.dateBuilt.getYear();
     }
 
     public boolean isUrban()
@@ -75,24 +97,14 @@ public class Home
         return location == Location.URBAN;
     }
 
-    public void setCustomer(Customer customer) {
+    public void setCustomer(Customer customer)
+    {
         this.customer = customer;
     }
 
-    public void setDateBuilt(LocalDate dateBuilt) {
+    public void setDateBuilt(LocalDate dateBuilt)
+    {
         this.dateBuilt = dateBuilt;
-    }
-
-    public void setHeatingType(HeatingType heatingType) {
-        this.heatingType = heatingType;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
-    public void setValue(double value) {
-        this.value = value;
     }
 
     /**
@@ -104,7 +116,7 @@ public class Home
         OIL,
         WOOD,
         GAS,
-        OTHER;
+        OTHER
     }
 
     /**
@@ -113,7 +125,7 @@ public class Home
     public enum Location
     {
         URBAN,
-        RURAL;
+        RURAL
     }
 
 }

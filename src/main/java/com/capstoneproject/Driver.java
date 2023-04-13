@@ -7,7 +7,7 @@ import jakarta.persistence.*;
  * @Date 2023-02-16
  * Descriptive class for a Driver object
  */
-@Entity(name="driver")
+@Entity(name = "driver")
 public class Driver
 {
     @Id
@@ -19,14 +19,17 @@ public class Driver
      */
     private int numberOfAccidents;
     @OneToOne
-    @JoinColumn(name="customer_id", referencedColumnName = "ID")
+    @JoinColumn(name = "customer_id", referencedColumnName = "ID")
     private Customer customer;
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-    public Customer getCustomer() {
+    public Customer getCustomer()
+    {
         return customer;
+    }
+
+    public void setCustomer(Customer customer)
+    {
+        this.customer = customer;
     }
 
     /**
