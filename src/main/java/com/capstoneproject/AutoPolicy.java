@@ -1,20 +1,14 @@
 package com.capstoneproject;
 
-import com.capstoneproject.Customer;
-import com.capstoneproject.Driver;
 import com.capstoneproject.POJOS.Policy;
-import com.capstoneproject.Vehicle;
 import jakarta.persistence.*;
-
-import java.math.BigDecimal;
-import java.time.LocalDate;
 
 /**
  * @Author Daniel Condon
  * @Date 2023-02-22
  * Descriptive class for customer's auto insurance policy
  */
-@Entity(name="auto_policy")
+@Entity(name = "auto_policy")
 public class AutoPolicy extends Policy
 {
     @Id
@@ -25,14 +19,14 @@ public class AutoPolicy extends Policy
      * Insured driver
      */
     @ManyToOne
-    @JoinColumn(name="driver_id", referencedColumnName = "ID")
+    @JoinColumn(name = "driver_id", referencedColumnName = "ID")
     private Driver driver;
 
     /**
      * Insured vehicle
      */
     @ManyToOne
-    @JoinColumn(name="auto_id", referencedColumnName = "ID")
+    @JoinColumn(name = "auto_id", referencedColumnName = "ID")
     private Vehicle vehicle;
 
     /**
@@ -45,6 +39,11 @@ public class AutoPolicy extends Policy
         return driver;
     }
 
+    public void setDriver(Driver driver)
+    {
+        this.driver = driver;
+    }
+
     /**
      * Getter for insuredVehicle
      *
@@ -55,11 +54,8 @@ public class AutoPolicy extends Policy
         return vehicle;
     }
 
-    public void setDriver(Driver driver) {
-        this.driver = driver;
-    }
-
-    public void setVehicle(Vehicle vehicle) {
+    public void setVehicle(Vehicle vehicle)
+    {
         this.vehicle = vehicle;
     }
 }

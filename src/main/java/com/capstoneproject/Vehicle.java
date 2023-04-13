@@ -1,6 +1,5 @@
 package com.capstoneproject;
 
-import com.capstoneproject.User;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -10,7 +9,7 @@ import java.time.LocalDate;
  * @Date 2023-04-08
  * Descriptive class for a Vehicle object
  */
-@Entity(name="vehicle")
+@Entity(name = "vehicle")
 public class Vehicle
 {
     @Id
@@ -38,7 +37,7 @@ public class Vehicle
     private User user;
 
     @ManyToOne
-    @JoinColumn(name="customer_id", referencedColumnName = "ID")
+    @JoinColumn(name = "customer_id", referencedColumnName = "ID")
     private Customer customer;
 
     /**
@@ -51,6 +50,11 @@ public class Vehicle
         return make;
     }
 
+    public void setMake(String make)
+    {
+        this.make = make;
+    }
+
     /**
      * Getter for model
      *
@@ -59,6 +63,11 @@ public class Vehicle
     public String getModel()
     {
         return model;
+    }
+
+    public void setModel(String model)
+    {
+        this.model = model;
     }
 
     /**
@@ -71,27 +80,22 @@ public class Vehicle
         return year;
     }
 
+    public void setYear(int year)
+    {
+        this.year = year;
+    }
+
     /**
-     *
      * @return
      */
-    public int calculateAge(){
-        return LocalDate.now().getYear()-year;
+    public int calculateAge()
+    {
+        return LocalDate.now()
+                .getYear() - year;
     }
 
-    public void setId(Integer id) {
+    public void setId(Integer id)
+    {
         this.id = id;
-    }
-
-    public void setMake(String make) {
-        this.make = make;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
     }
 }

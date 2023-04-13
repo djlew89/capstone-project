@@ -12,33 +12,40 @@ import java.time.LocalDate;
  *
  * @author Josh
  */
-public class QuoteBuilder {
+public class QuoteBuilder
+{
 
     /**
      * Get a new home quote
+     *
      * @param home
      * @return
      */
-    public static HomeQuote getNewHomeQuote(Home home){
-        return new HomeQuote(LocalDate.now(), LocalDate.now().plusDays(365), getHomeQuoteTotal(home),getHomeQuotePremium(home),home);
+    public static HomeQuote getNewHomeQuote(Home home)
+    {
+        return new HomeQuote(LocalDate.now(), LocalDate.now()
+                .plusDays(365), getHomeQuoteTotal(home), getHomeQuotePremium(home), home);
     }
 
     /**
-     *
      * @param vehicle
      * @param driver
      * @return
      */
-    public static AutoQuote getNewAutoQuote(Vehicle vehicle, Driver driver){
-        return new AutoQuote(LocalDate.now(), LocalDate.now().plusDays(360),getAutoQuoteTotal(vehicle,driver),driver,vehicle);
+    public static AutoQuote getNewAutoQuote(Vehicle vehicle, Driver driver)
+    {
+        return new AutoQuote(LocalDate.now(), LocalDate.now()
+                .plusDays(360), getAutoQuoteTotal(vehicle, driver), driver, vehicle);
     }
 
     /**
      * Get a home quote premium
+     *
      * @param home
      * @return
      */
-    private static BigDecimal getHomeQuotePremium(Home home){
+    private static BigDecimal getHomeQuotePremium(Home home)
+    {
         //TODO This should be a factory!
         InsuranceRates insuranceRates = new HardCodedRates();
 
@@ -48,11 +55,11 @@ public class QuoteBuilder {
     }
 
     /**
-     *
      * @param home
      * @return
      */
-    private static BigDecimal getHomeQuoteTotal(Home home){
+    private static BigDecimal getHomeQuoteTotal(Home home)
+    {
         InsuranceRates insuranceRates = new HardCodedRates();
 
         BigDecimal bigDecimal = getHomeQuotePremium(home);
@@ -65,19 +72,22 @@ public class QuoteBuilder {
     }
 
     /**
-     *
      * @param vehicle
      * @param driver
      * @return
      */
-    private static BigDecimal getAutoQuoteTotal(Vehicle vehicle, Driver driver){
+    private static BigDecimal getAutoQuoteTotal(Vehicle vehicle, Driver driver)
+    {
         InsuranceRates insuranceRates = new HardCodedRates();
 
-        BigDecimal bigDecimal = new BigDecimal(insuranceRates.getAutoBasePremium());
+        BigDecimal bigDecimal = BigDecimal.valueOf(insuranceRates.getAutoBasePremium());
         return bigDecimal
-                .multiply(BigDecimal.valueOf(insuranceRates.getDriverAgeFactor(LocalDate.now().getYear()-driver.getCustomer().getDob().getYear()))
-                .multiply(BigDecimal.valueOf(insuranceRates.getVehicleAgeFactor(vehicle.calculateAge())))
-                .multiply(BigDecimal.valueOf(insuranceRates.getDriverAccidentsFactor(driver.getNumberAccidents()))));
+                .multiply(BigDecimal.valueOf(insuranceRates.getDriverAgeFactor(LocalDate.now()
+                                .getYear() - driver.getCustomer()
+                                .getDob()
+                                .getYear()))
+                        .multiply(BigDecimal.valueOf(insuranceRates.getVehicleAgeFactor(vehicle.calculateAge())))
+                        .multiply(BigDecimal.valueOf(insuranceRates.getDriverAccidentsFactor(driver.getNumberAccidents()))));
     }
 
 }

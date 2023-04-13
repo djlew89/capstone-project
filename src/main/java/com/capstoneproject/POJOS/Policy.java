@@ -17,7 +17,7 @@ import java.time.LocalDate;
 public abstract class Policy
 {
     @ManyToOne
-    @JoinColumn(name="customer_id", referencedColumnName = "ID")
+    @JoinColumn(name = "customer_id", referencedColumnName = "ID")
     private Customer customer;
     private LocalDate startDate;
     private LocalDate endDate;
@@ -31,14 +31,16 @@ public abstract class Policy
      * @param endDate   The policy end date.
      */
 
-    public Policy(LocalDate startDate, LocalDate endDate, BigDecimal totalBeforeTax, Customer customer) {
+    public Policy(LocalDate startDate, LocalDate endDate, BigDecimal totalBeforeTax, Customer customer)
+    {
         this.startDate = startDate;
         this.endDate = endDate;
         this.totalBeforetax = totalBeforeTax;
-        this.customer=customer;
+        this.customer = customer;
     }
 
-    public Policy() {
+    public Policy()
+    {
 
     }
 
@@ -52,27 +54,33 @@ public abstract class Policy
         this.customer = customer;
     }
 
-    public LocalDate getStartDate() {
+    public LocalDate getStartDate()
+    {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(LocalDate startDate)
+    {
         this.startDate = startDate;
     }
 
-    public LocalDate getEndDate() {
+    public LocalDate getEndDate()
+    {
         return endDate;
     }
 
-    public void setEndDate(LocalDate endDate) {
+    public void setEndDate(LocalDate endDate)
+    {
         this.endDate = endDate;
     }
 
-    public BigDecimal getTotalBeforetax() {
+    public BigDecimal getTotalBeforetax()
+    {
         return totalBeforetax;
     }
 
-    public void setTotalBeforetax(BigDecimal totalBeforetax) {
+    public void setTotalBeforetax(BigDecimal totalBeforetax)
+    {
         this.totalBeforetax = totalBeforetax;
     }
 
@@ -87,7 +95,8 @@ public abstract class Policy
         return today.isBefore(endDate);
     }
 
-    public BigDecimal calculateTax(){
+    public BigDecimal calculateTax()
+    {
         return this.totalBeforetax.multiply(BigDecimal.valueOf(0.15));
     }
 }

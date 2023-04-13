@@ -1,6 +1,7 @@
 package com.capstoneproject.POJOS;
 
 import com.capstoneproject.Home;
+import com.capstoneproject.Quote;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -26,13 +27,14 @@ public class HomeQuote extends Quote
      */
     public HomeQuote(LocalDate startDate, LocalDate endDate, BigDecimal totalBeforeTax, BigDecimal premiumBeforeTax, Home selectedHome)
     {
-        super(startDate,endDate,totalBeforeTax);
-        this.premiumBeforeTax = premiumBeforeTax;
-        this.home = selectedHome;
+        super(startDate, endDate, totalBeforeTax);
+        HomeQuote.premiumBeforeTax = premiumBeforeTax;
+        home = selectedHome;
     }
 
     /**
      * gets home
+     *
      * @return home
      */
     public static Home getHome()
@@ -42,6 +44,7 @@ public class HomeQuote extends Quote
 
     /**
      * sets home
+     *
      * @param newHome the new home
      */
     public void setHome(Home newHome)
@@ -49,7 +52,8 @@ public class HomeQuote extends Quote
         home = newHome;
     }
 
-    public BigDecimal premiumBeforeTax() {
-        return this.premiumBeforeTax;
+    public BigDecimal premiumBeforeTax()
+    {
+        return premiumBeforeTax;
     }
 }
