@@ -20,7 +20,7 @@ public abstract class Quote
 {
     @JsonFormat(pattern = "yyyy-MM-dd")
     protected LocalDate startDate;
-    @JsonFormat(pattern = "yyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     protected LocalDate endDate;
     protected BigDecimal totalBeforeTax;
     @Id
