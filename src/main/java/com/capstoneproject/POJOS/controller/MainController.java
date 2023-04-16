@@ -1,13 +1,7 @@
 package com.capstoneproject.POJOS.controller;
 
-import com.capstoneproject.Customer;
-import com.capstoneproject.Home;
-import com.capstoneproject.POJOS.DataAccess.AutoRepository;
-import com.capstoneproject.POJOS.DataAccess.CustomerRepository;
-import com.capstoneproject.POJOS.DataAccess.HomeRepository;
-import com.capstoneproject.POJOS.DataAccess.UserRepository;
-import com.capstoneproject.User;
-import com.capstoneproject.Vehicle;
+import com.capstoneproject.*;
+import com.capstoneproject.POJOS.DataAccess.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +12,7 @@ import java.util.Optional;
 
 @Controller //This means that this class is a Controller
 @RequestMapping(path = RESTNouns.VERSION_1) //This means URL's start with /v1 (after Application path)
-public class MainController
-{
+public class MainController {
 
     //Wire the ORM
     @Autowired
@@ -32,24 +25,24 @@ public class MainController
     @Autowired
     private HomeRepository homeRepository;
 
+    @Autowired
+    private HomePolicyRepository homePolicyRepository;
+
     //USER - GET / READ All
     @GetMapping(path = RESTNouns.USER)
-    public @ResponseBody Iterable<User> getAllUsers()
-    {
+    public @ResponseBody Iterable<User> getAllUsers() {
         return userRepository.findAll();
     }
 
     //USER - GET / READ ONE by ID
     @GetMapping(path = RESTNouns.USER + RESTNouns.USER_ID)
-    public @ResponseBody Optional<User> getUserWithId(@PathVariable Integer id)
-    {
+    public @ResponseBody Optional<User> getUserWithId(@PathVariable Integer id) {
         return userRepository.findById(id);
     }
 
     //USER - POST / CREATE ONE
     @PostMapping(path = RESTNouns.USER)
-    public @ResponseBody String addNewUser(@RequestParam String name, @RequestParam String email)
-    {
+    public @ResponseBody String addNewUser(@RequestParam String name, @RequestParam String email) {
         User user = new User();
         user.setName(name);
         user.setEmail(email);
@@ -61,36 +54,28 @@ public class MainController
     @PutMapping(path = RESTNouns.USER + RESTNouns.USER_ID + "/update")
     public @ResponseBody String updateUser(@PathVariable Integer id,
                                            @RequestParam String name,
-                                           @RequestParam String email)
-    {
+                                           @RequestParam String email) {
         Optional<User> user = userRepository.findById(id);
-        if (user.isPresent())
-        {
+        if (user.isPresent()) {
             user.get()
                     .setName(name);
             user.get()
                     .setEmail(email);
             userRepository.save(user.get());
             return "Updated!";
-        }
-        else
-        {
+        } else {
             return "Not Found";
         }
     }
 
     //USER -DELETE / DELETE ONE
     @DeleteMapping(path = RESTNouns.USER + RESTNouns.USER_ID + "/delete")
-    public @ResponseBody String deleteUser(@PathVariable Integer id)
-    {
+    public @ResponseBody String deleteUser(@PathVariable Integer id) {
         Optional<User> user = userRepository.findById(id);
-        if (user.isPresent())
-        {
+        if (user.isPresent()) {
             userRepository.delete(user.get());
             return "Deleted";
-        }
-        else
-        {
+        } else {
             return "Not Found";
         }
     }
@@ -99,15 +84,13 @@ public class MainController
 
     //HOME - GET / READ All (DEBUG Only)
     @GetMapping(path = RESTNouns.USER + RESTNouns.HOME)
-    public @ResponseBody Iterable<Home> getAllHomes()
-    {
+    public @ResponseBody Iterable<Home> getAllHomes() {
         return homeRepository.findAll();
     }
 
     //HOME -GET / READ ONE
     @GetMapping(path = RESTNouns.USER + RESTNouns.HOME + RESTNouns.HOME_ID)
-    public @ResponseBody Optional<Home> getHomeByID(@PathVariable Integer home_id)
-    {
+    public @ResponseBody Optional<Home> getHomeByID(@PathVariable Integer home_id) {
         return homeRepository.findById(home_id);
     }
 
@@ -118,14 +101,12 @@ public class MainController
      * @return home object
      */
     @GetMapping(path = RESTNouns.USER + RESTNouns.USER_ID + RESTNouns.HOME)
-    public @ResponseBody Iterable<Home> getAllHomesByUser(@PathVariable(name = "user_id") Integer userId)
-    {
+    public @ResponseBody Iterable<Home> getAllHomesByUser(@PathVariable(name = "user_id") Integer userId) {
         Optional<User> user = userRepository.findById(userId);
         //        Optional<Customer> cusotmer = customerRepository
         Iterable<Home> homes = new LinkedList<>();
 
-        if (user.isPresent())
-        {
+        if (user.isPresent()) {
             homes = homeRepository.getAllByUserId(user.get()
                     .getId());
         }
@@ -147,8 +128,7 @@ public class MainController
                                            @RequestParam LocalDate date,
                                            @RequestParam Integer value,
                                            @RequestParam Home.HeatingType heatingType,
-                                           @RequestParam Home.Location location)
-    {
+                                           @RequestParam Home.Location location) {
         Home home = new Home();
         home.setDateBuilt(date);
         home.setValue(value);
@@ -157,30 +137,23 @@ public class MainController
 
         //Scope the customer
         Optional<Customer> customer = customerRepository.findById(id);
-        if (customer.isPresent())
-        {
+        if (customer.isPresent()) {
             home.setCustomer(customer.get());   //Link it to the user
             homeRepository.save(home);
             return "Saved"; //TODO Send a better message
-        }
-        else
-        {
+        } else {
             return "Failed to find user";
         }
     }
 
     //HOME -DELETE / DELETE ONE
     @DeleteMapping(path = RESTNouns.USER + RESTNouns.USER_ID + RESTNouns.HOME + RESTNouns.HOME_ID + "/delete")
-    public @ResponseBody String deleteHome(@PathVariable Integer home_id)
-    {
+    public @ResponseBody String deleteHome(@PathVariable Integer home_id) {
         Optional<Home> home = homeRepository.findById(home_id);
-        if (home.isPresent())
-        {
+        if (home.isPresent()) {
             homeRepository.delete(home.get());
             return "Deleted";
-        }
-        else
-        {
+        } else {
             return "Not Found";
         }
     }
@@ -191,11 +164,9 @@ public class MainController
                                            @RequestParam LocalDate dateBuilt,
                                            @RequestParam double value,
                                            @RequestParam Home.HeatingType heatingType,
-                                           @RequestParam Home.Location location)
-    {
+                                           @RequestParam Home.Location location) {
         Optional<Home> home = homeRepository.findById(home_id);
-        if (home.isPresent())
-        {
+        if (home.isPresent()) {
             home.get()
                     .setDateBuilt(dateBuilt);
             home.get()
@@ -206,30 +177,25 @@ public class MainController
                     .setLocation(location);
             homeRepository.save(home.get());
             return "Updated!";
-        }
-        else
-        {
+        } else {
             return "Not Found.";
         }
     }
     //    AUTO REST
 
     @GetMapping(path = RESTNouns.AUTO)
-    public @ResponseBody Iterable<Vehicle> getAllAuto()
-    {
+    public @ResponseBody Iterable<Vehicle> getAllAuto() {
         return autoRepository.findAll();
     }
 
     //AUTO - GET / READ ONE by ID
     @GetMapping(path = RESTNouns.AUTO + RESTNouns.AUTO_ID)
-    public @ResponseBody Optional<Vehicle> getAutoWithId(@PathVariable Integer auto_id)
-    {
+    public @ResponseBody Optional<Vehicle> getAutoWithId(@PathVariable Integer auto_id) {
         return autoRepository.findById(auto_id);
     }
 
     @PostMapping(path = RESTNouns.AUTO)
-    public @ResponseBody String addNewAuto(@RequestParam String make, @RequestParam String model, @RequestParam Integer year)
-    {
+    public @ResponseBody String addNewAuto(@RequestParam String make, @RequestParam String model, @RequestParam Integer year) {
         Vehicle auto = new Vehicle();
         auto.setMake(make);
         auto.setModel(model);
@@ -239,22 +205,52 @@ public class MainController
     }
 
     @DeleteMapping(path = RESTNouns.AUTO + RESTNouns.AUTO_ID + "/delete")
-    public @ResponseBody String deleteAuto(@PathVariable Integer auto_id)
-    {
+    public @ResponseBody String deleteAuto(@PathVariable Integer auto_id) {
         Optional<Vehicle> auto = autoRepository.findById(auto_id);
-        if (auto.isPresent())
-        {
+        if (auto.isPresent()) {
             autoRepository.delete(auto.get());
             return "Deleted";
-        }
-        else
-        {
+        } else {
             return "Not Found";
         }
     }
+
+    //HOME REST
+    //HOME POLICY -GET / READ ONE
+    @GetMapping(path = RESTNouns.HOME + RESTNouns.HOME_POLICY + RESTNouns.CUSTOMER_ID + RESTNouns.HOME_ID)
+    public @ResponseBody Optional<Home> getPolicyByHomeID(@PathVariable Integer home_id, @PathVariable Integer customer_id) {
+        Optional<Customer> customer = customerRepository.findById(customer_id);
+        if (customer.isPresent()) {
+            Optional<Home> home = homeRepository.findById(home_id);
+            if (home.isPresent()) {
+                HomePolicy policy = new HomePolicy();
+                policy.setHome(home.get());
+                policy.setCustomer(customer.get());
+
+                homePolicyRepository.save(policy);
+            }
+        }
+        return Optional.empty();
+    }
+
     //Quote REST
     /*
     To get a new Quote, send a GET request, with User ID and the Home ID as a parameter.
     Build the Quote object from the Quote manager
      */
+//    @GetMapping(path = RESTNouns.USER_ID + RESTNouns.HOME_ID)
+//    public @ResponseBody Optional<Quote> getQuoteWithId(@PathVariable Integer user_id, @PathVariable Integer home_id)
+//    {
+//        Optional<User> user = userRepository.findById(user_id);
+//        Optional<Home> home = homeRepository.findById(home_id);
+//        if (user.isPresent() && home.isPresent())
+//        {
+//            Quote quote = QuoteBuilder.getNewHomeQuote(user.get(), home.get());
+//            return Optional.of(quote);
+//        }
+//        else
+//        {
+//            return Optional.empty();
+//        }
+//    }
 }
