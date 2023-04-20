@@ -23,7 +23,7 @@ public class Home
      * Age of dwelling
      */
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDate dateBuilt;
+    private int dateBuilt;
     /**
      * int representing the type of heating in a dwelling.
      */
@@ -38,10 +38,6 @@ public class Home
      * The monetary value of dwelling
      */
     private double value;
-    @ManyToOne
-    @JoinColumn(name = "customer_id", referencedColumnName = "ID")
-    private Customer customer;
-
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "ID")
     private User user;
@@ -89,7 +85,8 @@ public class Home
     public int getAge()
     {
         return LocalDate.now()
-                .getYear() - this.dateBuilt.getYear();
+                .getYear() - this.dateBuilt;
+//        .getYear() - this.dateBuilt.getYear();
     }
 
     public boolean isUrban()
@@ -97,12 +94,7 @@ public class Home
         return location == Location.URBAN;
     }
 
-    public void setCustomer(Customer customer)
-    {
-        this.customer = customer;
-    }
-
-    public void setDateBuilt(LocalDate dateBuilt)
+    public void setDateBuilt(int dateBuilt)
     {
         this.dateBuilt = dateBuilt;
     }

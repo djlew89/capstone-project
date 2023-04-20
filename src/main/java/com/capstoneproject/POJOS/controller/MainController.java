@@ -1,13 +1,9 @@
 package com.capstoneproject.POJOS.controller;
 
-import com.capstoneproject.Customer;
-import com.capstoneproject.Home;
+import com.capstoneproject.*;
 import com.capstoneproject.POJOS.DataAccess.AutoRepository;
-import com.capstoneproject.POJOS.DataAccess.CustomerRepository;
 import com.capstoneproject.POJOS.DataAccess.HomeRepository;
 import com.capstoneproject.POJOS.DataAccess.UserRepository;
-import com.capstoneproject.User;
-import com.capstoneproject.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -28,8 +24,6 @@ public class MainController
     private AutoRepository autoRepository;
 
     @Autowired
-    private CustomerRepository customerRepository;
-    @Autowired
     private HomeRepository homeRepository;
 
     //USER - GET / READ All
@@ -48,28 +42,42 @@ public class MainController
 
     //USER - POST / CREATE ONE
     @PostMapping(path = RESTNouns.USER)
-    public @ResponseBody String addNewUser(@RequestParam String name, @RequestParam String email)
+    public @ResponseBody String addNewUser(@RequestParam String email,
+                                           @RequestParam String password, @RequestParam String address,
+                                           @RequestParam LocalDate dob, @RequestParam String fname,
+                                           @RequestParam String lname)
     {
         User user = new User();
-        user.setName(name);
         user.setEmail(email);
+        user.setPassword(password);
+
+        user.setFirstName(fname);
+        user.setLastName(lname);
+        user.setDob(dob);
+        user.setAddress(address);
         userRepository.save(user);
+
         return "User Registered";
     }
 
     //USER -PUT / UPDATE ONE
-    @PutMapping(path = RESTNouns.USER + RESTNouns.USER_ID + "/update")
+    @PutMapping(path = RESTNouns.USER + RESTNouns.USER_ID)
     public @ResponseBody String updateUser(@PathVariable Integer id,
-                                           @RequestParam String name,
-                                           @RequestParam String email)
+                                           @RequestParam String email,
+                                           @RequestParam String password, @RequestParam String address,
+                                           @RequestParam LocalDate dob, @RequestParam String fname,
+                                           @RequestParam String lname)
     {
         Optional<User> user = userRepository.findById(id);
         if (user.isPresent())
         {
             user.get()
-                    .setName(name);
-            user.get()
                     .setEmail(email);
+            user.get().setPassword(password);
+            user.get().setFirstName(fname);
+            user.get().setLastName(lname);
+            user.get().setAddress(address);
+            user.get().setDob(dob);
             userRepository.save(user.get());
             return "Updated!";
         }
@@ -144,7 +152,7 @@ public class MainController
     //HOME - POST / CREATE ONE
     @PostMapping(path = RESTNouns.USER + RESTNouns.USER_ID + RESTNouns.HOME)
     public @ResponseBody String addNewHome(@PathVariable Integer id,
-                                           @RequestParam LocalDate date,
+                                           @RequestParam int date,
                                            @RequestParam Integer value,
                                            @RequestParam Home.HeatingType heatingType,
                                            @RequestParam Home.Location location)
@@ -156,10 +164,10 @@ public class MainController
         home.setLocation(location);
 
         //Scope the customer
-        Optional<Customer> customer = customerRepository.findById(id);
-        if (customer.isPresent())
+        Optional<User> user = userRepository.findById(id);
+        if (user.isPresent())
         {
-            home.setCustomer(customer.get());   //Link it to the user
+            home.setUser(user.get());   //Link it to the user
             homeRepository.save(home);
             return "Saved"; //TODO Send a better message
         }
@@ -186,9 +194,9 @@ public class MainController
     }
 
     //HOME -PUT / UPDATE ONE
-    @PutMapping(path = RESTNouns.USER + RESTNouns.USER_ID + RESTNouns.HOME_ID + "/update")
+    @PutMapping(path = RESTNouns.USER + RESTNouns.USER_ID + RESTNouns.HOME + RESTNouns.HOME_ID + "/update")
     public @ResponseBody String updateHome(@PathVariable Integer home_id,
-                                           @RequestParam LocalDate dateBuilt,
+                                           @RequestParam int dateBuilt,
                                            @RequestParam double value,
                                            @RequestParam Home.HeatingType heatingType,
                                            @RequestParam Home.Location location)
