@@ -14,6 +14,14 @@ import java.time.LocalDate;
 public class Home
 {
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -38,10 +46,6 @@ public class Home
      * The monetary value of dwelling
      */
     private double value;
-    @ManyToOne
-    @JoinColumn(name = "customer_id", referencedColumnName = "ID")
-    private Customer customer;
-
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "ID")
     private User user;
@@ -90,16 +94,12 @@ public class Home
     {
         return LocalDate.now()
                 .getYear() - this.dateBuilt.getYear();
+//        .getYear() - this.dateBuilt.getYear();
     }
 
     public boolean isUrban()
     {
         return location == Location.URBAN;
-    }
-
-    public void setCustomer(Customer customer)
-    {
-        this.customer = customer;
     }
 
     public void setDateBuilt(LocalDate dateBuilt)

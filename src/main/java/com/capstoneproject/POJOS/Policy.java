@@ -1,6 +1,6 @@
 package com.capstoneproject.POJOS;
 
-import com.capstoneproject.Customer;
+import com.capstoneproject.User;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MappedSuperclass;
@@ -16,9 +16,17 @@ import java.time.LocalDate;
 @MappedSuperclass
 public abstract class Policy
 {
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @ManyToOne
-    @JoinColumn(name = "customer_id", referencedColumnName = "ID")
-    private Customer customer;
+    @JoinColumn(name = "user_id", referencedColumnName = "ID")
+    private User user;
     private LocalDate startDate;
     private LocalDate endDate;
     private BigDecimal totalBeforetax;
@@ -26,32 +34,22 @@ public abstract class Policy
     /**
      * constructor
      *
-     * @param customer  The policy's customer.
+     * @param user  The policy's customer.
      * @param startDate The policy start date.
      * @param endDate   The policy end date.
      */
 
-    public Policy(LocalDate startDate, LocalDate endDate, BigDecimal totalBeforeTax, Customer customer)
+    public Policy(LocalDate startDate, LocalDate endDate, BigDecimal totalBeforeTax, User user)
     {
         this.startDate = startDate;
         this.endDate = endDate;
         this.totalBeforetax = totalBeforeTax;
-        this.customer = customer;
+        this.user = user;
     }
 
     public Policy()
     {
 
-    }
-
-    public Customer getCustomer()
-    {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer)
-    {
-        this.customer = customer;
     }
 
     public LocalDate getStartDate()
