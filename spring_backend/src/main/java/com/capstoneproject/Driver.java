@@ -10,6 +10,10 @@ import jakarta.persistence.*;
 @Entity(name = "driver")
 public class Driver
 {
+    public Integer getId() {
+        return id;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -18,19 +22,19 @@ public class Driver
      * Number of Accidents Driver has been involved in
      */
     private int numberOfAccidents;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @OneToOne
-    @JoinColumn(name = "customer_id", referencedColumnName = "ID")
-    private Customer customer;
+    @JoinColumn(name = "user_id", referencedColumnName = "ID")
+    private User user;
 
-    public Customer getCustomer()
-    {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer)
-    {
-        this.customer = customer;
-    }
 
     /**
      * getter

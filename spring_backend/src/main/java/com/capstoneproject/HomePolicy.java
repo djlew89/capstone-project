@@ -30,14 +30,14 @@ public class HomePolicy extends Policy
     /**
      * constructor
      *
-     * @param customer  The customer.
+     * @param user  The customer.
      * @param startDate The policy start date.
      * @param endDate   The policy end date.
      * @param home      The home.
      */
-    public HomePolicy(LocalDate startDate, LocalDate endDate, BigDecimal totalBeforeTax, Customer customer, BigDecimal premiumBeforeTax, Home home)
+    public HomePolicy(LocalDate startDate, LocalDate endDate, BigDecimal totalBeforeTax, User user, BigDecimal premiumBeforeTax, Home home)
     {
-        super(startDate, endDate, totalBeforeTax, customer);
+        super(startDate, endDate, totalBeforeTax, user);
         this.premiumBeforeTax = premiumBeforeTax;
         this.home = home;
     }
