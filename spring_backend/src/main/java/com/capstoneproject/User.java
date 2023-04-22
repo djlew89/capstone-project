@@ -1,6 +1,11 @@
 package com.capstoneproject;
 
+import com.capstoneproject.POJOS.Policy;
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * User Entity model. This object will be used by Hibernate to create a table in the database
@@ -12,17 +17,27 @@ import jakarta.persistence.*;
 @Entity(name = "user")
 public class User
 {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private String username;
+
     private String email;
     private String password;
 
-    @OneToOne
-    @JoinColumn(name = "customer_id", referencedColumnName = "ID")
-    private Customer customer;
+    /**
+     * Customer's First Name
+     */
+    private String firstName;
+    /**
+     * Customer's Last Name
+     */
+    private String lastName;
+    /**
+     * Customer's DOB as YYYY-MM-DD
+     */
+    private LocalDate dob;
+
+    private String address;
 
     public Integer getId()
     {
@@ -32,16 +47,6 @@ public class User
     public void setId(Integer id)
     {
         this.id = id;
-    }
-
-    public String getUsername()
-    {
-        return username;
-    }
-
-    public void setName(String name)
-    {
-        this.username = name;
     }
 
     public String getEmail()
@@ -54,14 +59,44 @@ public class User
         this.email = email;
     }
 
-    public Customer getCustomer()
-    {
-        return customer;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public void setCustomer(Customer customer)
-    {
-        this.customer = customer;
+    public String getPassword() {
+        return password;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public LocalDate getDob() {
+        return dob;
+    }
+
+    public void setDob(LocalDate dob) {
+        this.dob = dob;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
 }

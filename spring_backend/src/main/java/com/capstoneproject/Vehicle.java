@@ -12,6 +12,10 @@ import java.time.LocalDate;
 @Entity(name = "vehicle")
 public class Vehicle
 {
+    public Integer getId() {
+        return id;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -32,13 +36,18 @@ public class Vehicle
      */
     private int year;
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "ID")
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "customer_id", referencedColumnName = "ID")
-    private Customer customer;
 
     /**
      * Getter for make
