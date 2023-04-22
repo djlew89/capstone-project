@@ -83,7 +83,7 @@ public class QuoteBuilder
         BigDecimal bigDecimal = BigDecimal.valueOf(insuranceRates.getAutoBasePremium());
         return bigDecimal
                 .multiply(BigDecimal.valueOf(insuranceRates.getDriverAgeFactor(LocalDate.now()
-                                .getYear() - driver.getUser()
+                                .getYear() - driver.getCustomer()
                                 .getDob()
                                 .getYear()))
                         .multiply(BigDecimal.valueOf(insuranceRates.getVehicleAgeFactor(vehicle.calculateAge())))

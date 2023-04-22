@@ -22,9 +22,9 @@ public class AutoTestApplication
                 autoQuote.totalBeforeTax(),
                 autoQuote.calculateTax());
         System.out.println("\n\nAutoPolicy testing");
-        User user = getTestUser();
+        Customer customer = getTestCustomer();
         AutoPolicy policy = PolicyBuilder.getNewAutoPolicy(LocalDate.now(), LocalDate.now()
-                .plusDays(365), car, driver, user);
+                .plusDays(365), car, driver, customer);
         System.out.printf("\nTotal Before Tax: %.2f\nTax: %.2f\nFinal Total: %.2f",
                 policy.getTotalBeforetax(),
                 policy.calculateTax(),
@@ -32,18 +32,22 @@ public class AutoTestApplication
                         .add(policy.calculateTax()));
     }
 
-
     public static User getTestUser()
     {
+        User user = new User();
+        user.setName("JuliaParewick");
+        user.setEmail("jparewick@gmail.com");
+        return user;
+    }
+
+    public static Customer getTestCustomer()
+    {
         //TODO Randomize this? Add in edge cases
-        User customer = new User();
-        customer.setEmail("test@gmail.com");
+        Customer customer = new Customer();
         customer.setFirstName("Julia");
         customer.setLastName("Parewick");
         customer.setDob(LocalDate.of(1992, 4, 4));
-        customer.setAddress("1 Test Ave");
-        customer.setPassword("admin");
-
+        customer.setUser(getTestUser());
         return customer;
     }
 
@@ -85,20 +89,20 @@ public class AutoTestApplication
         {
             Driver driver = new Driver();
             driver.setNumberAccidents(1);
-            driver.setUser(getTestUser());
+            driver.setCustomer(getTestCustomer());
             return driver;
         }
         else if (i % 3 == 1)
         {
             Driver driver = new Driver();
-            driver.setUser(getTestUser());
+            driver.setCustomer(getTestCustomer());
             driver.setNumberAccidents(3);
             return driver;
         }
         else
         {
             Driver driver = new Driver();
-            driver.setUser(getTestUser());
+            driver.setCustomer(getTestCustomer());
             driver.setNumberAccidents(0);
             return driver;
         }
@@ -110,14 +114,14 @@ public class AutoTestApplication
                 car.getMake(),
                 car.getModel(),
                 car.getYear(),
-                driver.getUser()
+                driver.getCustomer()
                         .getFirstName(),
-                driver.getUser()
+                driver.getCustomer()
                         .getLastName(),
-                driver.getUser()
+                driver.getCustomer()
                         .getAddress(),
                 LocalDate.now()
-                        .getYear() - driver.getUser()
+                        .getYear() - driver.getCustomer()
                         .getDob()
                         .getYear(),
                 driver.getNumberAccidents()

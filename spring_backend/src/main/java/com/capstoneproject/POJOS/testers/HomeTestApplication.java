@@ -1,11 +1,11 @@
 package com.capstoneproject.POJOS.testers;
 
+import com.capstoneproject.Customer;
 import com.capstoneproject.Home;
 import com.capstoneproject.HomePolicy;
 import com.capstoneproject.POJOS.HomeQuote;
 import com.capstoneproject.POJOS.PolicyBuilder;
 import com.capstoneproject.POJOS.QuoteBuilder;
-import com.capstoneproject.User;
 
 import java.time.LocalDate;
 import java.util.Random;
@@ -28,9 +28,9 @@ public class HomeTestApplication
                 homeQuote.totalBeforeTax(),
                 homeQuote.calculateTax());
         System.out.println("\n\nHomePolicy testing");
-        User user = getTestUser();
+        Customer customer = getTestCustomer();
         HomePolicy policy = PolicyBuilder.getNewHomePolicy(LocalDate.now(), LocalDate.now()
-                .plusDays(360), home, user);
+                .plusDays(360), home, customer);
         System.out.printf("\nHome Premium: %.2f\nTotal Before Tax: %.2f\nTax: %.2f\nFinal Total: %.2f",
                 policy.premiumBeforeTax(),
                 policy.getTotalBeforetax(),
@@ -39,13 +39,11 @@ public class HomeTestApplication
                         .add(policy.calculateTax()));
     }
 
-    public static User getTestUser()
+    public static Customer getTestCustomer()
     {
         //TODO Randomize this? Add in edge cases
-        return new User();
+        return new Customer();
     }
-
-
 
     public static Home getTestHome()
     {
@@ -56,8 +54,7 @@ public class HomeTestApplication
         if (i % 3 == 0)
         {
             Home home = new Home();
-//            home.setDateBuilt(LocalDate.of(2005, 1, 1));
-            home.setDateBuilt(LocalDate.of(2005,1,2));
+            home.setDateBuilt(LocalDate.of(2005, 1, 1));
             home.setValue(240000);
             home.setHeatingType(Home.HeatingType.OIL);
             home.setLocation(Home.Location.RURAL);
@@ -66,7 +63,7 @@ public class HomeTestApplication
         else if (i % 3 == 1)
         {
             Home home = new Home();
-            home.setDateBuilt(LocalDate.of(1905,4,10));
+            home.setDateBuilt(LocalDate.of(1905, 1, 1));
             home.setValue(600000);
             home.setHeatingType(Home.HeatingType.WOOD);
             home.setLocation(Home.Location.URBAN);
@@ -75,8 +72,7 @@ public class HomeTestApplication
         else
         {
             Home home = new Home();
-//            home.setDateBuilt(LocalDate.of(1985, 1, 1));
-            home.setDateBuilt(LocalDate.of(1985,3,4));
+            home.setDateBuilt(LocalDate.of(1985, 1, 1));
             home.setValue(400000);
             home.setHeatingType(Home.HeatingType.OTHER);
             home.setLocation(Home.Location.URBAN);

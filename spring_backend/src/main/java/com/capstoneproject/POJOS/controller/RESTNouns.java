@@ -11,8 +11,6 @@ public class RESTNouns
     public static final String USER_ID = "/{id}";
     public static final String HOME = "/homes";
     public static final String HOME_ID = "/{home_id}";
-    public static final String AUTO = "/autos";
+    public static final String AUTO = "/auto";
     public static final String AUTO_ID = "/{auto_id}";
-    public static final String DRIVER = "/drivers";
-    public static final String DRIVER_ID = "/{driver_id}";
 }

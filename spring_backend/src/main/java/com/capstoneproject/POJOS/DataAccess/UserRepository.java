@@ -1,10 +1,7 @@
 package com.capstoneproject.POJOS.DataAccess;
 
 import com.capstoneproject.User;
-import com.capstoneproject.Vehicle;
 import org.springframework.data.repository.CrudRepository;
-
-import java.util.Optional;
 
 /**
  * UserRepository for linking User object to the database.
@@ -14,6 +11,8 @@ import java.util.Optional;
 public interface UserRepository extends CrudRepository<User, Integer>
 {
 
-    Optional<User> getAllByEmail(String email);
+    //There is nothing in here. Hibernate handles all the CRUD
+    //IF you needed a very special or different query, you would write it here.
+    //See docs before attempting anything like that.
 
 }
