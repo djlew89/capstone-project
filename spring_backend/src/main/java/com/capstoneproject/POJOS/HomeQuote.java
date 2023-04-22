@@ -14,8 +14,9 @@ import java.time.LocalDate;
  */
 public class HomeQuote extends Quote
 {
-    protected Home home;
-    protected BigDecimal premiumBeforeTax;
+    protected static Home home;
+
+    protected static BigDecimal premiumBeforeTax;
 
     /**
      * Instantiates a new HomeQuote
@@ -27,8 +28,8 @@ public class HomeQuote extends Quote
     public HomeQuote(LocalDate startDate, LocalDate endDate, BigDecimal totalBeforeTax, BigDecimal premiumBeforeTax, Home selectedHome)
     {
         super(startDate, endDate, totalBeforeTax);
-        this.premiumBeforeTax = premiumBeforeTax;
-        this.home = selectedHome;
+        HomeQuote.premiumBeforeTax = premiumBeforeTax;
+        home = selectedHome;
     }
 
     /**
@@ -36,7 +37,7 @@ public class HomeQuote extends Quote
      *
      * @return home
      */
-    public Home getHome()
+    public static Home getHome()
     {
         return home;
     }
