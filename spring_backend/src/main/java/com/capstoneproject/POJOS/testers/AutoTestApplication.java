@@ -20,7 +20,7 @@ public class AutoTestApplication
         AutoQuote autoQuote = QuoteBuilder.getNewAutoQuote(car, driver);
         System.out.printf("\nTotal Before Tax: %.2f\nTax: %.2f",
                 autoQuote.totalBeforeTax(),
-                autoQuote.calculateTax());
+                autoQuote.getTax());
         System.out.println("\n\nAutoPolicy testing");
         User user = getTestUser();
         AutoPolicy policy = PolicyBuilder.getNewAutoPolicy(LocalDate.now(), LocalDate.now()

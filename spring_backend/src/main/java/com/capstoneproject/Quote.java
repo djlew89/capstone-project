@@ -15,17 +15,27 @@ import java.time.LocalDate;
  * @author Mason Seward
  * @Date 2023-02-24
  */
-@Entity(name = "quote")
+//@Entity(name = "quote")
 public abstract class Quote
 {
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    //    @JsonFormat(pattern = "yyyy-MM-dd")
     protected LocalDate startDate;
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    //    @JsonFormat(pattern = "yyyy-MM-dd")
     protected LocalDate endDate;
+
+    public BigDecimal getTotalBeforeTax() {
+        return totalBeforeTax;
+    }
+
+    public BigDecimal getTax() {
+        return tax;
+    }
+
+    protected BigDecimal tax;
     protected BigDecimal totalBeforeTax;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    private Integer id;
 
     /**
      * Instantiates a new Quote.
@@ -38,12 +48,14 @@ public abstract class Quote
         this.startDate = startDate;
         this.endDate = endDate;
         this.totalBeforeTax = totalBeforeTax;
+        this.tax = this.calculateTax();
+
     }
 
     /**
      * No args constructor. Please use arg constructor. Deprication tag for warning
      */
-    @Deprecated()
+//    @Deprecated()
     protected Quote()
     {
     }
@@ -93,7 +105,7 @@ public abstract class Quote
         return this.totalBeforeTax;
     }
 
-    public BigDecimal calculateTax()
+    private BigDecimal calculateTax()
     {
         return this.totalBeforeTax.multiply(BigDecimal.valueOf(0.15));
     }
