@@ -5,6 +5,8 @@ import com.capstoneproject.POJOS.DataAccess.AutoRepository;
 import com.capstoneproject.POJOS.DataAccess.DriverRepository;
 import com.capstoneproject.POJOS.DataAccess.HomeRepository;
 import com.capstoneproject.POJOS.DataAccess.UserRepository;
+import com.capstoneproject.POJOS.HomeQuote;
+import com.capstoneproject.POJOS.QuoteBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -126,7 +128,7 @@ public class MainController
      * Get All homes from Database
      * @return Iterable<Home>
      */
-    @GetMapping(path = RESTNouns.USER + RESTNouns.HOME)
+    @GetMapping(path = RESTNouns.HOME)
     public @ResponseBody Iterable<Home> getAllHomes()
     {
         return homeRepository.findAll();
@@ -494,4 +496,21 @@ public class MainController
     To get a new Quote, send a GET request, with User ID and the Home ID as a parameter.
     Build the Quote object from the Quote manager
      */
+    /**
+     *
+     */
+    @GetMapping(path = RESTNouns.USER+RESTNouns.USER_ID+RESTNouns.HOME+RESTNouns.HOME_ID)
+    public @ResponseBody Optional<HomeQuote> getHomeQuote(@PathVariable Integer id, @PathVariable Integer home_id)
+    {
+        Optional<HomeQuote> homeQuote = null;
+        Optional<User> user = userRepository.findById(id);
+        if (user.isPresent()){
+            Optional<Home> home = homeRepository.findById(home_id);
+            if(home.isPresent()){
+                homeQuote = Optional.of(QuoteBuilder.getNewHomeQuote(home.get()));
+            }
+        }
+        return homeQuote;
+    }
+
 }
