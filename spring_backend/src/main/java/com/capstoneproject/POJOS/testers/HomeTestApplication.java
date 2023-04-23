@@ -26,7 +26,7 @@ public class HomeTestApplication
         System.out.printf("\nHome Premium: %.2f\nTotal Before Tax: %.2f\nTax: %.2f",
                 homeQuote.premiumBeforeTax(),
                 homeQuote.totalBeforeTax(),
-                homeQuote.calculateTax());
+                homeQuote.getTax());
         System.out.println("\n\nHomePolicy testing");
         User user = getTestUser();
         HomePolicy policy = PolicyBuilder.getNewHomePolicy(LocalDate.now(), LocalDate.now()
@@ -49,39 +49,44 @@ public class HomeTestApplication
 
     public static Home getTestHome()
     {
-        //TODO Randomize this? Add in edge cases
-        Random random = new Random();
-        int i = Math.abs(random.nextInt());
-        //        System.out.printf("\n>%d", i % 3);
-        if (i % 3 == 0)
-        {
-            Home home = new Home();
-//            home.setDateBuilt(LocalDate.of(2005, 1, 1));
-            home.setDateBuilt(LocalDate.of(2005,1,2));
-            home.setValue(240000);
-            home.setHeatingType(Home.HeatingType.OIL);
-            home.setLocation(Home.Location.RURAL);
-            return home;
-        }
-        else if (i % 3 == 1)
-        {
-            Home home = new Home();
-            home.setDateBuilt(LocalDate.of(1905,4,10));
-            home.setValue(600000);
-            home.setHeatingType(Home.HeatingType.WOOD);
-            home.setLocation(Home.Location.URBAN);
-            return home;
-        }
-        else
-        {
-            Home home = new Home();
-//            home.setDateBuilt(LocalDate.of(1985, 1, 1));
-            home.setDateBuilt(LocalDate.of(1985,3,4));
-            home.setValue(400000);
-            home.setHeatingType(Home.HeatingType.OTHER);
-            home.setLocation(Home.Location.URBAN);
-            return home;
-        }
+        Home home = new Home();
+        home.setDateBuilt(LocalDate.of(2020,1,1));
+        home.setValue(1000000);
+        home.setHeatingType(Home.HeatingType.ELECTRIC);
+        home.setLocation(Home.Location.URBAN);
+        return home;
+//        Random random = new Random();
+//        int i = Math.abs(random.nextInt());
+//        //        System.out.printf("\n>%d", i % 3);
+//        if (i % 3 == 0)
+//        {
+//            Home home = new Home();
+////            home.setDateBuilt(LocalDate.of(2005, 1, 1));
+//            home.setDateBuilt(LocalDate.of(2005,1,2));
+//            home.setValue(240000);
+//            home.setHeatingType(Home.HeatingType.OIL);
+//            home.setLocation(Home.Location.RURAL);
+//            return home;
+//        }
+//        else if (i % 3 == 1)
+//        {
+//            Home home = new Home();
+//            home.setDateBuilt(LocalDate.of(1905,4,10));
+//            home.setValue(600000);
+//            home.setHeatingType(Home.HeatingType.WOOD);
+//            home.setLocation(Home.Location.URBAN);
+//            return home;
+//        }
+//        else
+//        {
+//            Home home = new Home();
+////            home.setDateBuilt(LocalDate.of(1985, 1, 1));
+//            home.setDateBuilt(LocalDate.of(1985,3,4));
+//            home.setValue(400000);
+//            home.setHeatingType(Home.HeatingType.OTHER);
+//            home.setLocation(Home.Location.URBAN);
+//            return home;
+//        }
     }
 
     public static void printHomeInfo(Home home)
