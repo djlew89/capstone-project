@@ -1,6 +1,11 @@
 import React, {useState} from "react";
 import {ListGroup} from 'react-bootstrap';
 
+/**
+ * The page responsible for listing a user by ID
+ * @author Mason Seward
+ * @returns {JSX.Element}
+ */
 export default function ViewUsers() {
     let [user, setUser] = useState([]);
     const [id, setId] = useState("");
@@ -20,7 +25,7 @@ export default function ViewUsers() {
 
     return (
         <>
-            <form onSubmit={handleSubmit} id="view_user_form_display">
+            <form onSubmit={handleSubmit}>
                 <label>Enter the ID of the User you would like to view:
                     <input
                         type="text"
@@ -34,7 +39,7 @@ export default function ViewUsers() {
                 {
                     Array.of(user).map(userData =>
                         [
-                            <ListGroup id="data_display">
+                            <ListGroup id="uservehicle_data_display">
                                 <ListGroup.Item key={userData.id}>User ID: {userData.id}</ListGroup.Item>
                                 <ListGroup.Item>Email: {userData.email}</ListGroup.Item>
                                 <ListGroup.Item>Actors: {userData.password}</ListGroup.Item>

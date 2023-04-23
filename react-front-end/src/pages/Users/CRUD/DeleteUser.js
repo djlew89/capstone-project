@@ -1,5 +1,10 @@
 import {useState} from 'react';
 
+/**
+ * The page responsible for deleting a Customer's data
+ * @author Mason Seward
+ * @returns {JSX.Element}
+ */
 export default function DeleteUser() {
     const [id, setId] = useState([]);
 

@@ -1,6 +1,11 @@
 import React, {useState} from "react";
 import {ListGroup} from 'react-bootstrap';
 
+/**
+ * The page responsible for viewing a customers homes
+ * @author Mason Seward
+ * @returns {JSX.Element}
+ */
 export default function ViewAssociatedHomes() {
     let [user, setUser] = useState([]);
     const [id, setId] = useState("");
@@ -36,7 +41,7 @@ export default function ViewAssociatedHomes() {
                         ])
                 }
             </ul>
-            <form onSubmit={handleSubmit} id="view_user_form_display">
+            <form onSubmit={handleSubmit}>
                 <label>Enter the User ID of the home you would like to view information on:
                     <input
                         type="text"

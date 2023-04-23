@@ -19,7 +19,7 @@ function NavigationBar() {
                         <NavDropdown.Item href="/SaveUserData">Save User</NavDropdown.Item>
                         <NavDropdown.Divider/>
                         <NavDropdown.Item href="/AssociatedHomes">List all homes associated with user</NavDropdown.Item>
-                        <NavDropdown.Item href="/AssociatedVehicle">List all vehicles associated with
+                        <NavDropdown.Item href="/AssociatedVehicles">List all vehicles associated with
                             user</NavDropdown.Item>
                         <NavDropdown.Divider/>
                         <NavDropdown.Item href="/AssociatedDriver">View driver data associated with

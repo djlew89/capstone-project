@@ -1,6 +1,11 @@
 import {useState} from 'react';
 import {Button, Form} from 'react-bootstrap';
 
+/**
+ * The page responsible for saving a Customer's data
+ * @author Mason Seward
+ * @returns {JSX.Element}
+ */
 export default function SaveData() {
     const [email, setEmail] = useState("");
     const [pass, setPass] = useState("");
@@ -56,7 +61,7 @@ export default function SaveData() {
                 <Form.Control name='fname' type="text" placeholder="First Name"
                               value={lname} onChange={(e) => setLname(e.target.value)}></Form.Control>
             </Form.Group>
-            <Button variant="primary" type="submit">Submit Movie Review!</Button>
+            <Button variant="primary" type="submit">Save user</Button>
         </Form>
     );
 }

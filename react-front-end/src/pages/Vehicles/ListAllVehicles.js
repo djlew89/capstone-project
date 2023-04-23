@@ -1,7 +1,13 @@
 import React, {useState} from "react";
 import {ListGroup} from "react-bootstrap";
 
+// TODO update this to be a select user ID instead of displaying everything in db. Then update file name
 
+/**
+ * The page responsible for viewing vehicles
+ * @author Mason Seward
+ * @returns {JSX.Element}
+ */
 export default function ViewVehicles() {
     let [vehicle, setVehicle] = useState([]);
 
@@ -9,11 +15,6 @@ export default function ViewVehicles() {
         .then(response => response.json())
         .then(setVehicle)
         .catch(e => console.log(e.message))
-
-    /**
-     * id make model year
-     */
-
 
     return (
         <>
