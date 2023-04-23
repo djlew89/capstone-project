@@ -23,8 +23,8 @@ export default function ViewUserHomes() {
                                 <ListGroup.Item>Heating Type: {homeData.heatingType}</ListGroup.Item>
                                 <ListGroup.Item>Location: {homeData.location}</ListGroup.Item>
                                 <ListGroup.Item>Date of Birth: {homeData.value}</ListGroup.Item>
-                                <ListGroup.Item>Associated User ID: {homeData.user.id}</ListGroup.Item>
-                                <ListGroup.Item>Associated User First Name: {homeData.user.firstName}</ListGroup.Item>
+                                <ListGroup.Item>Associated User's ID: {homeData.user.id}</ListGroup.Item>
+                                <ListGroup.Item>Associated User's Name: {homeData.user.firstName}</ListGroup.Item>
                             </ListGroup>
                         ])
                 }
