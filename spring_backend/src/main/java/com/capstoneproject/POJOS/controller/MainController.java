@@ -124,7 +124,8 @@ public class MainController
         if (user.isPresent())
         {
             Iterable<Home> homes = homeRepository.getAllByUserId(id);
-            homes.forEach(home -> {
+            homes.forEach(home ->
+            {
                 Optional<HomePolicy> homePolicy = homePolicyRepository.getByHomeId(home.getId());
                 homePolicyRepository.delete(homePolicy.get());
             });
@@ -132,7 +133,8 @@ public class MainController
 
 
             Iterable<Vehicle> autos = autoRepository.getAllByUserId(id);
-            autos.forEach(auto -> {
+            autos.forEach(auto ->
+            {
                 Optional<AutoPolicy> autoPolicy = autoPolicyRepository.getByVehicleId(auto.getId());
                 autoPolicyRepository.delete(autoPolicy.get());
             });
