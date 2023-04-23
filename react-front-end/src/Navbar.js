@@ -14,9 +14,9 @@ function NavigationBar() {
 
                     <NavDropdown title="Users" id="basic-nav-dropdown">
                         <NavDropdown.Item href="/Users">View Data</NavDropdown.Item>
-                        <NavDropdown.Item href="/EditData">Edit Data</NavDropdown.Item>
-                        <NavDropdown.Item href="/DeleteData">Delete Data</NavDropdown.Item>
-                        <NavDropdown.Item href="/SaveData">Save User</NavDropdown.Item>
+                        <NavDropdown.Item href="/EditUserData">Edit Data</NavDropdown.Item>
+                        <NavDropdown.Item href="/DeleteUserData">Delete Data</NavDropdown.Item>
+                        <NavDropdown.Item href="/SaveUserData">Save User</NavDropdown.Item>
                         <NavDropdown.Divider/>
                         <NavDropdown.Item href="/AssociatedHomes">List all homes associated with user</NavDropdown.Item>
                         <NavDropdown.Item href="/AssociatedVehicle">List all vehicles associated with user</NavDropdown.Item>
