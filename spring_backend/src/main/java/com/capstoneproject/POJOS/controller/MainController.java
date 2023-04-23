@@ -1,15 +1,8 @@
 package com.capstoneproject.POJOS.controller;
 
-import com.capstoneproject.Driver;
-import com.capstoneproject.Home;
-import com.capstoneproject.POJOS.DataAccess.AutoRepository;
-import com.capstoneproject.POJOS.DataAccess.DriverRepository;
-import com.capstoneproject.POJOS.DataAccess.HomeRepository;
-import com.capstoneproject.POJOS.DataAccess.UserRepository;
-import com.capstoneproject.POJOS.HomeQuote;
-import com.capstoneproject.POJOS.QuoteBuilder;
-import com.capstoneproject.User;
-import com.capstoneproject.Vehicle;
+import com.capstoneproject.*;
+import com.capstoneproject.POJOS.*;
+import com.capstoneproject.POJOS.DataAccess.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +26,12 @@ public class MainController
 
     @Autowired
     private DriverRepository driverRepository;
+
+    @Autowired
+    private HomePolicyRepository homePolicyRepository;
+
+    @Autowired
+    private AutoPolicyRepository autoPolicyRepository;
 
 
     //USER - GET / READ All
@@ -124,7 +123,10 @@ public class MainController
             Iterable<Home> homes = homeRepository.getAllByUserId(id);
             homeRepository.deleteAll(homes);
             Optional<Driver> driver = driverRepository.findByUserId(id);
-            driverRepository.delete(driver.get());
+            if (driver.isPresent()){
+                driverRepository.delete(driver.get());
+            }
+
             userRepository.delete(user.get());
             return "Deleted";
         }
@@ -543,29 +545,92 @@ public class MainController
     }
 
     //Quote REST
-    /*
-    To get a new Quote, send a GET request, with User ID and the Home ID as a parameter.
-    Build the Quote object from the Quote manager
-     */
-
     /**
-     *
+     * Home Quote
+     * @param id
+     * @param home_id
+     * @return HomeQuote
      */
-    @CrossOrigin
-    @GetMapping(path = RESTNouns.USER + RESTNouns.USER_ID + RESTNouns.QUOTE + RESTNouns.HOME + RESTNouns.HOME_ID)
+    @GetMapping(path = RESTNouns.USER+RESTNouns.USER_ID+ RESTNouns.QUOTE +RESTNouns.HOME+RESTNouns.HOME_ID)
     public @ResponseBody Optional<HomeQuote> getHomeQuote(@PathVariable Integer id, @PathVariable Integer home_id)
     {
         Optional<HomeQuote> homeQuote = Optional.empty();
         Optional<User> user = userRepository.findById(id);
-        if (user.isPresent())
-        {
+        if (user.isPresent()){
             Optional<Home> home = homeRepository.findById(home_id);
-            if (home.isPresent())
-            {
+            if(home.isPresent()){
                 homeQuote = Optional.of(QuoteBuilder.getNewHomeQuote(home.get()));
             }
         }
         return homeQuote;
     }
 
+    @GetMapping(path = RESTNouns.USER+RESTNouns.USER_ID+ RESTNouns.QUOTE +RESTNouns.AUTO+RESTNouns.AUTO_ID)
+    public @ResponseBody Optional<AutoQuote> getAutoQuote(@PathVariable Integer id, @PathVariable Integer auto_id)
+    {
+        Optional<AutoQuote> autoQuote = Optional.empty();
+        Optional<User> user = userRepository.findById(id);
+        if (user.isPresent()){
+            Optional<Vehicle> auto = autoRepository.findById(auto_id);
+            Optional<Driver> driver = driverRepository.findByUserId(id);
+            if(auto.isPresent()){
+                autoQuote = Optional.of(QuoteBuilder.getNewAutoQuote(auto.get(),driver.get()));
+            }
+        }
+        return autoQuote;
+    }
+
+    // HomePolicy REST
+
+    @CrossOrigin
+    @PostMapping(path = RESTNouns.USER + RESTNouns.USER_ID + RESTNouns.POLICY+RESTNouns.HOME+RESTNouns.HOME_ID)
+    public @ResponseBody String addNewHomePolicy(@PathVariable Integer id,
+                                                               @PathVariable Integer home_id,
+                                                               @RequestParam LocalDate startDate)
+    {
+        Optional<HomePolicy> homePolicy = Optional.empty();
+
+        Optional<User> user = userRepository.findById(id);
+        if (user.isPresent())
+        {
+            Optional<Home> home = homeRepository.findById(home_id);
+            if(home.isPresent()){
+                homePolicy = Optional.of(PolicyBuilder.getNewHomePolicy(startDate, startDate.plusDays(365),home.get(),user.get()));
+            }
+            homePolicyRepository.save(homePolicy.get());
+            return "Home Policy Created!";
+        }
+        else{
+            return "Please Register or Login!";
+        }
+
+    }
+
+    //AutoPolicy REST
+
+    @CrossOrigin
+    @PostMapping(path = RESTNouns.USER + RESTNouns.USER_ID + RESTNouns.POLICY+RESTNouns.AUTO+RESTNouns.AUTO_ID)
+    public @ResponseBody String addNewAutoPolicy(@PathVariable Integer id,
+                                                               @PathVariable Integer auto_id,
+                                                               @RequestParam LocalDate startDate)
+    {
+        Optional<AutoPolicy> autoPolicy = Optional.empty();
+
+        Optional<User> user = userRepository.findById(id);
+        if (user.isPresent())
+        {
+
+            Optional<Vehicle> auto = autoRepository.findById(auto_id);
+            Optional<Driver> driver = driverRepository.findByUserId(id);
+            if(auto.isPresent()){
+                autoPolicy = Optional.of(PolicyBuilder.getNewAutoPolicy(startDate, startDate.plusDays(365),auto.get(), driver.get(),user.get()));
+            }
+            autoPolicyRepository.save(autoPolicy.get());
+            return "Auto Policy Created!";
+        }
+        else{
+            return "Please register or login!";
+        }
+
+    }
 }
