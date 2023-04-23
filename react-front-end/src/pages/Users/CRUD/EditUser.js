@@ -1,6 +1,11 @@
 import {Button, Form} from 'react-bootstrap';
 import {useState} from 'react';
 
+/**
+ * The page responsible for modying customer data
+ * @author Mason Seward
+ * @returns {JSX.Element}
+ */
 export default function EditUser() {
     const [email, setEmail] = useState("");
     const [pass, setPass] = useState("");
@@ -66,7 +71,7 @@ export default function EditUser() {
                     <Form.Control name='lname' type="text" placeholder="Last Name"
                                   value={lName} onChange={(e) => setLname(e.target.value)}></Form.Control>
                 </Form.Group>
-                <Button variant="primary" type="submit">Submit Movie Review!</Button>
+                <Button variant="primary" type="submit">Submit Change</Button>
             </Form>
         </>
     );

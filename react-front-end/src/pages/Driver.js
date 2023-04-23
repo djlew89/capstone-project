@@ -1,6 +1,13 @@
 import React, {useState} from "react";
 import {ListGroup} from 'react-bootstrap';
 
+// TODO update this to be a select user ID instead of displaying everything in db. Then update file name
+
+/**
+ * The page responsible for viewing drivers
+ * @author Mason Seward
+ * @returns {JSX.Element}
+ */
 export default function ViewDrivers() {
     let [driver, setDriver] = useState([]);
 

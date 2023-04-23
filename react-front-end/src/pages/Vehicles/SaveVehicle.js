@@ -1,6 +1,11 @@
 import {useState} from 'react';
 import {Button, Form} from 'react-bootstrap';
 
+/**
+ * The page responsible for saving vehicles
+ * @author Mason Seward
+ * @returns {JSX.Element}
+ */
 export default function SaveVehicle() {
     const [make, setMake] = useState("");
     const [model, setModel] = useState("");
