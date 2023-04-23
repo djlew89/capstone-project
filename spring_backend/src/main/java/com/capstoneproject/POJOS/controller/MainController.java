@@ -570,7 +570,7 @@ public class MainController
     //Quote REST
 
     /**
-     * Home Quote
+     * Home Quote - Does not write to database. Option to access route should only be available to registered Home views.
      *
      * @param id
      * @param home_id
@@ -594,7 +594,7 @@ public class MainController
     }
 
     /**
-     * Auto Quote
+     * Auto Quote - Does not write to database. Option to access route should only be available to registered vehicle views.
      * @param id
      * @param auto_id
      * @return AutoQuote
