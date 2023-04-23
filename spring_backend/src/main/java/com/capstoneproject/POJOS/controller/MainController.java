@@ -551,6 +551,7 @@ public class MainController
      * @param home_id
      * @return HomeQuote
      */
+    @CrossOrigin
     @GetMapping(path = RESTNouns.USER+RESTNouns.USER_ID+ RESTNouns.QUOTE +RESTNouns.HOME+RESTNouns.HOME_ID)
     public @ResponseBody Optional<HomeQuote> getHomeQuote(@PathVariable Integer id, @PathVariable Integer home_id)
     {
@@ -565,6 +566,7 @@ public class MainController
         return homeQuote;
     }
 
+    @CrossOrigin
     @GetMapping(path = RESTNouns.USER+RESTNouns.USER_ID+ RESTNouns.QUOTE +RESTNouns.AUTO+RESTNouns.AUTO_ID)
     public @ResponseBody Optional<AutoQuote> getAutoQuote(@PathVariable Integer id, @PathVariable Integer auto_id)
     {
