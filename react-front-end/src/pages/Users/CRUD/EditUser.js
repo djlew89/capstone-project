@@ -27,6 +27,8 @@ export default function EditUser() {
 
     return (
         <>
+            <p></p>
+            <p></p>
             <h1 id="data_display">Edit User Data</h1>
             <Form method="post" onSubmit={handleSubmit} id="form_display">
                 <Form.Group>

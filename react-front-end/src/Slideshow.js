@@ -3,11 +3,13 @@ import Carousel from 'react-bootstrap/Carousel';
 export default function Homepage() {
     return (
         <>
-            <h3 style={{textAlign: "center"}}>Taylors Insurance Demo</h3>
+            <h1 style={{textAlign: "center"}}>TAYLOR'S INSURANCE DEMO</h1>
             <img id="img" src="/logo.png" alt="company logo" style={{marginLeft: "44%", marginRight: "50%"}}/>
+            <p></p>
             <p style={{textAlign: "center"}}>Welcome to the product demonstration of the insurance API for taylors
                 insurance.</p><br/>
-            <h1 style={{textAlign: "center"}}>Let's meet the team!</h1>
+            <p></p>
+            <h3 style={{textAlign: "center"}}>LET'S MEET THE TEAM</h3>
             <Carousel variant="dark">
                 <Carousel.Item>
                     <img
@@ -52,7 +54,7 @@ export default function Homepage() {
                 <Carousel.Item>
                     <img
                         className="d-block w-100"
-                        src="/ms.png"
+                        src="/MS.PNG"
                         alt="Fifth slide"
                         style={{margin: "auto"}}
                     />
