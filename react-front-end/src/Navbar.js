@@ -25,26 +25,26 @@ function NavigationBar() {
                     </NavDropdown>
 
                     <NavDropdown title="Homes" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="/Homes">View Data</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.2">Edit Data</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.3">Delete Data</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.3">Save User</NavDropdown.Item>
+                        <NavDropdown.Item href="/Homes">View Home Data</NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.2">Edit Home</NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.3">Delete Home</NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.3">Save Home</NavDropdown.Item>
                         <NavDropdown.Divider/>
                         <NavDropdown.Item href="#action/3.3">Get Home Quote</NavDropdown.Item>
                     </NavDropdown>
 
                     <NavDropdown title="Vehicle" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="/Vehicles">View Data</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.2">Edit Data</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.3">Delete Data</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.3">Save User</NavDropdown.Item>
+                        <NavDropdown.Item href="/Vehicles">View Vehicle Data</NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.2">Edit Vehicle</NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.3">Delete Vehicle</NavDropdown.Item>
+                        <NavDropdown.Item href="/SaveVehicleData">Save Vehicle</NavDropdown.Item>
                     </NavDropdown>
 
                     <NavDropdown title="Driver" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="/Drivers">View Data</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.2">Edit Data</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.3">Delete Data</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.3">Save User</NavDropdown.Item>
+                        <NavDropdown.Item href="/Drivers">View Driver Data</NavDropdown.Item>
+                        <NavDropdown.Item href="/EditDriver">Edit Driver</NavDropdown.Item>
+                        <NavDropdown.Item href="/DeleteDriver">Delete Driver</NavDropdown.Item>
+                        <NavDropdown.Item href="/SaveDriver">Save Driver</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
             </Container>

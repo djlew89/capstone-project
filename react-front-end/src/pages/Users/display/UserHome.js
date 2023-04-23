@@ -1,8 +1,6 @@
 import React, {useState} from "react";
 import {ListGroup} from "react-bootstrap";
 
-//TODO this
-
 export default function ViewUserHomes() {
     let [userHomes, setUserHomes] = useState([]);
 
