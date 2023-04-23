@@ -124,7 +124,20 @@ public class MainController
         if (user.isPresent())
         {
             Iterable<Home> homes = homeRepository.getAllByUserId(id);
+            homes.forEach(home -> {
+                Optional<HomePolicy> homePolicy = homePolicyRepository.getByHomeId(home.getId());
+                homePolicyRepository.delete(homePolicy.get());
+            });
             homeRepository.deleteAll(homes);
+
+
+            Iterable<Vehicle> autos = autoRepository.getAllByUserId(id);
+            autos.forEach(auto -> {
+                Optional<AutoPolicy> autoPolicy = autoPolicyRepository.getByVehicleId(auto.getId());
+                autoPolicyRepository.delete(autoPolicy.get());
+            });
+            autoRepository.deleteAll(autos);
+
             Optional<Driver> driver = driverRepository.findByUserId(id);
             if (driver.isPresent())
             {
