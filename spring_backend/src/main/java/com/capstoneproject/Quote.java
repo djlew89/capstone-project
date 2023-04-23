@@ -33,6 +33,7 @@ public abstract class Quote
         this.tax = this.calculateTax();
 
     }
+
     /**
      * No args constructor. Please use arg constructor. Deprication tag for warning
      */

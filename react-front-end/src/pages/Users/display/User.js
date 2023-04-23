@@ -11,7 +11,7 @@ export default function ViewUsers() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        fetch("http://localhost:8080/v1/users/"+id, requestOptions)
+        fetch("http://localhost:8080/v1/users/" + id, requestOptions)
             .then(response => response.json())
             .then(setUser)
             .catch(error => console.log('error', error));
@@ -28,7 +28,7 @@ export default function ViewUsers() {
                         onChange={(e) => setId(e.target.value)}
                     />
                 </label>
-                <input type="submit" />
+                <input type="submit"/>
             </form>
             <ul>
                 {
