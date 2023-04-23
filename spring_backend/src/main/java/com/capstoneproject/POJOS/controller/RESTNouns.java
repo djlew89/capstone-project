@@ -16,4 +16,5 @@ public class RESTNouns
     public static final String DRIVER = "/drivers";
     public static final String DRIVER_ID = "/{driver_id}";
     public static final String QUOTE = "/quote";
+    public static final String POLICY ="/policy";
 }
