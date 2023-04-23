@@ -1,10 +1,11 @@
 import './App.css';
 import { Route, Routes } from "react-router-dom";
-import ViewUsers from './pages/User';
+import ViewUsers from "./pages/Users/User";
 import ViewDrivers from './pages/Driver';
-import ViewUserHomes from "./pages/UserHome";
+import ViewUserHomes from "./pages/Homes/UserHome";
 import NavigationBar from './Navbar';
 import ViewVehicles from "./pages/Vehicles";
+import Homepage from "./Slideshow";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -12,7 +13,7 @@ function App() {
     <>
       <NavigationBar />
          <Routes>
-             <Route path="/"/>
+             <Route path="/" element={<Homepage/>}/>
              <Route path="/Users" element={<ViewUsers/>}/>
              <Route path="/Drivers" element={<ViewDrivers/>}/>
              <Route path="/Vehicles" element={<ViewVehicles/>}/>
