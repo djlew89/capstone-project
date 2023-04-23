@@ -8,7 +8,6 @@ import com.capstoneproject.POJOS.QuoteBuilder;
 import com.capstoneproject.User;
 
 import java.time.LocalDate;
-import java.util.Random;
 
 /**
  * Testing home class
@@ -46,47 +45,46 @@ public class HomeTestApplication
     }
 
 
-
     public static Home getTestHome()
     {
         Home home = new Home();
-        home.setDateBuilt(LocalDate.of(2020,1,1));
+        home.setDateBuilt(LocalDate.of(2020, 1, 1));
         home.setValue(1000000);
         home.setHeatingType(Home.HeatingType.ELECTRIC);
         home.setLocation(Home.Location.URBAN);
         return home;
-//        Random random = new Random();
-//        int i = Math.abs(random.nextInt());
-//        //        System.out.printf("\n>%d", i % 3);
-//        if (i % 3 == 0)
-//        {
-//            Home home = new Home();
-////            home.setDateBuilt(LocalDate.of(2005, 1, 1));
-//            home.setDateBuilt(LocalDate.of(2005,1,2));
-//            home.setValue(240000);
-//            home.setHeatingType(Home.HeatingType.OIL);
-//            home.setLocation(Home.Location.RURAL);
-//            return home;
-//        }
-//        else if (i % 3 == 1)
-//        {
-//            Home home = new Home();
-//            home.setDateBuilt(LocalDate.of(1905,4,10));
-//            home.setValue(600000);
-//            home.setHeatingType(Home.HeatingType.WOOD);
-//            home.setLocation(Home.Location.URBAN);
-//            return home;
-//        }
-//        else
-//        {
-//            Home home = new Home();
-////            home.setDateBuilt(LocalDate.of(1985, 1, 1));
-//            home.setDateBuilt(LocalDate.of(1985,3,4));
-//            home.setValue(400000);
-//            home.setHeatingType(Home.HeatingType.OTHER);
-//            home.setLocation(Home.Location.URBAN);
-//            return home;
-//        }
+        //        Random random = new Random();
+        //        int i = Math.abs(random.nextInt());
+        //        //        System.out.printf("\n>%d", i % 3);
+        //        if (i % 3 == 0)
+        //        {
+        //            Home home = new Home();
+        ////            home.setDateBuilt(LocalDate.of(2005, 1, 1));
+        //            home.setDateBuilt(LocalDate.of(2005,1,2));
+        //            home.setValue(240000);
+        //            home.setHeatingType(Home.HeatingType.OIL);
+        //            home.setLocation(Home.Location.RURAL);
+        //            return home;
+        //        }
+        //        else if (i % 3 == 1)
+        //        {
+        //            Home home = new Home();
+        //            home.setDateBuilt(LocalDate.of(1905,4,10));
+        //            home.setValue(600000);
+        //            home.setHeatingType(Home.HeatingType.WOOD);
+        //            home.setLocation(Home.Location.URBAN);
+        //            return home;
+        //        }
+        //        else
+        //        {
+        //            Home home = new Home();
+        ////            home.setDateBuilt(LocalDate.of(1985, 1, 1));
+        //            home.setDateBuilt(LocalDate.of(1985,3,4));
+        //            home.setValue(400000);
+        //            home.setHeatingType(Home.HeatingType.OTHER);
+        //            home.setLocation(Home.Location.URBAN);
+        //            return home;
+        //        }
     }
 
     public static void printHomeInfo(Home home)

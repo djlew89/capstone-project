@@ -12,42 +12,44 @@ import java.time.LocalDate;
 @Entity(name = "vehicle")
 public class Vehicle
 {
-    public Integer getId() {
-        return id;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
-
     /**
      * The make of the vehicle
      */
     private String make;
-
     /**
      * The model of the vehicle
      */
     private String model;
-
     /**
      * The year the vehicle was made
      */
     private int year;
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "ID")
     private User user;
 
+    public Integer getId()
+    {
+        return id;
+    }
+
+    public void setId(Integer id)
+    {
+        this.id = id;
+    }
+
+    public User getUser()
+    {
+        return user;
+    }
+
+    public void setUser(User user)
+    {
+        this.user = user;
+    }
 
     /**
      * Getter for make
@@ -95,16 +97,11 @@ public class Vehicle
     }
 
     /**
-     * @return
+     * @return the age of vehicle
      */
     public int calculateAge()
     {
         return LocalDate.now()
                 .getYear() - year;
-    }
-
-    public void setId(Integer id)
-    {
-        this.id = id;
     }
 }

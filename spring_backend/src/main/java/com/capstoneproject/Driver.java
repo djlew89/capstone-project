@@ -10,31 +10,31 @@ import jakarta.persistence.*;
 @Entity(name = "driver")
 public class Driver
 {
-    public Integer getId() {
-        return id;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
     /**
      * Number of Accidents Driver has been involved in
      */
     private int numberOfAccidents;
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "ID")
     private User user;
 
+    public Integer getId()
+    {
+        return id;
+    }
+
+    public User getUser()
+    {
+        return user;
+    }
+
+    public void setUser(User user)
+    {
+        this.user = user;
+    }
 
     /**
      * getter

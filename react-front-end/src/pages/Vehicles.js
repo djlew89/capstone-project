@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import {ListGroup} from "react-bootstrap";
 
 
@@ -26,8 +26,8 @@ export default function ViewVehicles() {
                                 <ListGroup.Item>Vehicle Make: {vehicleData.make}</ListGroup.Item>
                                 <ListGroup.Item>Vehicle Model: {vehicleData.model}</ListGroup.Item>
                                 <ListGroup.Item>Vehicle Year: {vehicleData.year}</ListGroup.Item>
-                                <ListGroup.Item>Associated User ID: {vehicleData.user.id}</ListGroup.Item>
-                                <ListGroup.Item>Associated User Name: {vehicleData.user.firstName}</ListGroup.Item>
+                                <ListGroup.Item>Associated User's ID: {vehicleData.user.id}</ListGroup.Item>
+                                <ListGroup.Item>Associated User's Name: {vehicleData.user.firstName}</ListGroup.Item>
                             </ListGroup>
                         ])
                 }

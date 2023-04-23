@@ -14,19 +14,9 @@ import java.time.LocalDate;
 public class Home
 {
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
-
     /**
      * Age of dwelling
      */
@@ -49,6 +39,16 @@ public class Home
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "ID")
     private User user;
+
+    public Integer getId()
+    {
+        return id;
+    }
+
+    public void setId(Integer id)
+    {
+        this.id = id;
+    }
 
     public User getUser()
     {
@@ -94,7 +94,7 @@ public class Home
     {
         return LocalDate.now()
                 .getYear() - this.dateBuilt.getYear();
-//        .getYear() - this.dateBuilt.getYear();
+        //        .getYear() - this.dateBuilt.getYear();
     }
 
     public boolean isUrban()

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { ListGroup } from 'react-bootstrap';
+import React, {useState} from "react";
+import {ListGroup} from 'react-bootstrap';
 
 export default function ViewDrivers() {
     let [driver, setDriver] = useState([]);
@@ -17,8 +17,8 @@ export default function ViewDrivers() {
                         [
                             <ListGroup id="data_display">
                                 <ListGroup.Item>User ID: {driverData.id}</ListGroup.Item>
-                                <ListGroup.Item>Associated User ID: {driverData.user.id}</ListGroup.Item>
-                                <ListGroup.Item>Associated User First Name: {driverData.user.id}</ListGroup.Item>
+                                <ListGroup.Item>Associated User's ID: {driverData.user.id}</ListGroup.Item>
+                                <ListGroup.Item>Associated User's Name: {driverData.user.firstName}</ListGroup.Item>
                             </ListGroup>
                         ])
                 }

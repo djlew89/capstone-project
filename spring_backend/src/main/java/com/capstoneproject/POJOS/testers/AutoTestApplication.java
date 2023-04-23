@@ -1,9 +1,12 @@
 package com.capstoneproject.POJOS.testers;
 
-import com.capstoneproject.*;
+import com.capstoneproject.AutoPolicy;
+import com.capstoneproject.Driver;
 import com.capstoneproject.POJOS.AutoQuote;
 import com.capstoneproject.POJOS.PolicyBuilder;
 import com.capstoneproject.POJOS.QuoteBuilder;
+import com.capstoneproject.User;
+import com.capstoneproject.Vehicle;
 
 import java.time.LocalDate;
 import java.util.Random;

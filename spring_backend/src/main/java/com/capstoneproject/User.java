@@ -1,11 +1,11 @@
 package com.capstoneproject;
 
-import com.capstoneproject.POJOS.Policy;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * User Entity model. This object will be used by Hibernate to create a table in the database
@@ -59,43 +59,53 @@ public class User
         this.email = email;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getPassword() {
+    public String getPassword()
+    {
         return password;
     }
 
-    public String getFirstName() {
+    public void setPassword(String password)
+    {
+        this.password = password;
+    }
+
+    public String getFirstName()
+    {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public void setFirstName(String firstName)
+    {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
+    public String getLastName()
+    {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    public void setLastName(String lastName)
+    {
         this.lastName = lastName;
     }
 
-    public LocalDate getDob() {
+    public LocalDate getDob()
+    {
         return dob;
     }
 
-    public void setDob(LocalDate dob) {
+    public void setDob(LocalDate dob)
+    {
         this.dob = dob;
     }
 
-    public String getAddress() {
+    public String getAddress()
+    {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(String address)
+    {
         this.address = address;
     }
 
