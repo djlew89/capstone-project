@@ -1,7 +1,6 @@
 package com.capstoneproject.POJOS.DataAccess;
 
 import com.capstoneproject.User;
-import com.capstoneproject.Vehicle;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;

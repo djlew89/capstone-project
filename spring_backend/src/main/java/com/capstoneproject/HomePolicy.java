@@ -30,7 +30,7 @@ public class HomePolicy extends Policy
     /**
      * constructor
      *
-     * @param user  The customer.
+     * @param user      The customer.
      * @param startDate The policy start date.
      * @param endDate   The policy end date.
      * @param home      The home.

@@ -1,12 +1,15 @@
 package com.capstoneproject.POJOS.controller;
 
-import com.capstoneproject.*;
+import com.capstoneproject.Driver;
+import com.capstoneproject.Home;
 import com.capstoneproject.POJOS.DataAccess.AutoRepository;
 import com.capstoneproject.POJOS.DataAccess.DriverRepository;
 import com.capstoneproject.POJOS.DataAccess.HomeRepository;
 import com.capstoneproject.POJOS.DataAccess.UserRepository;
 import com.capstoneproject.POJOS.HomeQuote;
 import com.capstoneproject.POJOS.QuoteBuilder;
+import com.capstoneproject.User;
+import com.capstoneproject.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -58,7 +61,8 @@ public class MainController
     {
         Optional<User> userCheck = userRepository.getAllByEmail(email);
 
-        if(userCheck.isPresent()){
+        if (userCheck.isPresent())
+        {
             return "User already registered";
         }
 
@@ -90,11 +94,16 @@ public class MainController
         {
             user.get()
                     .setEmail(email);
-            user.get().setPassword(password);
-            user.get().setFirstName(fname);
-            user.get().setLastName(lname);
-            user.get().setAddress(address);
-            user.get().setDob(dob);
+            user.get()
+                    .setPassword(password);
+            user.get()
+                    .setFirstName(fname);
+            user.get()
+                    .setLastName(lname);
+            user.get()
+                    .setAddress(address);
+            user.get()
+                    .setDob(dob);
             userRepository.save(user.get());
             return "Updated!";
         }
@@ -113,9 +122,7 @@ public class MainController
         if (user.isPresent())
         {
             Iterable<Home> homes = homeRepository.getAllByUserId(id);
-            homes.forEach(home -> {
-                homeRepository.delete(home);
-            });
+            homeRepository.deleteAll(homes);
             Optional<Driver> driver = driverRepository.findByUserId(id);
             driverRepository.delete(driver.get());
             userRepository.delete(user.get());
@@ -131,6 +138,7 @@ public class MainController
 
     /**
      * Get All homes from Database
+     *
      * @return Iterable<Home>
      */
     @CrossOrigin
@@ -142,8 +150,9 @@ public class MainController
 
     /**
      * Get One Home by ID
-     * @param home_id
-     * @return
+     *
+     * @param home_id the home id
+     * @return the Home object for the id
      */
     @CrossOrigin
     @GetMapping(path = RESTNouns.HOME + RESTNouns.HOME_ID)
@@ -155,7 +164,7 @@ public class MainController
     /**
      * Get Mapping for Home based on User ID
      *
-     * @param id
+     * @param id home id
      * @return Home
      */
     @CrossOrigin
@@ -175,6 +184,7 @@ public class MainController
 
     /**
      * Add new Home to Database
+     *
      * @param id
      * @param dateBuilt
      * @param value
@@ -212,6 +222,7 @@ public class MainController
 
     /**
      * Delete Home from Database by Home ID
+     *
      * @param home_id
      * @return
      */
@@ -233,6 +244,7 @@ public class MainController
 
     /**
      * Update Home in Database
+     *
      * @param home_id
      * @param dateBuilt
      * @param value
@@ -271,6 +283,7 @@ public class MainController
 
     /**
      * Get All Vehicles from Database
+     *
      * @return Iterable<Vehicle>
      */
     @CrossOrigin
@@ -282,6 +295,7 @@ public class MainController
 
     /**
      * Get One Vehicle by ID
+     *
      * @param auto_id
      * @return Vehicle
      */
@@ -294,13 +308,14 @@ public class MainController
 
     /**
      * Add Vehicle to Database
+     *
      * @param make
      * @param model
      * @param year
      * @return String
      */
     @CrossOrigin
-    @PostMapping(path = RESTNouns.USER+RESTNouns.USER_ID+RESTNouns.AUTO)
+    @PostMapping(path = RESTNouns.USER + RESTNouns.USER_ID + RESTNouns.AUTO)
     public @ResponseBody String addNewAuto(@PathVariable Integer id, @RequestParam String make, @RequestParam String model, @RequestParam Integer year)
     {
         Vehicle auto = new Vehicle();
@@ -324,6 +339,7 @@ public class MainController
 
     /**
      * Delete vehicle from database
+     *
      * @param auto_id
      * @return
      */
@@ -345,6 +361,7 @@ public class MainController
 
     /**
      * Get All User Vehicles
+     *
      * @param id
      * @return Iterable<Vehicle>
      */
@@ -365,6 +382,7 @@ public class MainController
 
     /**
      * Update Vehicle in Database
+     *
      * @param auto_id
      * @param make
      * @param model
@@ -372,15 +390,18 @@ public class MainController
      * @return String
      */
     @CrossOrigin
-    @PutMapping(path = RESTNouns.AUTO+RESTNouns.AUTO_ID)
+    @PutMapping(path = RESTNouns.AUTO + RESTNouns.AUTO_ID)
     public @ResponseBody String updateVehicle(@PathVariable Integer auto_id, @RequestParam String make, @RequestParam String model, @RequestParam int year)
     {
         Optional<Vehicle> auto = autoRepository.findById(auto_id);
         if (auto.isPresent())
         {
-            auto.get().setMake(make);
-            auto.get().setModel(model);
-            auto.get().setYear(year);
+            auto.get()
+                    .setMake(make);
+            auto.get()
+                    .setModel(model);
+            auto.get()
+                    .setYear(year);
             autoRepository.save(auto.get());
             return "Updated!";
         }
@@ -394,6 +415,7 @@ public class MainController
 
     /**
      * Get All Drivers from Database
+     *
      * @return
      */
     @CrossOrigin
@@ -405,6 +427,7 @@ public class MainController
 
     /**
      * Get One Driver by ID
+     *
      * @param driver_id
      * @return
      */
@@ -417,6 +440,7 @@ public class MainController
 
     /**
      * Get Driver by User ID
+     *
      * @param id
      * @return
      */
@@ -425,7 +449,7 @@ public class MainController
     public @ResponseBody Optional<Driver> getDriverByUserId(@PathVariable Integer id)
     {
         Optional<User> user = userRepository.findById(id);
-        Optional<Driver> driver = null;
+        Optional<Driver> driver = Optional.empty();
 
         if (user.isPresent())
         {
@@ -437,6 +461,7 @@ public class MainController
 
     /**
      * Add new Driver to Database
+     *
      * @param id
      * @param numOfAccidents
      * @return String
@@ -447,7 +472,8 @@ public class MainController
                                              @RequestParam Integer numOfAccidents)
     {
         Optional<Driver> driverCheck = driverRepository.findByUserId(id);
-        if(driverCheck.isPresent()){
+        if (driverCheck.isPresent())
+        {
             return "Driver already registered for user";
         }
 
@@ -471,6 +497,7 @@ public class MainController
 
     /**
      * Delete Driver by Driver ID
+     *
      * @param driver_id
      * @return String
      */
@@ -492,6 +519,7 @@ public class MainController
 
     /**
      * Update Driver in Database
+     *
      * @param numOfAccidents
      * @return String
      */
@@ -519,18 +547,21 @@ public class MainController
     To get a new Quote, send a GET request, with User ID and the Home ID as a parameter.
     Build the Quote object from the Quote manager
      */
+
     /**
      *
      */
     @CrossOrigin
-    @GetMapping(path = RESTNouns.USER+RESTNouns.USER_ID+ RESTNouns.QUOTE +RESTNouns.HOME+RESTNouns.HOME_ID)
+    @GetMapping(path = RESTNouns.USER + RESTNouns.USER_ID + RESTNouns.QUOTE + RESTNouns.HOME + RESTNouns.HOME_ID)
     public @ResponseBody Optional<HomeQuote> getHomeQuote(@PathVariable Integer id, @PathVariable Integer home_id)
     {
-        Optional<HomeQuote> homeQuote = null;
+        Optional<HomeQuote> homeQuote = Optional.empty();
         Optional<User> user = userRepository.findById(id);
-        if (user.isPresent()){
+        if (user.isPresent())
+        {
             Optional<Home> home = homeRepository.findById(home_id);
-            if(home.isPresent()){
+            if (home.isPresent())
+            {
                 homeQuote = Optional.of(QuoteBuilder.getNewHomeQuote(home.get()));
             }
         }

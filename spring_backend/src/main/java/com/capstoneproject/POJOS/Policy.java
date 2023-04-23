@@ -16,25 +16,16 @@ import java.time.LocalDate;
 @MappedSuperclass
 public abstract class Policy
 {
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "ID")
     private User user;
     private LocalDate startDate;
     private LocalDate endDate;
     private BigDecimal totalBeforetax;
-
     /**
      * constructor
      *
-     * @param user  The policy's customer.
+     * @param user      The policy's customer.
      * @param startDate The policy start date.
      * @param endDate   The policy end date.
      */
@@ -46,10 +37,19 @@ public abstract class Policy
         this.totalBeforetax = totalBeforeTax;
         this.user = user;
     }
-
     public Policy()
     {
 
+    }
+
+    public User getUser()
+    {
+        return user;
+    }
+
+    public void setUser(User user)
+    {
+        this.user = user;
     }
 
     public LocalDate getStartDate()
