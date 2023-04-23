@@ -75,7 +75,8 @@ export default function Homepage() {
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>
-            <p id="data_display">But of course, you're here for the product :P Use the navbar on top to view the different api routes</p>
+            <p id="data_display">But of course, you're here for the product :P Use the navbar on top to view the different api routes
+            at a customer level</p>
         </>
     );
 }
