@@ -122,6 +122,9 @@ public class MainController
         {
             Iterable<Home> homes = homeRepository.getAllByUserId(id);
             homeRepository.deleteAll(homes);
+            Iterable<Vehicle> autos = autoRepository.getAllByUserId(id);
+            autoRepository.deleteAll(autos);
+
             Optional<Driver> driver = driverRepository.findByUserId(id);
             if (driver.isPresent()){
                 driverRepository.delete(driver.get());
