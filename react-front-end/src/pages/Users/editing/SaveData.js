@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import {useState} from 'react';
+import {Button, Form} from 'react-bootstrap';
 
 export default function SaveData() {
     const [email, setEmail] = useState("");
@@ -9,8 +9,7 @@ export default function SaveData() {
     const [fname, setFname] = useState("");
     const [lname, setLname] = useState("");
 
-    function handleSubmit(event)
-    {
+    function handleSubmit(event) {
         event.preventDefault();
         let requestOptions = {
             method: 'POST',
@@ -22,7 +21,7 @@ export default function SaveData() {
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
         alert("User saved")
-        window.location.href='/';
+        window.location.href = '/';
     }
 
     return (
@@ -44,17 +43,17 @@ export default function SaveData() {
             </Form.Group>
             <Form.Group>
                 <Form.Label>Date of Birth</Form.Label>
-                <Form.Control name = 'dob' type="date" placeholder="DOB"
+                <Form.Control name='dob' type="date" placeholder="DOB"
                               value={dob} onChange={(e) => setDOB(e.target.value)}></Form.Control>
             </Form.Group>
             <Form.Group>
                 <Form.Label>First Name</Form.Label>
-                <Form.Control name = 'fname' type="text" placeholder="First Name"
+                <Form.Control name='fname' type="text" placeholder="First Name"
                               value={fname} onChange={(e) => setFname(e.target.value)}></Form.Control>
             </Form.Group>
             <Form.Group>
                 <Form.Label>Last Name</Form.Label>
-                <Form.Control name = 'fname' type="text" placeholder="First Name"
+                <Form.Control name='fname' type="text" placeholder="First Name"
                               value={lname} onChange={(e) => setLname(e.target.value)}></Form.Control>
             </Form.Group>
             <Button variant="primary" type="submit">Submit Movie Review!</Button>

@@ -1,13 +1,12 @@
-import { useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import {useState} from 'react';
+import {Button, Form} from 'react-bootstrap';
 
 export default function SaveVehicle() {
     const [make, setMake] = useState("");
     const [model, setModel] = useState("");
     const [year, setYear] = useState("");
 
-    function handleSubmit(event)
-    {
+    function handleSubmit(event) {
         event.preventDefault();
         let requestOptions = {
             method: 'POST',
@@ -19,7 +18,7 @@ export default function SaveVehicle() {
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
         alert("Vehicle saved")
-        window.location.href='/';
+        window.location.href = '/';
     }
 
     return (

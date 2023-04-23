@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import {useState} from 'react';
 
 //TODO this -> throws exception when deleting -> route does not work
 
@@ -12,7 +12,7 @@ export default function DeleteUser() {
             redirect: 'follow'
         };
 
-        fetch("http://localhost:8080/v1/users/"+id, requestOptions)
+        fetch("http://localhost:8080/v1/users/" + id, requestOptions)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
@@ -29,7 +29,7 @@ export default function DeleteUser() {
                         onChange={(e) => setId(e.target.value)}
                     />
                 </label>
-                <input type="submit" />
+                <input type="submit"/>
             </form>
         </>
     )

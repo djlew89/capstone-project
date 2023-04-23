@@ -22,6 +22,7 @@ public abstract class Policy
     private LocalDate startDate;
     private LocalDate endDate;
     private BigDecimal totalBeforetax;
+
     /**
      * constructor
      *
@@ -37,6 +38,7 @@ public abstract class Policy
         this.totalBeforetax = totalBeforeTax;
         this.user = user;
     }
+
     public Policy()
     {
 
