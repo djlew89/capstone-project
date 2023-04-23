@@ -9,6 +9,7 @@ import NavigationBar from './Navbar';
 import ViewVehicles from "./pages/Vehicles";
 import Homepage from "./Slideshow";
 import DeleteUser from "./pages/Users/editing/DeleteUser";
+import SaveData from "./pages/Users/editing/SaveData";
 
 function App() {
     return (
@@ -20,8 +21,9 @@ function App() {
                 <Route path="/Drivers" element={<ViewDrivers/>}/>
                 <Route path="/Vehicles" element={<ViewVehicles/>}/>
                 <Route path="/Homes" element={<ViewUserHomes/>}/>
-                <Route path="/EditData" element={<EditUser/>}/>
-                <Route path="/DeleteData" element={<DeleteUser/>}/>
+                <Route path="/EditUserData" element={<EditUser/>}/>
+                <Route path="/DeleteUserData" element={<DeleteUser/>}/>
+                <Route path="/SaveUserData" element={<SaveData/>}/>
             </Routes>
         </>
     );
