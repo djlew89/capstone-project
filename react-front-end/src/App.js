@@ -1,4 +1,5 @@
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import {Route, Routes} from "react-router-dom";
 import ViewUsers from "./pages/Users/display/User";
 import EditUser from "./pages/Users/editing/EditUser";
@@ -7,7 +8,7 @@ import ViewUserHomes from "./pages/Homes/UserHome";
 import NavigationBar from './Navbar';
 import ViewVehicles from "./pages/Vehicles";
 import Homepage from "./Slideshow";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import DeleteUser from "./pages/Users/editing/DeleteUser";
 
 function App() {
     return (
@@ -20,6 +21,7 @@ function App() {
                 <Route path="/Vehicles" element={<ViewVehicles/>}/>
                 <Route path="/Homes" element={<ViewUserHomes/>}/>
                 <Route path="/EditData" element={<EditUser/>}/>
+                <Route path="/DeleteData" element={<DeleteUser/>}/>
             </Routes>
         </>
     );
