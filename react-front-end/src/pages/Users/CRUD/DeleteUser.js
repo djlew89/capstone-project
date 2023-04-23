@@ -1,9 +1,7 @@
 import {useState} from 'react';
 
-//TODO this -> throws exception when deleting -> route does not work
-
 export default function DeleteUser() {
-    const [id, setId] = useState("");
+    const [id, setId] = useState([]);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -13,7 +11,7 @@ export default function DeleteUser() {
         };
 
         fetch("http://localhost:8080/v1/users/" + id, requestOptions)
-            .then(response => response.text())
+            .then(response => response.json())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
     }

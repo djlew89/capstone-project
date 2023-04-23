@@ -12,7 +12,7 @@ function NavigationBar() {
                 <Nav className="me-auto">
                     <Nav.Link href="/">Home</Nav.Link>
 
-                    <NavDropdown title="Users" id="basic-nav-dropdown">
+                    <NavDropdown title="Customers" id="basic-nav-dropdown">
                         <NavDropdown.Item href="/Users">View Data</NavDropdown.Item>
                         <NavDropdown.Item href="/EditUserData">Edit Data</NavDropdown.Item>
                         <NavDropdown.Item href="/DeleteUserData">Delete Data</NavDropdown.Item>
