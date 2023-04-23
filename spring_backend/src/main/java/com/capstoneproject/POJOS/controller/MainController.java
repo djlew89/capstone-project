@@ -127,7 +127,9 @@ public class MainController
             homes.forEach(home ->
             {
                 Optional<HomePolicy> homePolicy = homePolicyRepository.getByHomeId(home.getId());
-                homePolicyRepository.delete(homePolicy.get());
+                if(homePolicy.isPresent()){
+                    homePolicyRepository.delete(homePolicy.get());
+                }
             });
             homeRepository.deleteAll(homes);
 
@@ -136,7 +138,9 @@ public class MainController
             autos.forEach(auto ->
             {
                 Optional<AutoPolicy> autoPolicy = autoPolicyRepository.getByVehicleId(auto.getId());
-                autoPolicyRepository.delete(autoPolicy.get());
+                if(autoPolicy.isPresent()){
+                    autoPolicyRepository.delete(autoPolicy.get());
+                }
             });
             autoRepository.deleteAll(autos);
 
