@@ -6,7 +6,6 @@ import ViewUserHomes from "./pages/UserHome";
 import NavigationBar from './Navbar';
 import ViewVehicles from "./pages/Vehicles";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {useEffect, useState} from "react";
 
 function App() {
   return (

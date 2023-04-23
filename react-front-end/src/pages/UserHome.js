@@ -3,10 +3,10 @@ import React, { useState } from "react";
 //TODO this
 
 export default function ViewUserHomes() {
-    let [userHomes, setUserHomes] = useState("empty");
+    let [userHomes, setUserHomes] = useState([]);
 
     fetch("http://localhost:8080/v1/users/1/homes")
-        .then(reponse => reponse.json())
+        .then(response => response.json())
         .then(setUserHomes)
         .catch(e => console.log(e.message))
 
@@ -14,15 +14,15 @@ export default function ViewUserHomes() {
         <>
             <ul>
                 {
-                    Array.from(userHomes).map(userData =>
+                    Array.from(userHomes).map(homeData =>
                         [
-                            <li>User ID: {userData.id}</li>,
-                            <li>Email: {userData.email}</li>,
-                            <li>Actors: {userData.password}</li>,
-                            <li>User's First Name: {userData.firstName}</li>,
-                            <li>User's Last Name: {userData.lastName}</li>,
-                            <li>Date of Birth: {userData.dob}</li>,
-                            <li>Address: {userData.address}</li>,
+                            <li>Home ID: {homeData.id}</li>,
+                            <li>Date Built: {homeData.dateBuilt}</li>,
+                            <li>Heating Type: {homeData.heatingType}</li>,
+                            <li>Location: {homeData.location}</li>,
+                            <li>Date of Birth: {homeData.value}</li>,
+                            <li>Associated User ID: {homeData.user.id}</li>,
+                            <li>Associated User First Name: {homeData.user.firstName}</li>,
                         ])
                 }
             </ul>

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-
+import { ListGroup } from 'react-bootstrap';
 
 export default function ViewUsers() {
-    let [user, setUser] = useState("empty");
+    let [user, setUser] = useState([]);
 
     fetch("http://localhost:8080/v1/users")
-        .then(reponse => reponse.json())
+        .then(response => response.json())
         .then(setUser)
         .catch(e => console.log(e.message))
 
@@ -15,13 +15,15 @@ export default function ViewUsers() {
                 {
                     Array.from(user).map(userData =>
                         [
-                            <li>User ID: {userData.id}</li>,
-                            <li>Email: {userData.email}</li>,
-                            <li>Actors: {userData.password}</li>,
-                            <li>User's First Name: {userData.firstName}</li>,
-                            <li>User's Last Name: {userData.lastName}</li>,
-                            <li>Date of Birth: {userData.dob}</li>,
-                            <li>Address: {userData.address}</li>,
+                            <ListGroup id="data_display">
+                                <ListGroup.Item key={userData.id}>User ID: {userData.id}</ListGroup.Item>
+                                <ListGroup.Item>Email: {userData.email}</ListGroup.Item>
+                                <ListGroup.Item>Actors: {userData.password}</ListGroup.Item>
+                                <ListGroup.Item>User's First Name: {userData.firstName}</ListGroup.Item>
+                                <ListGroup.Item>User's Last Name: {userData.lastName}</ListGroup.Item>
+                                <ListGroup.Item>Date of Birth: {userData.dob}</ListGroup.Item>
+                                <ListGroup.Item>Address: {userData.address}</ListGroup.Item>
+                            </ListGroup>
                         ])
                 }
             </ul>

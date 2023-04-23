@@ -1,15 +1,13 @@
-import React, {useEffect, useState} from "react";
-
+import React, { useState } from "react";
+import { ListGroup } from 'react-bootstrap';
 
 export default function ViewDrivers() {
-    let [driver, setDriver] = useState("empty");
+    let [driver, setDriver] = useState([]);
 
-    useEffect(() => {
-        fetch("http://localhost:8080/v1/drivers")
-            .then(reponse => reponse.json())
-            .then(setDriver)
-            .catch(e => console.log(e.message))
-    })
+    fetch("http://localhost:8080/v1/drivers")
+        .then(response => response.json())
+        .then(setDriver)
+        .catch(e => console.log(e.message))
 
     return (
         <>
@@ -17,9 +15,11 @@ export default function ViewDrivers() {
                 {
                     Array.from(driver).map(driverData =>
                         [
-                            <li>User ID: {driverData.id}</li>,
-                            <li>Associated User ID: {driverData.user.id}</li>,
-                            <li>Associated User First Name: {driverData.user.id}</li>,
+                            <ListGroup id="data_display">
+                                <ListGroup.Item>User ID: {driverData.id}</ListGroup.Item>
+                                <ListGroup.Item>Associated User ID: {driverData.user.id}</ListGroup.Item>
+                                <ListGroup.Item>Associated User First Name: {driverData.user.id}</ListGroup.Item>
+                            </ListGroup>
                         ])
                 }
             </ul>

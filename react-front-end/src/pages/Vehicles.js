@@ -1,13 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import {ListGroup} from "react-bootstrap";
 
 
-export default async function ViewVehicles() {
-    let [vehicle, setVehicle] = useState("empty");
+export default function ViewVehicles() {
+    let [vehicle, setVehicle] = useState([]);
 
-    await fetch("http://localhost:8080/v1/autos")
-            .then(reponse => reponse.json())
-            .then(setVehicle)
-            .catch(e => console.log(e.message))
+    fetch("http://localhost:8080/v1/autos")
+        .then(response => response.json())
+        .then(setVehicle)
+        .catch(e => console.log(e.message))
+
+    /**
+     * id make model year
+     */
 
 
     return (
@@ -16,12 +21,14 @@ export default async function ViewVehicles() {
                 {
                     Array.from(vehicle).map(vehicleData =>
                         [
-                            <li>Vehicle ID: {vehicleData.id}</li>,
-                            <li>Make: {vehicleData.make}</li>,
-                            <li>Model: {vehicleData.model}</li>,
-                            <li>Year: {vehicleData.year}</li>,
-                            <li>Associated User ID: {vehicleData.user.id}</li>,
-                            <li>Associated User First Name: {vehicleData.user.firstName}</li>,
+                            <ListGroup id="data_display">
+                                <ListGroup.Item>Vehicle ID: {vehicleData.id}</ListGroup.Item>
+                                <ListGroup.Item>Vehicle Make: {vehicleData.make}</ListGroup.Item>
+                                <ListGroup.Item>Vehicle Model: {vehicleData.model}</ListGroup.Item>
+                                <ListGroup.Item>Vehicle Year: {vehicleData.year}</ListGroup.Item>
+                                <ListGroup.Item>Associated User ID: {vehicleData.user.id}</ListGroup.Item>
+                                <ListGroup.Item>Associated User Name: {vehicleData.user.firstName}</ListGroup.Item>
+                            </ListGroup>
                         ])
                 }
             </ul>
