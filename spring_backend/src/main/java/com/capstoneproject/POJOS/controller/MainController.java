@@ -33,6 +33,7 @@ public class MainController
 
 
     //USER - GET / READ All
+    @CrossOrigin
     @GetMapping(path = RESTNouns.USER)
     public @ResponseBody Iterable<User> getAllUsers()
     {
@@ -40,6 +41,7 @@ public class MainController
     }
 
     //USER - GET / READ ONE by ID
+    @CrossOrigin
     @GetMapping(path = RESTNouns.USER + RESTNouns.USER_ID)
     public @ResponseBody Optional<User> getUserWithId(@PathVariable Integer id)
     {
@@ -47,6 +49,7 @@ public class MainController
     }
 
     //USER - POST / CREATE ONE
+    @CrossOrigin
     @PostMapping(path = RESTNouns.USER)
     public @ResponseBody String addNewUser(@RequestParam String email,
                                            @RequestParam String password, @RequestParam String address,
@@ -74,6 +77,7 @@ public class MainController
     }
 
     //USER -PUT / UPDATE ONE
+    @CrossOrigin
     @PutMapping(path = RESTNouns.USER + RESTNouns.USER_ID)
     public @ResponseBody String updateUser(@PathVariable Integer id,
                                            @RequestParam String email,
@@ -101,6 +105,7 @@ public class MainController
     }
 
     //USER -DELETE / DELETE ONE
+    @CrossOrigin
     @DeleteMapping(path = RESTNouns.USER + RESTNouns.USER_ID)
     public @ResponseBody String deleteUser(@PathVariable Integer id)
     {
@@ -128,6 +133,7 @@ public class MainController
      * Get All homes from Database
      * @return Iterable<Home>
      */
+    @CrossOrigin
     @GetMapping(path = RESTNouns.HOME)
     public @ResponseBody Iterable<Home> getAllHomes()
     {
@@ -139,6 +145,7 @@ public class MainController
      * @param home_id
      * @return
      */
+    @CrossOrigin
     @GetMapping(path = RESTNouns.HOME + RESTNouns.HOME_ID)
     public @ResponseBody Optional<Home> getHomeByID(@PathVariable Integer home_id)
     {
@@ -151,6 +158,7 @@ public class MainController
      * @param id
      * @return Home
      */
+    @CrossOrigin
     @GetMapping(path = RESTNouns.USER + RESTNouns.USER_ID + RESTNouns.HOME)
     public @ResponseBody Iterable<Home> getAllHomesByUser(@PathVariable Integer id)
     {
@@ -174,6 +182,7 @@ public class MainController
      * @param location
      * @return String
      */
+    @CrossOrigin
     @PostMapping(path = RESTNouns.USER + RESTNouns.USER_ID + RESTNouns.HOME)
     public @ResponseBody String addNewHome(@PathVariable Integer id,
                                            @RequestParam LocalDate dateBuilt,
@@ -206,6 +215,7 @@ public class MainController
      * @param home_id
      * @return
      */
+    @CrossOrigin
     @DeleteMapping(path = RESTNouns.HOME + RESTNouns.HOME_ID)
     public @ResponseBody String deleteHomeByID(@PathVariable Integer home_id)
     {
@@ -230,6 +240,7 @@ public class MainController
      * @param location
      * @return String
      */
+    @CrossOrigin
     @PutMapping(path = RESTNouns.HOME + RESTNouns.HOME_ID)
     public @ResponseBody String updateHome(@PathVariable Integer home_id,
                                            @RequestParam LocalDate dateBuilt,
@@ -262,6 +273,7 @@ public class MainController
      * Get All Vehicles from Database
      * @return Iterable<Vehicle>
      */
+    @CrossOrigin
     @GetMapping(path = RESTNouns.AUTO)
     public @ResponseBody Iterable<Vehicle> getAllAuto()
     {
@@ -273,6 +285,7 @@ public class MainController
      * @param auto_id
      * @return Vehicle
      */
+    @CrossOrigin
     @GetMapping(path = RESTNouns.AUTO + RESTNouns.AUTO_ID)
     public @ResponseBody Optional<Vehicle> getAutoWithId(@PathVariable Integer auto_id)
     {
@@ -286,6 +299,7 @@ public class MainController
      * @param year
      * @return String
      */
+    @CrossOrigin
     @PostMapping(path = RESTNouns.USER+RESTNouns.USER_ID+RESTNouns.AUTO)
     public @ResponseBody String addNewAuto(@PathVariable Integer id, @RequestParam String make, @RequestParam String model, @RequestParam Integer year)
     {
@@ -313,6 +327,7 @@ public class MainController
      * @param auto_id
      * @return
      */
+    @CrossOrigin
     @DeleteMapping(path = RESTNouns.AUTO + RESTNouns.AUTO_ID)
     public @ResponseBody String deleteAuto(@PathVariable Integer auto_id)
     {
@@ -333,6 +348,7 @@ public class MainController
      * @param id
      * @return Iterable<Vehicle>
      */
+    @CrossOrigin
     @GetMapping(path = RESTNouns.USER + RESTNouns.USER_ID + RESTNouns.AUTO)
     public @ResponseBody Iterable<Vehicle> getAllAutoByUser(@PathVariable Integer id)
     {
@@ -355,6 +371,7 @@ public class MainController
      * @param year
      * @return String
      */
+    @CrossOrigin
     @PutMapping(path = RESTNouns.AUTO+RESTNouns.AUTO_ID)
     public @ResponseBody String updateVehicle(@PathVariable Integer auto_id, @RequestParam String make, @RequestParam String model, @RequestParam int year)
     {
@@ -379,6 +396,7 @@ public class MainController
      * Get All Drivers from Database
      * @return
      */
+    @CrossOrigin
     @GetMapping(path = RESTNouns.DRIVER)
     public @ResponseBody Iterable<Driver> getAllDrivers()
     {
@@ -390,6 +408,7 @@ public class MainController
      * @param driver_id
      * @return
      */
+    @CrossOrigin
     @GetMapping(path = RESTNouns.DRIVER + RESTNouns.DRIVER_ID)
     public @ResponseBody Optional<Driver> getDriverById(@PathVariable Integer driver_id)
     {
@@ -401,6 +420,7 @@ public class MainController
      * @param id
      * @return
      */
+    @CrossOrigin
     @GetMapping(path = RESTNouns.USER + RESTNouns.USER_ID + RESTNouns.DRIVER)
     public @ResponseBody Optional<Driver> getDriverByUserId(@PathVariable Integer id)
     {
@@ -421,6 +441,7 @@ public class MainController
      * @param numOfAccidents
      * @return String
      */
+    @CrossOrigin
     @PostMapping(path = RESTNouns.USER + RESTNouns.USER_ID + RESTNouns.DRIVER)
     public @ResponseBody String addNewDriver(@PathVariable Integer id,
                                              @RequestParam Integer numOfAccidents)
@@ -453,6 +474,7 @@ public class MainController
      * @param driver_id
      * @return String
      */
+    @CrossOrigin
     @DeleteMapping(path = RESTNouns.DRIVER + RESTNouns.DRIVER_ID)
     public @ResponseBody String deleteDriver(@PathVariable Integer driver_id)
     {
@@ -473,6 +495,7 @@ public class MainController
      * @param numOfAccidents
      * @return String
      */
+    @CrossOrigin
     @PutMapping(path = RESTNouns.DRIVER + RESTNouns.DRIVER_ID)
     public @ResponseBody String updateDriver(@PathVariable Integer driver_id,
                                              @RequestParam Integer numOfAccidents)
@@ -499,6 +522,7 @@ public class MainController
     /**
      *
      */
+    @CrossOrigin
     @GetMapping(path = RESTNouns.USER+RESTNouns.USER_ID+ RESTNouns.QUOTE +RESTNouns.HOME+RESTNouns.HOME_ID)
     public @ResponseBody Optional<HomeQuote> getHomeQuote(@PathVariable Integer id, @PathVariable Integer home_id)
     {
