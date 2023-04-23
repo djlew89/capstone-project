@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {ListGroup} from "react-bootstrap";
 
 //TODO this
 
@@ -16,13 +17,15 @@ export default function ViewUserHomes() {
                 {
                     Array.from(userHomes).map(homeData =>
                         [
-                            <li>Home ID: {homeData.id}</li>,
-                            <li>Date Built: {homeData.dateBuilt}</li>,
-                            <li>Heating Type: {homeData.heatingType}</li>,
-                            <li>Location: {homeData.location}</li>,
-                            <li>Date of Birth: {homeData.value}</li>,
-                            <li>Associated User ID: {homeData.user.id}</li>,
-                            <li>Associated User First Name: {homeData.user.firstName}</li>,
+                            <ListGroup id="data_display">
+                                <ListGroup.Item>Home ID: {homeData.id}</ListGroup.Item>
+                                <ListGroup.Item>Date Built: {homeData.dateBuilt}</ListGroup.Item>
+                                <ListGroup.Item>Heating Type: {homeData.heatingType}</ListGroup.Item>
+                                <ListGroup.Item>Location: {homeData.location}</ListGroup.Item>
+                                <ListGroup.Item>Date of Birth: {homeData.value}</ListGroup.Item>
+                                <ListGroup.Item>Associated User ID: {homeData.user.id}</ListGroup.Item>
+                                <ListGroup.Item>Associated User First Name: {homeData.user.firstName}</ListGroup.Item>
+                            </ListGroup>
                         ])
                 }
             </ul>
