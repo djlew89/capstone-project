@@ -34,20 +34,18 @@ export default function ViewAssociatedHomes() {
                                 <ListGroup.Item>Associated User's Name: {homeData.user.firstName}</ListGroup.Item>
                             </ListGroup>
                         ])
-                },
-                {
-                    <form onSubmit={handleSubmit} id="view_user_form_display">
-                        <label>Enter the User ID of the home you would like to view information on:
-                            <input
-                                type="text"
-                                value={id}
-                                onChange={(e) => setId(e.target.value)}
-                            />
-                        </label>
-                        <input type="submit"/>
-                    </form>
                 }
             </ul>
+            <form onSubmit={handleSubmit} id="view_user_form_display">
+                <label>Enter the User ID of the home you would like to view information on:
+                    <input
+                        type="text"
+                        value={id}
+                        onChange={(e) => setId(e.target.value)}
+                    />
+                </label>
+                <input type="submit"/>
+            </form>
         </>
     );
 }
