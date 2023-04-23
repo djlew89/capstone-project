@@ -1,6 +1,7 @@
 import './App.css';
 import {Route, Routes} from "react-router-dom";
-import ViewUsers from "./pages/Users/User";
+import ViewUsers from "./pages/Users/display/User";
+import EditUser from "./pages/Users/editing/EditUser";
 import ViewDrivers from './pages/Driver';
 import ViewUserHomes from "./pages/Homes/UserHome";
 import NavigationBar from './Navbar';
@@ -18,6 +19,7 @@ function App() {
                 <Route path="/Drivers" element={<ViewDrivers/>}/>
                 <Route path="/Vehicles" element={<ViewVehicles/>}/>
                 <Route path="/Homes" element={<ViewUserHomes/>}/>
+                <Route path="/EditData" element={<EditUser/>}/>
             </Routes>
         </>
     );
