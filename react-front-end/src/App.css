@@ -46,3 +46,15 @@ img {
     text-align: center;
     padding-bottom: 10px;
 }
+
+#uservehicle_data_display {
+    border-style: solid;
+    margin: 0;
+    position: absolute;
+    top: 24%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding-bottom: 10px;
+}
