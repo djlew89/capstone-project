@@ -14,14 +14,14 @@ function NavigationBar() {
 
                     <NavDropdown title="Users" id="basic-nav-dropdown">
                         <NavDropdown.Item href="/Users">View Data</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.2">Edit Data</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.3">Delete Data</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.3">Save User</NavDropdown.Item>
+                        <NavDropdown.Item href="/EditData">Edit Data</NavDropdown.Item>
+                        <NavDropdown.Item href="/DeleteData">Delete Data</NavDropdown.Item>
+                        <NavDropdown.Item href="/SaveData">Save User</NavDropdown.Item>
                         <NavDropdown.Divider/>
-                        <NavDropdown.Item href="#action/3.4">List all homes associated with user</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.4">List all vehicles associated with user</NavDropdown.Item>
+                        <NavDropdown.Item href="/AssociatedHomes">List all homes associated with user</NavDropdown.Item>
+                        <NavDropdown.Item href="/AssociatedVehicle">List all vehicles associated with user</NavDropdown.Item>
                         <NavDropdown.Divider/>
-                        <NavDropdown.Item href="#action/3.4">View driver data associated with user</NavDropdown.Item>
+                        <NavDropdown.Item href="/AssociatedDriver">View driver data associated with user</NavDropdown.Item>
                     </NavDropdown>
 
                     <NavDropdown title="Homes" id="basic-nav-dropdown">
