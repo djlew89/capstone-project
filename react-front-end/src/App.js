@@ -4,9 +4,9 @@ import {Route, Routes} from "react-router-dom";
 import ViewUsers from "./pages/Users/CRUD/ListUserData";
 import EditUser from "./pages/Users/CRUD/EditUser";
 import ViewDrivers from './pages/Driver';
-import ViewUserHomes from "./pages/Homes/ListAllHomes";
+import ViewHomeByHomeID from "./pages/Homes/ListHomeByHomeID";
 import NavigationBar from './Navbar';
-import ViewVehicles from "./pages/Vehicles/ListAllVehicles";
+import ViewVehiclesByID from "./pages/Vehicles/ListVehicleByID";
 import Homepage from "./Slideshow";
 import DeleteUser from "./pages/Users/CRUD/DeleteUser";
 import SaveData from "./pages/Users/CRUD/SaveData";
@@ -28,8 +28,8 @@ function App() {
                 <Route path="/" element={<Homepage/>}/>
                 <Route path="/Users" element={<ViewUsers/>}/>
                 <Route path="/Drivers" element={<ViewDrivers/>}/>
-                <Route path="/Vehicles" element={<ViewVehicles/>}/>
-                <Route path="/Homes" element={<ViewUserHomes/>}/>
+                <Route path="/Vehicles" element={<ViewVehiclesByID/>}/>
+                <Route path="/Homes" element={<ViewHomeByHomeID/>}/>
                 <Route path="/EditUserData" element={<EditUser/>}/>
                 <Route path="/DeleteUserData" element={<DeleteUser/>}/>
                 <Route path="/SaveUserData" element={<SaveData/>}/>
