@@ -129,9 +129,7 @@ public class MainController
             homes.forEach(home ->
             {
                 Optional<HomePolicy> homePolicy = homePolicyRepository.getByHomeId(home.getId());
-                if(homePolicy.isPresent()){
-                    homePolicyRepository.delete(homePolicy.get());
-                }
+                homePolicy.ifPresent(policy -> homePolicyRepository.delete(policy));
             });
             homeRepository.deleteAll(homes);
 
@@ -140,17 +138,12 @@ public class MainController
             autos.forEach(auto ->
             {
                 Optional<AutoPolicy> autoPolicy = autoPolicyRepository.getByVehicleId(auto.getId());
-                if(autoPolicy.isPresent()){
-                    autoPolicyRepository.delete(autoPolicy.get());
-                }
+                autoPolicy.ifPresent(policy -> autoPolicyRepository.delete(policy));
             });
             autoRepository.deleteAll(autos);
 
             Optional<Driver> driver = driverRepository.findByUserId(id);
-            if (driver.isPresent())
-            {
-                driverRepository.delete(driver.get());
-            }
+            driver.ifPresent(value -> driverRepository.delete(value));
 
             userRepository.delete(user.get());
             return "Deleted";
@@ -183,9 +176,11 @@ public class MainController
      */
     @CrossOrigin
     @GetMapping(path = RESTNouns.HOME + RESTNouns.HOME_ID)
-    public @ResponseBody Optional<Home> getHomeByID(@PathVariable Integer home_id)
+    public @ResponseBody List<Optional<Home>> getHomeByID(@PathVariable Integer home_id)
     {
-        return homeRepository.findById(home_id);
+        List<Optional<Home>> home = new ArrayList<>(1);
+        home.add(homeRepository.findById(home_id));
+        return home;
     }
 
     /**
@@ -613,7 +608,7 @@ public class MainController
         {
             Optional<Vehicle> auto = autoRepository.findById(auto_id);
             Optional<Driver> driver = driverRepository.findByUserId(id);
-            if (auto.isPresent())
+            if (auto.isPresent() && driver.isPresent())
             {
                 autoQuote = Optional.of(QuoteBuilder.getNewAutoQuote(auto.get(), driver.get()));
             }
@@ -636,7 +631,7 @@ public class MainController
                                                  @PathVariable Integer home_id,
                                                  @RequestParam LocalDate startDate)
     {
-        Optional<HomePolicy> homePolicy = Optional.empty();
+        Optional<HomePolicy> homePolicy;
 
         Optional<User> user = userRepository.findById(id);
         if (user.isPresent())
@@ -674,7 +669,7 @@ public class MainController
                                                  @PathVariable Integer auto_id,
                                                  @RequestParam LocalDate startDate)
     {
-        Optional<AutoPolicy> autoPolicy = Optional.empty();
+        Optional<AutoPolicy> autoPolicy;
 
         Optional<User> user = userRepository.findById(id);
         if (user.isPresent())

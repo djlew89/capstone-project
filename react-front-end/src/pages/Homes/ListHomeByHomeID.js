@@ -1,8 +1,6 @@
 import React, {useState} from "react";
 import {ListGroup} from "react-bootstrap";
 
-// TODO update this to be a select user ID instead of displaying everything in db. Then update file name
-
 /**
  * The page responsible for viewing home information
  *
@@ -11,16 +9,17 @@ import {ListGroup} from "react-bootstrap";
  */
 export default function ViewHomeByHomeID() {
     let [home, setHome] = useState([]);
-    const [id, setId] = useState("");
+    const [homeId, setHomeId] = useState("");
 
     const handleSubmit = (event) => {
         event.preventDefault();
+
         let requestOptions = {
             method: 'GET',
             redirect: 'follow'
         };
 
-        fetch(`http://localhost:8080/v1/users/${id}/homes`, requestOptions)
+        fetch(`http://localhost:8080/v1/homes/${homeId}`, requestOptions)
             .then(response => response.json())
             .then(setHome)
             .catch(error => console.log('error', error));
@@ -49,8 +48,8 @@ export default function ViewHomeByHomeID() {
                 <label>Enter the House ID of the home you would like to view the data of:
                     <input
                         type="text"
-                        value={id}
-                        onChange={(e) => setId(e.target.value)}
+                        value={homeId}
+                        onChange={(e) => setHomeId(e.target.value)}
                     />
                 </label>
                 <input type="submit"/>
