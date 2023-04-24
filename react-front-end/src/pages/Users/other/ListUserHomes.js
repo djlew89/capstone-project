@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {ListGroup} from 'react-bootstrap';
 
 /**
- * The page responsible for viewing a customers homes
+ * The page responsible for viewing a customer's homes
  * @author Mason Seward
  * @returns {JSX.Element}
  */
