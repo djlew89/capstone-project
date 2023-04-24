@@ -18,7 +18,8 @@ import java.util.Optional;
 
 @Controller //This means that this class is a Controller
 @RequestMapping(path = RESTNouns.VERSION_1) //This means URL's start with /v1 (after Application path)
-public class MainController {
+public class MainController
+{
 
     //Wire the ORM
     @Autowired
@@ -41,14 +42,16 @@ public class MainController {
     //USER - GET / READ All
     @CrossOrigin
     @GetMapping(path = RESTNouns.USER)
-    public @ResponseBody Iterable<User> getAllUsers() {
+    public @ResponseBody Iterable<User> getAllUsers()
+    {
         return userRepository.findAll();
     }
 
     //USER - GET / READ ONE by ID
     @CrossOrigin
     @GetMapping(path = RESTNouns.USER + RESTNouns.USER_ID)
-    public @ResponseBody Optional<User> getUserWithId(@PathVariable Integer id) {
+    public @ResponseBody Optional<User> getUserWithId(@PathVariable Integer id)
+    {
         return userRepository.findById(id);
     }
 
@@ -58,10 +61,12 @@ public class MainController {
     public @ResponseBody String addNewUser(@RequestParam String email,
                                            @RequestParam String password, @RequestParam String address,
                                            @RequestParam LocalDate dob, @RequestParam String fname,
-                                           @RequestParam String lname) {
+                                           @RequestParam String lname)
+    {
         Optional<User> userCheck = userRepository.getAllByEmail(email);
 
-        if (userCheck.isPresent()) {
+        if (userCheck.isPresent())
+        {
             return "User already registered";
         }
 
@@ -86,9 +91,11 @@ public class MainController {
                                            @RequestParam String email,
                                            @RequestParam String password, @RequestParam String address,
                                            @RequestParam LocalDate dob, @RequestParam String fname,
-                                           @RequestParam String lname) {
+                                           @RequestParam String lname)
+    {
         Optional<User> user = userRepository.findById(id);
-        if (user.isPresent()) {
+        if (user.isPresent())
+        {
             user.get()
                     .setEmail(email);
             user.get()
@@ -103,7 +110,9 @@ public class MainController {
                     .setDob(dob);
             userRepository.save(user.get());
             return "Updated!";
-        } else {
+        }
+        else
+        {
             return "Not Found";
         }
     }
@@ -111,16 +120,16 @@ public class MainController {
     //USER -DELETE / DELETE ONE
     @CrossOrigin
     @DeleteMapping(path = RESTNouns.USER + RESTNouns.USER_ID)
-    public @ResponseBody String deleteUser(@PathVariable Integer id) {
+    public @ResponseBody String deleteUser(@PathVariable Integer id)
+    {
         Optional<User> user = userRepository.findById(id);
-        if (user.isPresent()) {
+        if (user.isPresent())
+        {
             Iterable<Home> homes = homeRepository.getAllByUserId(id);
             homes.forEach(home ->
             {
                 Optional<HomePolicy> homePolicy = homePolicyRepository.getByHomeId(home.getId());
-                if (homePolicy.isPresent()) {
-                    homePolicyRepository.delete(homePolicy.get());
-                }
+                homePolicy.ifPresent(policy -> homePolicyRepository.delete(policy));
             });
             homeRepository.deleteAll(homes);
 
@@ -129,20 +138,18 @@ public class MainController {
             autos.forEach(auto ->
             {
                 Optional<AutoPolicy> autoPolicy = autoPolicyRepository.getByVehicleId(auto.getId());
-                if (autoPolicy.isPresent()) {
-                    autoPolicyRepository.delete(autoPolicy.get());
-                }
+                autoPolicy.ifPresent(policy -> autoPolicyRepository.delete(policy));
             });
             autoRepository.deleteAll(autos);
 
             Optional<Driver> driver = driverRepository.findByUserId(id);
-            if (driver.isPresent()) {
-                driverRepository.delete(driver.get());
-            }
+            driver.ifPresent(value -> driverRepository.delete(value));
 
             userRepository.delete(user.get());
             return "Deleted";
-        } else {
+        }
+        else
+        {
             return "Not Found";
         }
     }
@@ -156,7 +163,8 @@ public class MainController {
      */
     @CrossOrigin
     @GetMapping(path = RESTNouns.HOME)
-    public @ResponseBody Iterable<Home> getAllHomes() {
+    public @ResponseBody Iterable<Home> getAllHomes()
+    {
         return homeRepository.findAll();
     }
 
@@ -168,8 +176,11 @@ public class MainController {
      */
     @CrossOrigin
     @GetMapping(path = RESTNouns.HOME + RESTNouns.HOME_ID)
-    public @ResponseBody Optional<Home> getHomeByID(@PathVariable Integer home_id) {
-        return homeRepository.findById(home_id);
+    public @ResponseBody List<Optional<Home>> getHomeByID(@PathVariable Integer home_id)
+    {
+        List<Optional<Home>> home = new ArrayList<>(1);
+        home.add(homeRepository.findById(home_id));
+        return home;
     }
 
     /**
@@ -180,11 +191,13 @@ public class MainController {
      */
     @CrossOrigin
     @GetMapping(path = RESTNouns.USER + RESTNouns.USER_ID + RESTNouns.HOME)
-    public @ResponseBody Iterable<Home> getAllHomesByUser(@PathVariable Integer id) {
+    public @ResponseBody Iterable<Home> getAllHomesByUser(@PathVariable Integer id)
+    {
         Optional<User> user = userRepository.findById(id);
         Iterable<Home> homes = new LinkedList<>();
 
-        if (user.isPresent()) {
+        if (user.isPresent())
+        {
             homes = homeRepository.getAllByUserId(id);
         }
 
@@ -207,7 +220,8 @@ public class MainController {
                                            @RequestParam LocalDate dateBuilt,
                                            @RequestParam Integer value,
                                            @RequestParam Home.HeatingType heatingType,
-                                           @RequestParam Home.Location location) {
+                                           @RequestParam Home.Location location)
+    {
         Home home = new Home();
         home.setDateBuilt(dateBuilt);
         home.setValue(value);
@@ -216,11 +230,14 @@ public class MainController {
 
         //Scope the customer
         Optional<User> user = userRepository.findById(id);
-        if (user.isPresent()) {
+        if (user.isPresent())
+        {
             home.setUser(user.get());   //Link it to the user
             homeRepository.save(home);
             return "Saved home to database"; //TODO Send a better message
-        } else {
+        }
+        else
+        {
             return "Failed to find user";
         }
     }
@@ -233,12 +250,16 @@ public class MainController {
      */
     @CrossOrigin
     @DeleteMapping(path = RESTNouns.HOME + RESTNouns.HOME_ID)
-    public @ResponseBody String deleteHomeByID(@PathVariable Integer home_id) {
+    public @ResponseBody String deleteHomeByID(@PathVariable Integer home_id)
+    {
         Optional<Home> home = homeRepository.findById(home_id);
-        if (home.isPresent()) {
+        if (home.isPresent())
+        {
             homeRepository.delete(home.get());
             return "Deleted";
-        } else {
+        }
+        else
+        {
             return "Not Found";
         }
     }
@@ -259,9 +280,11 @@ public class MainController {
                                            @RequestParam LocalDate dateBuilt,
                                            @RequestParam double value,
                                            @RequestParam Home.HeatingType heatingType,
-                                           @RequestParam Home.Location location) {
+                                           @RequestParam Home.Location location)
+    {
         Optional<Home> home = homeRepository.findById(home_id);
-        if (home.isPresent()) {
+        if (home.isPresent())
+        {
             home.get()
                     .setDateBuilt(dateBuilt);
             home.get()
@@ -272,7 +295,9 @@ public class MainController {
                     .setLocation(location);
             homeRepository.save(home.get());
             return "Updated!";
-        } else {
+        }
+        else
+        {
             return "Not Found.";
         }
     }
@@ -285,7 +310,8 @@ public class MainController {
      */
     @CrossOrigin
     @GetMapping(path = RESTNouns.AUTO)
-    public @ResponseBody Iterable<Vehicle> getAllAuto() {
+    public @ResponseBody Iterable<Vehicle> getAllAuto()
+    {
         return autoRepository.findAll();
     }
 
@@ -297,7 +323,8 @@ public class MainController {
      */
     @CrossOrigin
     @GetMapping(path = RESTNouns.AUTO + RESTNouns.AUTO_ID)
-    public @ResponseBody Iterable<Optional<Vehicle>> getAutoWithId(@PathVariable Integer auto_id) {
+    public @ResponseBody Iterable<Optional<Vehicle>> getAutoWithId(@PathVariable Integer auto_id)
+    {
         List<Optional<Vehicle>> autos = new ArrayList<>(1);
         autos.add(autoRepository.findById(auto_id));
         return autos;
@@ -313,7 +340,8 @@ public class MainController {
      */
     @CrossOrigin
     @PostMapping(path = RESTNouns.USER + RESTNouns.USER_ID + RESTNouns.AUTO)
-    public @ResponseBody String addNewAuto(@PathVariable Integer id, @RequestParam String make, @RequestParam String model, @RequestParam Integer year) {
+    public @ResponseBody String addNewAuto(@PathVariable Integer id, @RequestParam String make, @RequestParam String model, @RequestParam Integer year)
+    {
         Vehicle auto = new Vehicle();
         auto.setMake(make);
         auto.setModel(model);
@@ -321,11 +349,14 @@ public class MainController {
 
         //Scope the customer
         Optional<User> user = userRepository.findById(id);
-        if (user.isPresent()) {
+        if (user.isPresent())
+        {
             auto.setUser(user.get());   //Link it to the user
             autoRepository.save(auto);
             return "Saved vehicle to database";
-        } else {
+        }
+        else
+        {
             return "Failed to find user";
         }
     }
@@ -338,12 +369,16 @@ public class MainController {
      */
     @CrossOrigin
     @DeleteMapping(path = RESTNouns.AUTO + RESTNouns.AUTO_ID)
-    public @ResponseBody String deleteAuto(@PathVariable Integer auto_id) {
+    public @ResponseBody String deleteAuto(@PathVariable Integer auto_id)
+    {
         Optional<Vehicle> auto = autoRepository.findById(auto_id);
-        if (auto.isPresent()) {
+        if (auto.isPresent())
+        {
             autoRepository.delete(auto.get());
             return "Deleted";
-        } else {
+        }
+        else
+        {
             return "Not Found";
         }
     }
@@ -356,11 +391,13 @@ public class MainController {
      */
     @CrossOrigin
     @GetMapping(path = RESTNouns.USER + RESTNouns.USER_ID + RESTNouns.AUTO)
-    public @ResponseBody Iterable<Vehicle> getAllAutoByUser(@PathVariable Integer id) {
+    public @ResponseBody Iterable<Vehicle> getAllAutoByUser(@PathVariable Integer id)
+    {
         Optional<User> user = userRepository.findById(id);
         Iterable<Vehicle> cars = new LinkedList<>();
 
-        if (user.isPresent()) {
+        if (user.isPresent())
+        {
             cars = autoRepository.getAllByUserId(id);
         }
 
@@ -378,9 +415,11 @@ public class MainController {
      */
     @CrossOrigin
     @PutMapping(path = RESTNouns.AUTO + RESTNouns.AUTO_ID)
-    public @ResponseBody String updateVehicle(@PathVariable Integer auto_id, @RequestParam String make, @RequestParam String model, @RequestParam int year) {
+    public @ResponseBody String updateVehicle(@PathVariable Integer auto_id, @RequestParam String make, @RequestParam String model, @RequestParam int year)
+    {
         Optional<Vehicle> auto = autoRepository.findById(auto_id);
-        if (auto.isPresent()) {
+        if (auto.isPresent())
+        {
             auto.get()
                     .setMake(make);
             auto.get()
@@ -389,7 +428,9 @@ public class MainController {
                     .setYear(year);
             autoRepository.save(auto.get());
             return "Updated!";
-        } else {
+        }
+        else
+        {
             return "Not Found.";
         }
     }
@@ -403,7 +444,8 @@ public class MainController {
      */
     @CrossOrigin
     @GetMapping(path = RESTNouns.DRIVER)
-    public @ResponseBody Iterable<Driver> getAllDrivers() {
+    public @ResponseBody Iterable<Driver> getAllDrivers()
+    {
         return driverRepository.findAll();
     }
 
@@ -415,7 +457,8 @@ public class MainController {
      */
     @CrossOrigin
     @GetMapping(path = RESTNouns.DRIVER + RESTNouns.DRIVER_ID)
-    public @ResponseBody Optional<Driver> getDriverById(@PathVariable Integer driver_id) {
+    public @ResponseBody Optional<Driver> getDriverById(@PathVariable Integer driver_id)
+    {
         return driverRepository.findById(driver_id);
     }
 
@@ -427,11 +470,13 @@ public class MainController {
      */
     @CrossOrigin
     @GetMapping(path = RESTNouns.USER + RESTNouns.USER_ID + RESTNouns.DRIVER)
-    public @ResponseBody Optional<Driver> getDriverByUserId(@PathVariable Integer id) {
+    public @ResponseBody Optional<Driver> getDriverByUserId(@PathVariable Integer id)
+    {
         Optional<User> user = userRepository.findById(id);
         Optional<Driver> driver = Optional.empty();
 
-        if (user.isPresent()) {
+        if (user.isPresent())
+        {
             driver = driverRepository.findByUserId(id);
 
         }
@@ -448,9 +493,11 @@ public class MainController {
     @CrossOrigin
     @PostMapping(path = RESTNouns.USER + RESTNouns.USER_ID + RESTNouns.DRIVER)
     public @ResponseBody String addNewDriver(@PathVariable Integer id,
-                                             @RequestParam Integer numOfAccidents) {
+                                             @RequestParam Integer numOfAccidents)
+    {
         Optional<Driver> driverCheck = driverRepository.findByUserId(id);
-        if (driverCheck.isPresent()) {
+        if (driverCheck.isPresent())
+        {
             return "Driver already registered for user";
         }
 
@@ -459,12 +506,15 @@ public class MainController {
 
         //Scope the customer
         Optional<User> user = userRepository.findById(id);
-        if (user.isPresent()) {
+        if (user.isPresent())
+        {
             driver.setUser(user.get());   //Link it to the user
             driverRepository.save(driver);
 
             return "Saved driver to database";
-        } else {
+        }
+        else
+        {
             return "Failed to find user";
         }
     }
@@ -477,12 +527,16 @@ public class MainController {
      */
     @CrossOrigin
     @DeleteMapping(path = RESTNouns.DRIVER + RESTNouns.DRIVER_ID)
-    public @ResponseBody String deleteDriver(@PathVariable Integer driver_id) {
+    public @ResponseBody String deleteDriver(@PathVariable Integer driver_id)
+    {
         Optional<Driver> driver = driverRepository.findById(driver_id);
-        if (driver.isPresent()) {
+        if (driver.isPresent())
+        {
             driverRepository.delete(driver.get());
             return "Deleted";
-        } else {
+        }
+        else
+        {
             return "Not Found";
         }
     }
@@ -496,14 +550,18 @@ public class MainController {
     @CrossOrigin
     @PutMapping(path = RESTNouns.DRIVER + RESTNouns.DRIVER_ID)
     public @ResponseBody String updateDriver(@PathVariable Integer driver_id,
-                                             @RequestParam Integer numOfAccidents) {
+                                             @RequestParam Integer numOfAccidents)
+    {
         Optional<Driver> driver = driverRepository.findById(driver_id);
-        if (driver.isPresent()) {
+        if (driver.isPresent())
+        {
             driver.get()
                     .setNumberAccidents(numOfAccidents);
             driverRepository.save(driver.get());
             return "Updated!";
-        } else {
+        }
+        else
+        {
             return "Not Found.";
         }
     }
@@ -519,18 +577,19 @@ public class MainController {
      */
     @CrossOrigin
     @GetMapping(path = RESTNouns.USER + RESTNouns.USER_ID + RESTNouns.QUOTE + RESTNouns.HOME + RESTNouns.HOME_ID)
-    public @ResponseBody Iterable<Optional<HomeQuote>> getHomeQuote(@PathVariable Integer id, @PathVariable Integer home_id) {
-        List<Optional<HomeQuote>> quote = new ArrayList<>(1);
-        Optional<HomeQuote> homeQuote;
+    public @ResponseBody Optional<HomeQuote> getHomeQuote(@PathVariable Integer id, @PathVariable Integer home_id)
+    {
+        Optional<HomeQuote> homeQuote = Optional.empty();
         Optional<User> user = userRepository.findById(id);
-        if (user.isPresent()) {
+        if (user.isPresent())
+        {
             Optional<Home> home = homeRepository.findById(home_id);
-            if (home.isPresent()) {
+            if (home.isPresent())
+            {
                 homeQuote = Optional.of(QuoteBuilder.getNewHomeQuote(home.get()));
-                quote.add(homeQuote);
             }
         }
-        return quote;
+        return homeQuote;
     }
 
     /**
@@ -542,19 +601,20 @@ public class MainController {
      */
     @CrossOrigin
     @GetMapping(path = RESTNouns.USER + RESTNouns.USER_ID + RESTNouns.QUOTE + RESTNouns.AUTO + RESTNouns.AUTO_ID)
-    public @ResponseBody Iterable<Optional<AutoQuote>> getAutoQuote(@PathVariable Integer id, @PathVariable Integer auto_id) {
-        List<Optional<AutoQuote>> quote = new ArrayList<>(1);
-        Optional<AutoQuote> autoQuote;
+    public @ResponseBody Optional<AutoQuote> getAutoQuote(@PathVariable Integer id, @PathVariable Integer auto_id)
+    {
+        Optional<AutoQuote> autoQuote = Optional.empty();
         Optional<User> user = userRepository.findById(id);
-        if (user.isPresent()) {
+        if (user.isPresent())
+        {
             Optional<Vehicle> auto = autoRepository.findById(auto_id);
             Optional<Driver> driver = driverRepository.findByUserId(id);
-            if (auto.isPresent()) {
+            if (auto.isPresent() && driver.isPresent())
+            {
                 autoQuote = Optional.of(QuoteBuilder.getNewAutoQuote(auto.get(), driver.get()));
-                quote.add(autoQuote);
             }
         }
-        return quote;
+        return autoQuote;
     }
 
     // HomePolicy REST
@@ -571,20 +631,27 @@ public class MainController {
     @PostMapping(path = RESTNouns.USER + RESTNouns.USER_ID + RESTNouns.POLICY + RESTNouns.HOME + RESTNouns.HOME_ID)
     public @ResponseBody String addNewHomePolicy(@PathVariable Integer id,
                                                  @PathVariable Integer home_id,
-                                                 @RequestParam LocalDate startDate) {
-        Optional<HomePolicy> homePolicy = Optional.empty();
+                                                 @RequestParam LocalDate startDate)
+    {
+        Optional<HomePolicy> homePolicy;
 
         Optional<User> user = userRepository.findById(id);
-        if (user.isPresent()) {
+        if (user.isPresent())
+        {
             Optional<Home> home = homeRepository.findById(home_id);
-            if (home.isPresent()) {
+            if (home.isPresent())
+            {
                 homePolicy = Optional.of(PolicyBuilder.getNewHomePolicy(startDate, startDate.plusDays(365), home.get(), user.get()));
                 homePolicyRepository.save(homePolicy.get());
                 return "Home Policy Created!";
-            } else {
+            }
+            else
+            {
                 return "Home not registered";
             }
-        } else {
+        }
+        else
+        {
             return "Please Register User";
         }
 
@@ -604,26 +671,36 @@ public class MainController {
     @PostMapping(path = RESTNouns.USER + RESTNouns.USER_ID + RESTNouns.POLICY + RESTNouns.AUTO + RESTNouns.AUTO_ID)
     public @ResponseBody String addNewAutoPolicy(@PathVariable Integer id,
                                                  @PathVariable Integer auto_id,
-                                                 @RequestParam LocalDate startDate) {
-        Optional<AutoPolicy> autoPolicy = Optional.empty();
+                                                 @RequestParam LocalDate startDate)
+    {
+        Optional<AutoPolicy> autoPolicy;
 
         Optional<User> user = userRepository.findById(id);
-        if (user.isPresent()) {
+        if (user.isPresent())
+        {
 
             Optional<Vehicle> auto = autoRepository.findById(auto_id);
             Optional<Driver> driver = driverRepository.findByUserId(id);
-            if (driver.isPresent()) {
-                if (auto.isPresent()) {
+            if (driver.isPresent())
+            {
+                if (auto.isPresent())
+                {
                     autoPolicy = Optional.of(PolicyBuilder.getNewAutoPolicy(startDate, startDate.plusDays(365), auto.get(), driver.get(), user.get()));
                     autoPolicyRepository.save(autoPolicy.get());
                     return "Auto Policy Created!";
-                } else {
+                }
+                else
+                {
                     return "Vehicle not Found";
                 }
-            } else {
+            }
+            else
+            {
                 return "Please register as a Driver";
             }
-        } else {
+        }
+        else
+        {
             return "Please register User.";
         }
 
