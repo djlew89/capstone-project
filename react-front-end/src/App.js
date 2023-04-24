@@ -14,6 +14,7 @@ import SaveVehicle from "./pages/Vehicles/SaveVehicle";
 import ViewAssociatedHomes from "./pages/Users/other/ListUserHomes";
 import ViewAssociatedVehicles from "./pages/Users/other/ListUserVehicles";
 import ViewAssociatedDriverData from "./pages/Users/other/ListUserDriverData";
+import GetHomeQuoteById from "./pages/Homes/GetQuote";
 
 
 /**
@@ -31,6 +32,7 @@ function App() {
                 <Route path="/Drivers" element={<ViewDrivers/>}/>
                 <Route path="/Vehicles" element={<ViewVehiclesByID/>}/>
                 <Route path="/Homes" element={<ViewHomeByHomeID/>}/>
+                <Route path="/GetQuote" element={<GetHomeQuoteById/>}/>
                 <Route path="/EditUserData" element={<EditUser/>}/>
                 <Route path="/DeleteUserData" element={<DeleteUser/>}/>
                 <Route path="/SaveUserData" element={<SaveData/>}/>
