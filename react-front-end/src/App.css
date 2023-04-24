@@ -58,3 +58,15 @@ img {
     text-align: center;
     padding-bottom: 10px;
 }
+
+#edit_form_display {
+    border-style: solid;
+    margin: 0;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding-bottom: 10px;
+}

@@ -28,17 +28,17 @@ function NavigationBar() {
 
                     <NavDropdown title="Homes" id="basic-nav-dropdown">
                         <NavDropdown.Item href="/Homes">View Home Data</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.2">Edit Home</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.3">Delete Home</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.3">Save Home</NavDropdown.Item>
+                        <NavDropdown.Item href="/editHomeData">Edit Home</NavDropdown.Item>
+                        <NavDropdown.Item href="/deleteHomeData">Delete Home</NavDropdown.Item>
+                        <NavDropdown.Item href="/saveHomeData">Save Home</NavDropdown.Item>
                         <NavDropdown.Divider/>
                         <NavDropdown.Item href="/GetQuote">Get Home Quote</NavDropdown.Item>
                     </NavDropdown>
 
                     <NavDropdown title="Vehicle" id="basic-nav-dropdown">
                         <NavDropdown.Item href="/Vehicles">View Vehicle Data</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.2">Edit Vehicle</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.3">Delete Vehicle</NavDropdown.Item>
+                        <NavDropdown.Item href="/editVehicleData">Edit Vehicle</NavDropdown.Item>
+                        <NavDropdown.Item href="/deleteVehicleData">Delete Vehicle</NavDropdown.Item>
                         <NavDropdown.Item href="/SaveVehicleData">Save Vehicle</NavDropdown.Item>
                         <NavDropdown.Divider/>
                         <NavDropdown.Item href="/getVehicleQuote">Get Vehicle Quote</NavDropdown.Item>
