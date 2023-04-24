@@ -19,6 +19,7 @@ export default function DeleteUser() {
             .then(response => response.json())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
+        window.location.href = "/";
     }
 
     return (
