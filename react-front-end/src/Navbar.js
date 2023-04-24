@@ -32,7 +32,7 @@ function NavigationBar() {
                         <NavDropdown.Item href="#action/3.3">Delete Home</NavDropdown.Item>
                         <NavDropdown.Item href="#action/3.3">Save Home</NavDropdown.Item>
                         <NavDropdown.Divider/>
-                        <NavDropdown.Item href="#action/3.3">Get Home Quote</NavDropdown.Item>
+                        <NavDropdown.Item href="/GetQuote">Get Home Quote</NavDropdown.Item>
                     </NavDropdown>
 
                     <NavDropdown title="Vehicle" id="basic-nav-dropdown">
