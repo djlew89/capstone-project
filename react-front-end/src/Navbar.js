@@ -40,6 +40,8 @@ function NavigationBar() {
                         <NavDropdown.Item href="#action/3.2">Edit Vehicle</NavDropdown.Item>
                         <NavDropdown.Item href="#action/3.3">Delete Vehicle</NavDropdown.Item>
                         <NavDropdown.Item href="/SaveVehicleData">Save Vehicle</NavDropdown.Item>
+                        <NavDropdown.Divider/>
+                        <NavDropdown.Item href="/getVehicleQuote">Get Vehicle Quote</NavDropdown.Item>
                     </NavDropdown>
 
                     <NavDropdown title="Driver" id="basic-nav-dropdown">

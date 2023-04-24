@@ -11,10 +11,18 @@ import {ListGroup} from 'react-bootstrap';
 export default function ViewDrivers() {
     let [driver, setDriver] = useState([]);
 
-    fetch("http://localhost:8080/v1/drivers")
+    // this is used for setting the id from the form input to track in the fetch statement
+    let [id, setId] = useState("");
+
+    let requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+    };
+
+    fetch(`http://localhost:8080/v1/drivers/${id}`, requestOptions)
         .then(response => response.json())
         .then(setDriver)
-        .catch(e => console.log(e.message))
+        .catch(error => console.log('error', error));
 
     return (
         <>

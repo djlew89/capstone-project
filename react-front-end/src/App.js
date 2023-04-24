@@ -15,6 +15,7 @@ import ViewAssociatedHomes from "./pages/Users/other/ListUserHomes";
 import ViewAssociatedVehicles from "./pages/Users/other/ListUserVehicles";
 import ViewAssociatedDriverData from "./pages/Users/other/ListUserDriverData";
 
+
 /**
  * The main application responsible for linking together the pages and logic of the front end.
  * @author Mason Seward
@@ -37,6 +38,7 @@ function App() {
                 <Route path="/AssociatedHomes" element={<ViewAssociatedHomes/>}/>
                 <Route path="/AssociatedVehicles" element={<ViewAssociatedVehicles/>}/>
                 <Route path="/AssociatedDriver" element={<ViewAssociatedDriverData/>}/>
+                <Route path="/SaveDriver" element={<ViewAssociatedDriverData/>}/>
             </Routes>
         </>
     );
