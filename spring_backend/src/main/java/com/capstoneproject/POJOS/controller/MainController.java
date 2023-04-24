@@ -11,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 
 @Controller //This means that this class is a Controller
@@ -326,9 +328,11 @@ public class MainController
      */
     @CrossOrigin
     @GetMapping(path = RESTNouns.AUTO + RESTNouns.AUTO_ID)
-    public @ResponseBody Optional<Vehicle> getAutoWithId(@PathVariable Integer auto_id)
+    public @ResponseBody Iterable<Optional<Vehicle>> getAutoWithId(@PathVariable Integer auto_id)
     {
-        return autoRepository.findById(auto_id);
+        List<Optional<Vehicle>> autos= new ArrayList<>(1);
+        autos.add(autoRepository.findById(auto_id));
+        return autos;
     }
 
     /**
