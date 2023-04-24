@@ -41,11 +41,11 @@ export default function Homepage() {
                 <Carousel.Item>
                     <img
                         className="d-block w-100"
-                        src="/DL.jpg"
+                        src="/DL.png"
                         alt="Fourth slide"
                         style={{margin: "auto"}}
                     />
-                    <Carousel.Caption style={{color: 'red'}}>
+                    <Carousel.Caption style={{color: 'white'}}>
                         <h3>Daniel Lewis</h3>
                         <p>Frontend Developer.</p>
                     </Carousel.Caption>
@@ -54,7 +54,7 @@ export default function Homepage() {
                 <Carousel.Item>
                     <img
                         className="d-block w-100"
-                        src="/MS.PNG"
+                        src="/MS.png"
                         alt="Fifth slide"
                         style={{margin: "auto"}}
                     />
@@ -67,7 +67,7 @@ export default function Homepage() {
                 <Carousel.Item>
                     <img
                         className="d-block w-100"
-                        src="/logo.png"
+                        src="/DC.png"
                         alt="Sixth slide"
                         style={{margin: "auto"}}
                     />
