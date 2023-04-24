@@ -29,8 +29,9 @@ export default function ViewVehiclesByID() {
 
     return (
         <>
+            <h1 id="data_display">View Vehicle Data by Id</h1>
             <form onSubmit={handleSubmit}>
-                <label>Enter the User ID of the Vehicle you would like to view:
+                <label>Enter the vehicle owner's User Id of the vehicle you would like to view:
                     <input
                         type="text"
                         value={id}

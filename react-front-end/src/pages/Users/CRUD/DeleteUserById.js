@@ -5,8 +5,8 @@ import {useState} from 'react';
  * @author Mason Seward
  * @returns {JSX.Element}
  */
-export default function DeleteUser() {
-    const [id, setId] = useState([]);
+export default function DeleteUserById() {
+    const [id, setId] = useState("");
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -15,9 +15,9 @@ export default function DeleteUser() {
             redirect: 'follow'
         };
 
-        fetch("http://localhost:8080/v1/users/" + id, requestOptions)
+        fetch(`http://localhost:8080/v1/autos/${id}`, requestOptions)
             .then(response => response.json())
-            .then(result => console.log(result))
+            .then(setId)
             .catch(error => console.log('error', error));
         window.location.href = "/";
     }
