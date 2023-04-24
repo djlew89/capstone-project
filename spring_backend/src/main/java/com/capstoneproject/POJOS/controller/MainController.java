@@ -542,17 +542,19 @@ public class MainController {
      */
     @CrossOrigin
     @GetMapping(path = RESTNouns.USER + RESTNouns.USER_ID + RESTNouns.QUOTE + RESTNouns.AUTO + RESTNouns.AUTO_ID)
-    public @ResponseBody Optional<AutoQuote> getAutoQuote(@PathVariable Integer id, @PathVariable Integer auto_id) {
-        Optional<AutoQuote> autoQuote = Optional.empty();
+    public @ResponseBody Iterable<Optional<AutoQuote>> getAutoQuote(@PathVariable Integer id, @PathVariable Integer auto_id) {
+        List<Optional<AutoQuote>> quote = new ArrayList<>(1);
+        Optional<AutoQuote> autoQuote;
         Optional<User> user = userRepository.findById(id);
         if (user.isPresent()) {
             Optional<Vehicle> auto = autoRepository.findById(auto_id);
             Optional<Driver> driver = driverRepository.findByUserId(id);
             if (auto.isPresent()) {
                 autoQuote = Optional.of(QuoteBuilder.getNewAutoQuote(auto.get(), driver.get()));
+                quote.add(autoQuote);
             }
         }
-        return autoQuote;
+        return quote;
     }
 
     // HomePolicy REST
