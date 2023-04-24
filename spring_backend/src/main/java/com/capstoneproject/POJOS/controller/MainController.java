@@ -325,7 +325,7 @@ public class MainController
     @GetMapping(path = RESTNouns.AUTO + RESTNouns.AUTO_ID)
     public @ResponseBody Iterable<Optional<Vehicle>> getAutoWithId(@PathVariable Integer auto_id)
     {
-        List<Optional<Vehicle>> autos= new ArrayList<>(1);
+        List<Optional<Vehicle>> autos = new ArrayList<>(1);
         autos.add(autoRepository.findById(auto_id));
         return autos;
     }
@@ -594,6 +594,7 @@ public class MainController
 
     /**
      * Auto Quote - Does not write to database. Option to access route should only be available to registered vehicle views.
+     *
      * @param id
      * @param auto_id
      * @return AutoQuote
@@ -620,6 +621,7 @@ public class MainController
 
     /**
      * Save a Home Policy to Database
+     *
      * @param id
      * @param home_id
      * @param startDate
@@ -643,7 +645,8 @@ public class MainController
                 homePolicyRepository.save(homePolicy.get());
                 return "Home Policy Created!";
             }
-            else{
+            else
+            {
                 return "Home not registered";
             }
         }
@@ -658,6 +661,7 @@ public class MainController
 
     /**
      * Save an Auto Policy to Database
+     *
      * @param id
      * @param auto_id
      * @param startDate
@@ -677,7 +681,8 @@ public class MainController
 
             Optional<Vehicle> auto = autoRepository.findById(auto_id);
             Optional<Driver> driver = driverRepository.findByUserId(id);
-            if(driver.isPresent()){
+            if (driver.isPresent())
+            {
                 if (auto.isPresent())
                 {
                     autoPolicy = Optional.of(PolicyBuilder.getNewAutoPolicy(startDate, startDate.plusDays(365), auto.get(), driver.get(), user.get()));
@@ -689,7 +694,8 @@ public class MainController
                     return "Vehicle not Found";
                 }
             }
-            else{
+            else
+            {
                 return "Please register as a Driver";
             }
         }
