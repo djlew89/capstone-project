@@ -29,6 +29,7 @@ export default function GetQuoteById() {
 
     return (
         <>
+            <h1>Get Home Quote</h1>
             <form onSubmit={handleSubmit}>
                 <label>Enter the User ID of the Home you would like to get a quote for:
                     <input
@@ -52,8 +53,7 @@ export default function GetQuoteById() {
                     homeQuote.map(homeData =>
                         [
                             <ListGroup id="data_display">
-                                <ListGroup.Item>Associated User's
-                                    Name: {homeData.home.user.lastName}, {homeData.home.user.firstName}</ListGroup.Item>
+                                <ListGroup.Item>Home Quote for: {homeData.home.user.lastName}, {homeData.home.user.firstName}</ListGroup.Item>
                                 <ListGroup.Item>Start Date: {homeData.startDate}</ListGroup.Item>
                                 <ListGroup.Item>End Date: {homeData.endDate}</ListGroup.Item>
                                 <ListGroup.Item>Total Tax: {homeData.tax}</ListGroup.Item>

@@ -579,9 +579,10 @@ public class MainController
      */
     @CrossOrigin
     @GetMapping(path = RESTNouns.USER + RESTNouns.USER_ID + RESTNouns.QUOTE + RESTNouns.HOME + RESTNouns.HOME_ID)
-    public @ResponseBody Optional<HomeQuote> getHomeQuote(@PathVariable Integer id, @PathVariable Integer home_id)
+    public @ResponseBody Iterable<Optional<HomeQuote>> getHomeQuote(@PathVariable Integer id, @PathVariable Integer home_id)
     {
-        Optional<HomeQuote> homeQuote = Optional.empty();
+        List<Optional<HomeQuote>> quote= new ArrayList<>(1);
+        Optional<HomeQuote> homeQuote;
         Optional<User> user = userRepository.findById(id);
         if (user.isPresent())
         {
@@ -589,9 +590,10 @@ public class MainController
             if (home.isPresent())
             {
                 homeQuote = Optional.of(QuoteBuilder.getNewHomeQuote(home.get()));
+                quote.add(homeQuote);
             }
         }
-        return homeQuote;
+        return quote;
     }
 
     /**
@@ -603,20 +605,24 @@ public class MainController
      */
     @CrossOrigin
     @GetMapping(path = RESTNouns.USER + RESTNouns.USER_ID + RESTNouns.QUOTE + RESTNouns.AUTO + RESTNouns.AUTO_ID)
-    public @ResponseBody Optional<AutoQuote> getAutoQuote(@PathVariable Integer id, @PathVariable Integer auto_id)
+    public @ResponseBody List<Optional<AutoQuote>> getAutoQuote(@PathVariable Integer id, @PathVariable Integer auto_id)
     {
-        Optional<AutoQuote> autoQuote = Optional.empty();
+        List<Optional<AutoQuote>> quote = new LinkedList<>();
+        Optional<AutoQuote> autoQuote;
         Optional<User> user = userRepository.findById(id);
         if (user.isPresent())
         {
             Optional<Vehicle> auto = autoRepository.findById(auto_id);
             Optional<Driver> driver = driverRepository.findByUserId(id);
-            if (auto.isPresent() && driver.isPresent())
+            if (auto.isPresent())
             {
-                autoQuote = Optional.of(QuoteBuilder.getNewAutoQuote(auto.get(), driver.get()));
+                if(driver.isPresent()){
+                    autoQuote = Optional.of(QuoteBuilder.getNewAutoQuote(auto.get(), driver.get()));
+                    quote.add(autoQuote);
+                }
             }
         }
-        return autoQuote;
+        return quote;
     }
 
     // HomePolicy REST
