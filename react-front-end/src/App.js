@@ -20,6 +20,9 @@ import EditVehicleById from "./pages/Vehicles/CRUD/EditVehicleById";
 import DeleteDriverById from "./pages/Drivers/DeleteDriverById";
 import SaveDriverById from "./pages/Drivers/SaveDriverById";
 import EditDriverById from "./pages/Drivers/EditDriverById";
+import SaveHomeById from "./pages/Homes/CRUD/SaveHomeById";
+import DeleteHomeByHomeId from "./pages/Homes/CRUD/DeleteHomeByHomeId";
+import EditHomeById from "./pages/Homes/CRUD/EditHomeById";
 
 /**
  * The main application responsible for linking together the pages and logic of the front end.
@@ -44,9 +47,9 @@ function App() {
                 <Route path="/AssociatedHomes" element={<ViewAssociatedHomes/>}/>
                 <Route path="/AssociatedVehicles" element={<ViewAssociatedVehicles/>}/>
                 <Route path="/AssociatedDriver" element={<ViewAssociatedDriverData/>}/>
-                <Route path="/editHomeData" element={<ViewAssociatedDriverData/>}/>
-                <Route path="/deleteHomeData" element={<ViewAssociatedDriverData/>}/>
-                <Route path="/saveHomeData" element={<ViewAssociatedDriverData/>}/>
+                <Route path="/editHomeData" element={<EditHomeById/>}/>
+                <Route path="/deleteHomeData" element={<DeleteHomeByHomeId/>}/>
+                <Route path="/saveHomeData" element={<SaveHomeById/>}/>
                 <Route path="/GetQuote" element={<ViewAssociatedDriverData/>}/>
                 <Route path="/editVehicleData" element={<EditVehicleById/>}/>
                 <Route path="/deleteVehicleData" element={<DeleteVehicleById/>}/>
