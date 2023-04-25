@@ -55,8 +55,7 @@ export default function GetAutoQuoteById() {
                     autoQuote.map(autoData =>
                         [
                             <ListGroup id="data_display">
-                                <ListGroup.Item>Associated User's
-                                    Name: {autoData.driver.user.lastName}, {autoData.driver.user.firstName}</ListGroup.Item>
+                                <ListGroup.Item>Auto Quote for: {autoData.driver.user.lastName}, {autoData.driver.user.firstName}</ListGroup.Item>
                                 <ListGroup.Item>Start Date: {autoData.startDate}</ListGroup.Item>
                                 <ListGroup.Item>End Date: {autoData.endDate}</ListGroup.Item>
                                 <ListGroup.Item>Total Tax: {autoData.tax}</ListGroup.Item>
