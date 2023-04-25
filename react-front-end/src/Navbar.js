@@ -33,6 +33,11 @@ function NavigationBar() {
                         <NavDropdown.Item href="/saveHomeData">Save Home</NavDropdown.Item>
                         <NavDropdown.Divider/>
                         <NavDropdown.Item href="/GetQuote">Get Home Quote</NavDropdown.Item>
+                        <NavDropdown.Divider/>
+                        <NavDropdown.Item href="/ViewHomePolicyData">View Home Policy Data</NavDropdown.Item>
+                        <NavDropdown.Item href="/EditHomePolicyData">Edit Home Policy</NavDropdown.Item>
+                        <NavDropdown.Item href="/deleteHomePolicyData">Delete Home Policy</NavDropdown.Item>
+                        <NavDropdown.Item href="/saveHomePolicyData">Save Home Policy</NavDropdown.Item>
                     </NavDropdown>
 
                     <NavDropdown title="Vehicle" id="basic-nav-dropdown">
@@ -42,6 +47,11 @@ function NavigationBar() {
                         <NavDropdown.Item href="/SaveVehicleData">Save Vehicle</NavDropdown.Item>
                         <NavDropdown.Divider/>
                         <NavDropdown.Item href="/getVehicleQuote">Get Vehicle Quote</NavDropdown.Item>
+                        <NavDropdown.Divider/>
+                        <NavDropdown.Item href="/ViewVehiclePolicyData">View Vehicle Policy Data</NavDropdown.Item>
+                        <NavDropdown.Item href="/EditVehiclePolicyData">Edit Vehicle Policy</NavDropdown.Item>
+                        <NavDropdown.Item href="/deleteVehiclePolicyData">Delete Vehicle Policy</NavDropdown.Item>
+                        <NavDropdown.Item href="/saveVehiclePolicyData">Save Vehicle Policy</NavDropdown.Item>
                     </NavDropdown>
 
                     <NavDropdown title="Driver" id="basic-nav-dropdown">
@@ -49,13 +59,6 @@ function NavigationBar() {
                         <NavDropdown.Item href="/editDriverData">Edit Driver</NavDropdown.Item>
                         <NavDropdown.Item href="/deleteDriverData">Delete Driver</NavDropdown.Item>
                         <NavDropdown.Item href="/saveDriverData">Save Driver</NavDropdown.Item>
-                    </NavDropdown>
-
-                    <NavDropdown title="Policy" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="/ViewPolicyData">View Policy Data</NavDropdown.Item>
-                        <NavDropdown.Item href="/EditPolicyData">Edit Policy</NavDropdown.Item>
-                        <NavDropdown.Item href="/deletePolicyData">Delete Policy</NavDropdown.Item>
-                        <NavDropdown.Item href="/savePolicyData">Save Policy</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
             </Container>
