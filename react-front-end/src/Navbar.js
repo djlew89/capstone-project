@@ -50,8 +50,8 @@ function NavigationBar() {
                         <NavDropdown.Divider/>
                         <NavDropdown.Item href="/ViewVehiclePolicyData">View Vehicle Policy Data</NavDropdown.Item>
                         <NavDropdown.Item href="/EditVehiclePolicyData">Edit Vehicle Policy</NavDropdown.Item>
-                        <NavDropdown.Item href="/deleteVehiclePolicyData">Delete Vehicle Policy</NavDropdown.Item>
-                        <NavDropdown.Item href="/saveVehiclePolicyData">Save Vehicle Policy</NavDropdown.Item>
+                        <NavDropdown.Item href="/DeleteVehiclePolicyData">Delete Vehicle Policy</NavDropdown.Item>
+                        <NavDropdown.Item href="/SaveVehiclePolicyData">Save Vehicle Policy</NavDropdown.Item>
                     </NavDropdown>
 
                     <NavDropdown title="Driver" id="basic-nav-dropdown">
