@@ -22,6 +22,11 @@ public class HomePolicy extends Policy
     @JoinColumn(name = "home_id", referencedColumnName = "ID")
     protected Home home;
     protected BigDecimal premiumBeforeTax;
+
+    public Integer getId() {
+        return id;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;

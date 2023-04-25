@@ -11,6 +11,10 @@ import jakarta.persistence.*;
 @Entity(name = "auto_policy")
 public class AutoPolicy extends Policy
 {
+    public Integer getId() {
+        return id;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
