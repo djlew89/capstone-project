@@ -7,7 +7,7 @@ function NavigationBar() {
     return (
         <Navbar bg="dark" sticky='top' variant='dark' expand="lg">
             <Container>
-                <Navbar.Brand>Taylors Insurance API Demo</Navbar.Brand>
+                <Navbar.Brand>Taylor Insurance</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                 <Nav className="me-auto">
                     <Nav.Link href="/">Home</Nav.Link>

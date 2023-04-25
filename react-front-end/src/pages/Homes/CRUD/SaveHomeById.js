@@ -60,7 +60,7 @@ export default function SaveHomeById() {
                     <Form.Control name='location' type="text" placeholder="Location"
                                   value={location} onChange={(e) => setLocation(e.target.value)}></Form.Control>
                 </Form.Group>
-                <Button variant="primary" type="submit">Save Vehicle</Button>
+                <Button variant="primary" type="submit">Save Home</Button>
             </Form>
         </>
     );
