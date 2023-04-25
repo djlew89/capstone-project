@@ -23,6 +23,7 @@ import EditDriverById from "./pages/Drivers/EditDriverById";
 import SaveHomeById from "./pages/Homes/CRUD/SaveHomeById";
 import DeleteHomeByHomeId from "./pages/Homes/CRUD/DeleteHomeByHomeId";
 import EditHomeById from "./pages/Homes/CRUD/EditHomeById";
+import GetAutoQuoteById from "./pages/Vehicles/GetAutoQuote";
 
 /**
  * The main application responsible for linking together the pages and logic of the front end.
@@ -53,7 +54,7 @@ function App() {
                 <Route path="/GetQuote" element={<ViewAssociatedDriverData/>}/>
                 <Route path="/editVehicleData" element={<EditVehicleById/>}/>
                 <Route path="/deleteVehicleData" element={<DeleteVehicleById/>}/>
-                {/*<Route path="/getVehicleQuote" element={</>}/>*/}
+                <Route path="/getVehicleQuote" element={<GetAutoQuoteById/>}/>
                 <Route path="/deleteDriverData" element={<DeleteDriverById/>}/>
                 <Route path="/saveDriverData" element={<SaveDriverById/>}/>
                 <Route path="/editDriverData" element={<EditDriverById/>}/>
