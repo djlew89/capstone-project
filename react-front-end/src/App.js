@@ -24,6 +24,10 @@ import SaveHomeById from "./pages/Homes/CRUD/SaveHomeById";
 import DeleteHomeByHomeId from "./pages/Homes/CRUD/DeleteHomeByHomeId";
 import EditHomeById from "./pages/Homes/CRUD/EditHomeById";
 import GetAutoQuoteById from "./pages/Vehicles/GetAutoQuote";
+import DeleteHomePolicyByHomeId from "./pages/Homes/Policy/DeleteHomePolicyById";
+import RenewHomePolicyById from "./pages/Homes/Policy/RenewHomePolicyById";
+import ListHomePolicyById from "./pages/Homes/Policy/ListHomePolicyById";
+import SaveHomePolicyById from "./pages/Homes/Policy/SaveHomePolicyById";
 
 /**
  * The main application responsible for linking together the pages and logic of the front end.
@@ -58,6 +62,11 @@ function App() {
                 <Route path="/deleteDriverData" element={<DeleteDriverById/>}/>
                 <Route path="/saveDriverData" element={<SaveDriverById/>}/>
                 <Route path="/editDriverData" element={<EditDriverById/>}/>
+                <Route path="/deleteHomePolicy" element={<DeleteHomePolicyByHomeId/>}/>
+                <Route path="/renewHomePolicy" element={<RenewHomePolicyById/>}/>
+                <Route path="/listHomePolicy" element={<ListHomePolicyById/>}/>
+                <Route path="/saveHomePolicy" element={<SaveHomePolicyById/>}/>
+
             </Routes>
         </>
     );

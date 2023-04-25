@@ -34,10 +34,10 @@ function NavigationBar() {
                         <NavDropdown.Divider/>
                         <NavDropdown.Item href="/GetQuote">Get Home Quote</NavDropdown.Item>
                         <NavDropdown.Divider/>
-                        <NavDropdown.Item href="/ViewHomePolicyData">View Home Policy Data</NavDropdown.Item>
-                        <NavDropdown.Item href="/EditHomePolicyData">Edit Home Policy</NavDropdown.Item>
-                        <NavDropdown.Item href="/deleteHomePolicyData">Delete Home Policy</NavDropdown.Item>
-                        <NavDropdown.Item href="/saveHomePolicyData">Save Home Policy</NavDropdown.Item>
+                        <NavDropdown.Item href="/listHomePolicy">View Home Policy Data</NavDropdown.Item>
+                        <NavDropdown.Item href="/renewHomePolicy">Renew Home Policy</NavDropdown.Item>
+                        <NavDropdown.Item href="/deleteHomePolicy">Delete Home Policy</NavDropdown.Item>
+                        <NavDropdown.Item href="/saveHomePolicy">Save Home Policy</NavDropdown.Item>
                     </NavDropdown>
 
                     <NavDropdown title="Vehicle" id="basic-nav-dropdown">

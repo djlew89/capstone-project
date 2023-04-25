@@ -25,6 +25,10 @@ export default function ViewHomeByHomeID() {
             .catch(error => console.log('error', error));
     }
 
+    if ( home == null) {
+        return <h1>Loading...</h1>;
+    }
+
     return (
         <>
             <ul>
