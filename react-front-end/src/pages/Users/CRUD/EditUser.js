@@ -32,10 +32,8 @@ export default function EditUser() {
 
     return (
         <>
-            <p></p>
-            <p></p>
             <h1 id="data_display">Edit User Data</h1>
-            <Form method="post" onSubmit={handleSubmit} id="form_display">
+            <Form method="post" onSubmit={handleSubmit} id="edit_form_display">
                 <Form.Group>
                     <Form.Label>Enter The ID of the User you would like to edit</Form.Label>
                     <Form.Control name='userID' type="text" placeholder="ID"
