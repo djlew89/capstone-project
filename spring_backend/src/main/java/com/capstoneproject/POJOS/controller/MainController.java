@@ -651,9 +651,11 @@ public class MainController
 
     @CrossOrigin
     @GetMapping(path = RESTNouns.HOME + RESTNouns.HOME_ID +RESTNouns.POLICY)
-    public @ResponseBody Optional<HomePolicy> getHomePolicyByHomeId(@PathVariable Integer home_id)
+    public @ResponseBody Iterable<Optional<HomePolicy>> getHomePolicyByHomeId(@PathVariable Integer home_id)
     {
-        return homePolicyRepository.getByHomeId(home_id);
+        List<Optional<HomePolicy>> hp = new ArrayList<>(1);
+        hp.add(homePolicyRepository.getByHomeId(home_id));
+        return hp;
     }
 
     /**
@@ -702,6 +704,24 @@ public class MainController
         return homePolicies;
     }
 
+    @CrossOrigin
+    @PutMapping(path = RESTNouns.HOME + RESTNouns.HOME_ID+RESTNouns.POLICY)
+    public @ResponseBody String updateHomePolicy(@PathVariable Integer home_id)
+    {
+        Optional<HomePolicy> hp = homePolicyRepository.getByHomeId(home_id);
+        if (hp.isPresent())
+        {
+            hp.get()
+                    .setEndDate(hp.get().getEndDate().plusDays(365));
+            homePolicyRepository.save(hp.get());
+            return "Updated!";
+        }
+        else
+        {
+            return "Not Found.";
+        }
+    }
+
     //AutoPolicy REST
 
     /**
@@ -740,6 +760,25 @@ public class MainController
             return "Please register or login!";
         }
     }
+
+    @CrossOrigin
+    @PutMapping(path = RESTNouns.AUTO + RESTNouns.AUTO_ID+RESTNouns.POLICY)
+    public @ResponseBody String updateAutoPolicy(@PathVariable Integer auto_id)
+    {
+        Optional<AutoPolicy> ap = autoPolicyRepository.getByVehicleId(auto_id);
+        if (ap.isPresent())
+        {
+            ap.get()
+                    .setEndDate(ap.get().getEndDate().plusDays(365));
+            autoPolicyRepository.save(ap.get());
+            return "Updated!";
+        }
+        else
+        {
+            return "Not Found.";
+        }
+    }
+
 
     /**
      * Get Auto Policies by User ID
@@ -789,9 +828,12 @@ public class MainController
 
     @CrossOrigin
     @GetMapping(path = RESTNouns.AUTO + RESTNouns.AUTO_ID +RESTNouns.POLICY)
-    public @ResponseBody Optional<AutoPolicy> getAutoPolicyByAutoId(@PathVariable Integer auto_id)
+    public @ResponseBody Iterable<Optional<AutoPolicy>> getAutoPolicyByAutoId(@PathVariable Integer auto_id)
     {
-        return autoPolicyRepository.getByVehicleId(auto_id);
+        List<Optional<AutoPolicy>> ap = new ArrayList<>(1);
+
+        ap.add(autoPolicyRepository.getByVehicleId(auto_id));
+        return ap;
     }
 
 }
