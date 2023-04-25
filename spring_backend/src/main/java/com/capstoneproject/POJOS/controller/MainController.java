@@ -11,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 
 @Controller //This means that this class is a Controller
@@ -574,8 +576,9 @@ public class MainController
      */
     @CrossOrigin
     @GetMapping(path = RESTNouns.USER + RESTNouns.USER_ID + RESTNouns.QUOTE + RESTNouns.HOME + RESTNouns.HOME_ID)
-    public @ResponseBody Optional<HomeQuote> getHomeQuote(@PathVariable Integer id, @PathVariable Integer home_id)
+    public @ResponseBody Iterable<Optional<HomeQuote>> getHomeQuote(@PathVariable Integer id, @PathVariable Integer home_id)
     {
+        List<Optional<HomeQuote>> quote= new ArrayList<>(1);
         Optional<HomeQuote> homeQuote = Optional.empty();
         Optional<User> user = userRepository.findById(id);
         if (user.isPresent())
@@ -584,16 +587,18 @@ public class MainController
             if (home.isPresent())
             {
                 homeQuote = Optional.of(QuoteBuilder.getNewHomeQuote(home.get()));
+                quote.add(homeQuote);
             }
         }
-        return homeQuote;
+        return quote;
     }
 
     @CrossOrigin
     @GetMapping(path = RESTNouns.USER + RESTNouns.USER_ID + RESTNouns.QUOTE + RESTNouns.AUTO + RESTNouns.AUTO_ID)
-    public @ResponseBody Optional<AutoQuote> getAutoQuote(@PathVariable Integer id, @PathVariable Integer auto_id)
+    public @ResponseBody List<Optional<AutoQuote>> getAutoQuote(@PathVariable Integer id, @PathVariable Integer auto_id)
     {
-        Optional<AutoQuote> autoQuote = Optional.empty();
+        List<Optional<AutoQuote>> quote = new LinkedList<>();
+        Optional<AutoQuote> autoQuote;
         Optional<User> user = userRepository.findById(id);
         if (user.isPresent())
         {
@@ -601,14 +606,24 @@ public class MainController
             Optional<Driver> driver = driverRepository.findByUserId(id);
             if (auto.isPresent())
             {
-                autoQuote = Optional.of(QuoteBuilder.getNewAutoQuote(auto.get(), driver.get()));
+                if(driver.isPresent()){
+                    autoQuote = Optional.of(QuoteBuilder.getNewAutoQuote(auto.get(), driver.get()));
+                    quote.add(autoQuote);
+                }
             }
         }
-        return autoQuote;
+        return quote;
     }
 
     // HomePolicy REST
 
+    /**
+     * Save Home Policy to DB
+     * @param id
+     * @param home_id
+     * @param startDate
+     * @return
+     */
     @CrossOrigin
     @PostMapping(path = RESTNouns.USER + RESTNouns.USER_ID + RESTNouns.POLICY + RESTNouns.HOME + RESTNouns.HOME_ID)
     public @ResponseBody String addNewHomePolicy(@PathVariable Integer id,
@@ -632,10 +647,70 @@ public class MainController
         {
             return "Please Register or Login!";
         }
+    }
 
+    @CrossOrigin
+    @GetMapping(path = RESTNouns.HOME + RESTNouns.HOME_ID +RESTNouns.POLICY)
+    public @ResponseBody Optional<HomePolicy> getHomePolicyByHomeId(@PathVariable Integer home_id)
+    {
+        return homePolicyRepository.getByHomeId(home_id);
+    }
+
+    /**
+     * Delete Home Policy by Home ID
+     * @param home_id
+     * @return
+     */
+    @CrossOrigin
+    @DeleteMapping(path = RESTNouns.HOME + RESTNouns.HOME_ID +RESTNouns.POLICY)
+    public @ResponseBody
+    String deleteHomePolicy(@PathVariable Integer home_id) {
+        Optional<HomePolicy> homePolicy = homePolicyRepository.getByHomeId(home_id);
+        if (homePolicy.isPresent()) {
+            homePolicyRepository.delete(homePolicy.get());
+            return "Home Policy Deleted";
+        } else {
+            return "Home Policy not found";
+        }
+    }
+
+    /**
+     * Get Home Policy By User ID
+     * @param id
+     * @return
+     */
+    @CrossOrigin
+    @GetMapping(path = RESTNouns.USER + RESTNouns.USER_ID + RESTNouns.POLICY + RESTNouns.HOME)
+    public @ResponseBody Iterable<Optional<HomePolicy>> getAllHomePoliciesByUserId(@PathVariable Integer id) {
+        Optional<User> user = userRepository.findById(id);
+        Iterable<Home> homes = new LinkedList<>();
+
+        // Step 1: Find all homes for user
+        if (user.isPresent()) {
+            homes = homeRepository.getAllByUserId(id);
+        }
+
+        // Step 2: Check each home for policy and if present, add to list
+        List<Optional<HomePolicy>> homePolicies = new LinkedList<>();
+        homes.forEach(home -> {
+            Optional<HomePolicy> hp = homePolicyRepository.getByHomeId(home.getId());
+            if (hp.isPresent()) {
+                homePolicies.add(hp);
+            }
+        });
+
+        return homePolicies;
     }
 
     //AutoPolicy REST
+
+    /**
+     * Save Auto Policy to Database
+     * @param id
+     * @param auto_id
+     * @param startDate
+     * @return
+     */
 
     @CrossOrigin
     @PostMapping(path = RESTNouns.USER + RESTNouns.USER_ID + RESTNouns.POLICY + RESTNouns.AUTO + RESTNouns.AUTO_ID)
@@ -653,7 +728,9 @@ public class MainController
             Optional<Driver> driver = driverRepository.findByUserId(id);
             if (auto.isPresent())
             {
-                autoPolicy = Optional.of(PolicyBuilder.getNewAutoPolicy(startDate, startDate.plusDays(365), auto.get(), driver.get(), user.get()));
+                if(driver.isPresent()){
+                    autoPolicy = Optional.of(PolicyBuilder.getNewAutoPolicy(startDate, startDate.plusDays(365), auto.get(), driver.get(), user.get()));
+                }
             }
             autoPolicyRepository.save(autoPolicy.get());
             return "Auto Policy Created!";
@@ -662,6 +739,59 @@ public class MainController
         {
             return "Please register or login!";
         }
-
     }
+
+    /**
+     * Get Auto Policies by User ID
+     * @param id
+     * @return
+     */
+    @CrossOrigin
+    @GetMapping(path = RESTNouns.USER + RESTNouns.USER_ID + RESTNouns.POLICY + RESTNouns.AUTO)
+    public @ResponseBody Iterable<Optional<AutoPolicy>> getAllAutoPoliciesByUserId(@PathVariable Integer id) {
+        Optional<User> user = userRepository.findById(id);
+        Iterable<Vehicle> autos = new LinkedList<>();
+
+        // Step 1: Find all autos for user
+        if (user.isPresent()) {
+            autos = autoRepository.getAllByUserId(id);
+        }
+
+        // Step 2: Check each auto for policy and if present, add to list
+        List<Optional<AutoPolicy>> autoPolicies = new LinkedList<>();
+        autos.forEach(auto -> {
+            Optional<AutoPolicy> ap = autoPolicyRepository.getByVehicleId(auto.getId());
+            if (ap.isPresent()) {
+                autoPolicies.add(ap);
+            }
+        });
+
+        return autoPolicies;
+    }
+
+    /**
+     * @param auto_id
+     * @return
+     */
+    @CrossOrigin
+    @DeleteMapping(path = RESTNouns.AUTO + RESTNouns.AUTO_ID+RESTNouns.POLICY)
+    public @ResponseBody
+    String deleteAutoPolicy(
+                            @PathVariable Integer auto_id) {
+        Optional<AutoPolicy> autoPolicy = autoPolicyRepository.getByVehicleId(auto_id);
+        if (autoPolicy.isPresent()) {
+            autoPolicyRepository.delete(autoPolicy.get());
+            return "Auto Policy Deleted";
+        } else {
+            return "Auto Policy not found";
+        }
+    }
+
+    @CrossOrigin
+    @GetMapping(path = RESTNouns.AUTO + RESTNouns.AUTO_ID +RESTNouns.POLICY)
+    public @ResponseBody Optional<AutoPolicy> getAutoPolicyByAutoId(@PathVariable Integer auto_id)
+    {
+        return autoPolicyRepository.getByVehicleId(auto_id);
+    }
+
 }
