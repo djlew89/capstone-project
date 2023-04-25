@@ -42,7 +42,7 @@ export default function ViewUsers() {
                             <ListGroup id="uservehicle_data_display">
                                 <ListGroup.Item key={userData.id}>User ID: {userData.id}</ListGroup.Item>
                                 <ListGroup.Item>Email: {userData.email}</ListGroup.Item>
-                                <ListGroup.Item>Actors: {userData.password}</ListGroup.Item>
+                                <ListGroup.Item>Password: {userData.password}</ListGroup.Item>
                                 <ListGroup.Item>User's First Name: {userData.firstName}</ListGroup.Item>
                                 <ListGroup.Item>User's Last Name: {userData.lastName}</ListGroup.Item>
                                 <ListGroup.Item>Date of Birth: {userData.dob}</ListGroup.Item>

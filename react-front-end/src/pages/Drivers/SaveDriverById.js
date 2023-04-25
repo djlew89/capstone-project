@@ -41,7 +41,7 @@ export default function SaveDriverById() {
                     <Form.Control name='noa' type="text" placeholder="Number of Accidents"
                                   value={numberOfAccidents} onChange={(e) => setNumberOfAccidents(e.target.value)}></Form.Control>
                 </Form.Group>
-                <Button variant="primary" type="submit">Save Vehicle</Button>
+                <Button variant="primary" type="submit">Save Driver</Button>
             </Form>
         </>
     );
