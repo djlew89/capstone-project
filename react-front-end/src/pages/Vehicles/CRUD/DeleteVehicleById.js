@@ -1,7 +1,7 @@
 import {useState} from 'react';
 
 /**
- * The page responsible for deleting a vehicle data
+ * The page responsible for deleting vehicle data
  * @author Mason Seward
  * @returns {JSX.Element}
  */
@@ -22,6 +22,7 @@ export default function DeleteVehicleById() {
             .catch(error => console.log('error', error));
 
         alert("Vehicle deleted");
+        window.location.href = "/";
     }
 
     return (

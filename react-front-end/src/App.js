@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Route, Routes} from "react-router-dom";
 import ViewUsers from "./pages/Users/CRUD/ListUserData";
 import EditUser from "./pages/Users/CRUD/EditUser";
-import ViewDrivers from './pages/Driver';
+import ViewDrivers from './pages/Drivers/ViewDriverById';
 import ViewHomeByHomeID from "./pages/Homes/ListHomeByHomeID";
 import NavigationBar from './Navbar';
 import ViewVehiclesByID from "./pages/Vehicles/CRUD/ListVehicleByID";
@@ -17,6 +17,9 @@ import ViewAssociatedDriverData from "./pages/Users/other/ListUserDriverData";
 import GetHomeQuoteById from "./pages/Homes/GetQuote";
 import DeleteVehicleById from "./pages/Vehicles/CRUD/DeleteVehicleById";
 import EditVehicleById from "./pages/Vehicles/CRUD/EditVehicleById";
+import DeleteDriverById from "./pages/Drivers/DeleteDriverById";
+import SaveDriverById from "./pages/Drivers/SaveDriverById";
+import EditDriverById from "./pages/Drivers/EditDriverById";
 
 /**
  * The main application responsible for linking together the pages and logic of the front end.
@@ -48,6 +51,9 @@ function App() {
                 <Route path="/editVehicleData" element={<EditVehicleById/>}/>
                 <Route path="/deleteVehicleData" element={<DeleteVehicleById/>}/>
                 {/*<Route path="/getVehicleQuote" element={</>}/>*/}
+                <Route path="/deleteDriverData" element={<DeleteDriverById/>}/>
+                <Route path="/saveDriverData" element={<SaveDriverById/>}/>
+                <Route path="/editDriverData" element={<EditDriverById/>}/>
             </Routes>
         </>
     );

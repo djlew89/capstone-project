@@ -457,9 +457,11 @@ public class MainController
      */
     @CrossOrigin
     @GetMapping(path = RESTNouns.DRIVER + RESTNouns.DRIVER_ID)
-    public @ResponseBody Optional<Driver> getDriverById(@PathVariable Integer driver_id)
+    public @ResponseBody List<Optional<Driver>> getDriverById(@PathVariable Integer driver_id)
     {
-        return driverRepository.findById(driver_id);
+        List<Optional<Driver>> driver = new ArrayList<>(1);
+        driver.add(driverRepository.findById(driver_id));
+        return driver;
     }
 
     /**

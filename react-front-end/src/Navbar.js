@@ -46,9 +46,9 @@ function NavigationBar() {
 
                     <NavDropdown title="Driver" id="basic-nav-dropdown">
                         <NavDropdown.Item href="/Drivers">View Driver Data</NavDropdown.Item>
-                        <NavDropdown.Item href="/EditDriver">Edit Driver</NavDropdown.Item>
-                        <NavDropdown.Item href="/DeleteDriver">Delete Driver</NavDropdown.Item>
-                        <NavDropdown.Item href="/SaveDriver">Save Driver</NavDropdown.Item>
+                        <NavDropdown.Item href="/editDriverData">Edit Driver</NavDropdown.Item>
+                        <NavDropdown.Item href="/deleteDriverData">Delete Driver</NavDropdown.Item>
+                        <NavDropdown.Item href="/saveDriverData">Save Driver</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
             </Container>
