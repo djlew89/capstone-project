@@ -27,7 +27,7 @@ export default function ViewHomePolicyByHomeID() {
 
     return (
         <>
-            <h1 id="data_display">Get home policy home id</h1>
+            <h1 id="data_display">Get home policy by home id</h1>
             <form onSubmit={handleSubmit}>
                 <label>Enter the House ID of the home you would like to view the data of:
                     <input
