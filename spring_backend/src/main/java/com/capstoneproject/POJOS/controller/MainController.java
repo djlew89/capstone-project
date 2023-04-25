@@ -38,7 +38,6 @@ public class MainController
     @Autowired
     private AutoPolicyRepository autoPolicyRepository;
 
-
     //USER - GET / READ All
     @CrossOrigin
     @GetMapping(path = RESTNouns.USER)
@@ -179,9 +178,12 @@ public class MainController
      */
     @CrossOrigin
     @GetMapping(path = RESTNouns.HOME + RESTNouns.HOME_ID)
-    public @ResponseBody Optional<Home> getHomeByID(@PathVariable Integer home_id)
+    public @ResponseBody Iterable<Optional<Home>> getHomeByID(@PathVariable Integer home_id)
     {
-        return homeRepository.findById(home_id);
+        List<Optional<Home>> home= new LinkedList<>();
+
+        home.add(homeRepository.findById(home_id));
+        return home;
     }
 
     /**
