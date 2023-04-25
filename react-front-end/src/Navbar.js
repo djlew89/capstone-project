@@ -50,6 +50,13 @@ function NavigationBar() {
                         <NavDropdown.Item href="/deleteDriverData">Delete Driver</NavDropdown.Item>
                         <NavDropdown.Item href="/saveDriverData">Save Driver</NavDropdown.Item>
                     </NavDropdown>
+
+                    <NavDropdown title="Policy" id="basic-nav-dropdown">
+                        <NavDropdown.Item href="/ViewPolicyData">View Policy Data</NavDropdown.Item>
+                        <NavDropdown.Item href="/EditPolicyData">Edit Policy</NavDropdown.Item>
+                        <NavDropdown.Item href="/deletePolicyData">Delete Policy</NavDropdown.Item>
+                        <NavDropdown.Item href="/savePolicyData">Save Policy</NavDropdown.Item>
+                    </NavDropdown>
                 </Nav>
             </Container>
         </Navbar>
