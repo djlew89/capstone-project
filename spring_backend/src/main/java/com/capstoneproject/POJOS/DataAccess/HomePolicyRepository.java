@@ -7,6 +7,5 @@ import java.util.Optional;
 
 public interface HomePolicyRepository extends CrudRepository<HomePolicy, Integer>
 {
-
     Optional<HomePolicy> getByHomeId(Integer id);
 }

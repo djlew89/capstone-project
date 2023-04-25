@@ -1,4 +1,4 @@
-package com.capstoneproject;
+package com.capstoneproject.POJOS;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -9,12 +9,12 @@ import java.time.LocalDate;
  * @author Mason Seward
  * @Date 2023-02-24
  */
-//@Entity(name = "quote")
+
 public abstract class Quote
 {
-    //    @JsonFormat(pattern = "yyyy-MM-dd")
+
     protected LocalDate startDate;
-    //    @JsonFormat(pattern = "yyyy-MM-dd")
+
     protected LocalDate endDate;
     protected BigDecimal tax;
     protected BigDecimal totalBeforeTax;
@@ -34,16 +34,9 @@ public abstract class Quote
 
     }
 
-    /**
-     * No args constructor. Please use arg constructor. Deprication tag for warning
-     */
-    //    @Deprecated()
     protected Quote()
     {
     }
-    //    @Id
-    //    @GeneratedValue(strategy = GenerationType.AUTO)
-    //    private Integer id;
 
     public BigDecimal getTotalBeforeTax()
     {
