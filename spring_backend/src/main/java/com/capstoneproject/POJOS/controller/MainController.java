@@ -639,8 +639,8 @@ public class MainController
             if (home.isPresent())
             {
                 homePolicy = Optional.of(PolicyBuilder.getNewHomePolicy(startDate, startDate.plusDays(365), home.get(), user.get()));
+                homePolicyRepository.save(homePolicy.get());
             }
-            homePolicyRepository.save(homePolicy.get());
             return "Home Policy Created!";
         }
         else
