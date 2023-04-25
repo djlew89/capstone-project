@@ -1,7 +1,6 @@
 package com.capstoneproject.POJOS;
 
 import com.capstoneproject.Driver;
-import com.capstoneproject.Quote;
 import com.capstoneproject.Vehicle;
 
 import java.math.BigDecimal;
