@@ -55,7 +55,4 @@ export default function SaveVehiclePolicyById() {
     );
 }
 
-// 1 is userID
-// 2 is auto id
-
 
