@@ -39,7 +39,8 @@ export default function SaveDriverById() {
                 <Form.Group>
                     <Form.Label>Number of Accidents</Form.Label>
                     <Form.Control name='noa' type="text" placeholder="Number of Accidents"
-                                  value={numberOfAccidents} onChange={(e) => setNumberOfAccidents(e.target.value)}></Form.Control>
+                                  value={numberOfAccidents}
+                                  onChange={(e) => setNumberOfAccidents(e.target.value)}></Form.Control>
                 </Form.Group>
                 <Button variant="primary" type="submit">Save Driver</Button>
             </Form>
