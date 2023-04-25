@@ -471,17 +471,18 @@ public class MainController
      */
     @CrossOrigin
     @GetMapping(path = RESTNouns.USER + RESTNouns.USER_ID + RESTNouns.DRIVER)
-    public @ResponseBody Optional<Driver> getDriverByUserId(@PathVariable Integer id)
+    public @ResponseBody Iterable<Optional<Driver>> getDriverByUserId(@PathVariable Integer id)
     {
+        List<Optional<Driver>> d = new LinkedList<>();
         Optional<User> user = userRepository.findById(id);
-        Optional<Driver> driver = Optional.empty();
+        Optional<Driver> driver;
 
         if (user.isPresent())
         {
             driver = driverRepository.findByUserId(id);
-
+            d.add(driver);
         }
-        return driver;
+        return d;
     }
 
     /**
@@ -818,7 +819,7 @@ public class MainController
     @DeleteMapping(path = RESTNouns.AUTO + RESTNouns.AUTO_ID+RESTNouns.POLICY)
     public @ResponseBody
     String deleteAutoPolicy(
-                            @PathVariable Integer auto_id) {
+            @PathVariable Integer auto_id) {
         Optional<AutoPolicy> autoPolicy = autoPolicyRepository.getByVehicleId(auto_id);
         if (autoPolicy.isPresent()) {
             autoPolicyRepository.delete(autoPolicy.get());
