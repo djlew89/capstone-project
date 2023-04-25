@@ -39,7 +39,8 @@ export default function EditDriverById() {
                 <Form.Group>
                     <Form.Label>Enter The New Number of Accidents</Form.Label>
                     <Form.Control name='noa' type="text" placeholder="Number of accidents"
-                                  value={numOfAccidents} onChange={(e) => setNumOfAccidents(e.target.value)}></Form.Control>
+                                  value={numOfAccidents}
+                                  onChange={(e) => setNumOfAccidents(e.target.value)}></Form.Control>
                 </Form.Group>
                 <Button variant="primary" type="submit">Submit Change</Button>
             </Form>
